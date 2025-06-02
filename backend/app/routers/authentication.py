@@ -96,10 +96,33 @@ async def register(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Email already registered"
                 )
+            
+
+        db_member = models.Member(
+            first_name=registration_data.member.first_name,
+            last_name=registration_data.member.last_name,
+            date_of_birth=registration_data.member.date_of_birth,
+            gender=registration_data.member.gender,
+            marital_status=registration_data.member.marital_status,
+            occupation=registration_data.member.occupation,
+            emergency_contact=registration_data.member.emergency_contact,
+            emergency_contact_phone=registration_data.member.emergency_contact_phone,
+            baptism_date=registration_data.member.baptism_date,
+            membership_date=registration_data.member.membership_date or datetime.utcnow(),
+            notes=registration_data.member.notes,
+            is_active=True,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
+
+        session.add(db_member)
+        session.commit()
+        session.refresh(db_member)
 
         # Create new user
         hashed_password = hashing.get_password_hash(registration_data.user.password)
         db_user = models.User(
+            member_id=db_member.id,
             username=registration_data.user.username,
             email=registration_data.user.email,
             password=hashed_password,
@@ -131,8 +154,7 @@ async def register(
             updated_at=datetime.utcnow()
         )
 
-        session.add(db_member)
-        session.commit()
+        
 
         return db_user
 
