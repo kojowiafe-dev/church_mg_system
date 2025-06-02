@@ -24,7 +24,7 @@ class User(SQLModel, table=True):
     __tablename__ = 'users'
 
     id: int = Field(default=None, primary_key=True, index=True)
-    member_id: int = Field(foreign_key="members.id", nullable=False)
+    member_id: int = Field(foreign_key="members.id", nullable=True)
     username: str = Field(unique=True, index=True)
     email: Optional[str] = Field(default=None, unique=True, index=True)
     password: str

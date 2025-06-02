@@ -115,7 +115,6 @@ async def register(
 
         # Create member profile
         db_member = models.Member(
-            user_id=db_user.id,
             first_name=registration_data.member.first_name,
             last_name=registration_data.member.last_name,
             date_of_birth=registration_data.member.date_of_birth,
