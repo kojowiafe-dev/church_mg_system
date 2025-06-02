@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+axios
+sqlalchemy
+bcrypt
+python-jose
+passlib
+gunicorn
+sqlmodel
+sqlalchemy
+timescaledb
+requests
+python-decouple
+psycopg[binary]
