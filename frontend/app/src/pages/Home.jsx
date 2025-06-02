@@ -59,7 +59,7 @@ export default function HomePage() {
         <h1 className="text-4xl md:text-5xl font-bold text-indigo-50/80 mb-4 drop-shadow-md" data-aos="fade-up">
           Welcome to <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 block">King Of Glory Covenant Chapel International</span>
         </h1>
-        <div className="text-gray-300 text-lg md:text-xl mb-6 max-w-2xl mt-6" data-aos="fade-up">
+        <div className="text-gray-300 text-lg md:text-xl mb-6 max-w-2xl mt-10" data-aos="fade-down">
           {/* A modern church management system designed to empower your ministry and enhance community engagement. */}
           Streamline your church operations — {prefix} {" "}
           <div className="flex justify-center items-center"> 
