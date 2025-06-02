@@ -23,7 +23,6 @@ class UserLogin(SQLModel):
 
 class UserPublic(UserBase):
     id: int
-    # member_id: int
     profile_image: Optional[str] = None
     join_date: datetime
     is_active: bool = True
