@@ -24,6 +24,7 @@ class User(SQLModel, table=True):
     __tablename__ = 'users'
 
     id: int = Field(default=None, primary_key=True, index=True)
+    member_id: int = Field(foreign_key="members.id", nullable=False)
     username: str = Field(unique=True, index=True)
     email: Optional[str] = Field(default=None, unique=True, index=True)
     password: str
@@ -45,7 +46,7 @@ class Member(SQLModel, table=True):
     __tablename__ = 'members'
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
+    # user_id: int = Field(foreign_key="users.id", nullable=False)
     first_name: str
     last_name: str
     date_of_birth: date
