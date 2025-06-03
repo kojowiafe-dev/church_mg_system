@@ -63,7 +63,7 @@ export default function HomePage() {
           {/* A modern church management system designed to empower your ministry and enhance community engagement. */}
           Streamline your church operations — {prefix} {" "}
           <div className="flex justify-center items-center"> 
-            <TextTransition springConfig={presets.gentle} inline className="text-3xl font-bold">
+            <TextTransition springConfig={presets.wobbly} inline className="text-3xl font-bold">
               <span aria-live="polite" className="bg-clip-text text-transparent  bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
             </TextTransition>
           </div>
