@@ -36,7 +36,7 @@ export default function HomePage() {
       </div>
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
-      <header className="bg-indigo-50/80 shadow-md px-6 py-4 flex justify-between items-center relative z-10">
+      <header className="bg-indigo-300/30 shadow-md px-6 py-4 flex justify-between items-center relative z-10">
         <div className="flex items-center gap-2 text-xl font-bold text-indigo-600 relative z-20">
           <FaChurch className="text-indigo-600" />
           KGCCI
@@ -125,7 +125,7 @@ export default function HomePage() {
       {/* <footer className="text-indigo-600 bg-indigo-50/80 text-center py-6 mt-auto font-bold relative z-10">
         <p>&copy; {new Date().getFullYear()} ChurchConnect. All rights reserved.</p>
       </footer> */}
-      <footer className="bg-indigo-50/80 backdrop-blur-md text-white px-6 py-10 md:px-20">
+      <footer className="bg-indigo-300/30 backdrop-blur-md text-white px-6 py-10 md:px-20">
         <div className="grid md:grid-cols-3 gap-10">
           {/* Branding */}
           <div>
@@ -139,17 +139,17 @@ export default function HomePage() {
           <div>
             <h2 className="text-xl font-semibold mb-4">Quick Links</h2>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-yellow-300">Home</a></li>
-              <li><a href="#" className="hover:text-yellow-300">Services</a></li>
-              <li><a href="#" className="hover:text-yellow-300">About</a></li>
-              <li><a href="#" className="hover:text-yellow-300">Contact</a></li>
+              <li><a href="#" className="hover:text-indigo-300/30">Home</a></li>
+              <li><a href="#" className="hover:text-indigo-300/30">Services</a></li>
+              <li><a href="#" className="hover:text-indigo-300/30">About</a></li>
+              <li><a href="#" className="hover:bg-indigo-300/30">Contact</a></li>
             </ul>
           </div>
 
           {/* Social Media */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Follow Us</h2>
-            <div className="flex space-x-4 text-pink-500 text-2xl">
+            <div className="flex space-x-4 text-indigo-300/30 text-2xl">
               <a href="#" className="text-indigo-700"><FaFacebookF /></a>
               <a href="#" className="text-indigo-700"><FaTwitter /></a>
               <a href="#" className="text-indigo-700"><FaLinkedinIn /></a>
@@ -158,7 +158,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
+        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
           &copy; {new Date().getFullYear()} KGCCI. All rights reserved.
         </div>
       </footer>
