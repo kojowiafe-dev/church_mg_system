@@ -7,6 +7,9 @@ import bgImage from '../../assets/elianna-gill-DppEkXKjahk-unsplash.jpg';
 import BackgroundImage from '../../components/BackgroundImage';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { IoIosArrowRoundBack } from "react-icons/io"
+
+
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -381,6 +384,20 @@ const Register = () => {
             Sign in here
           </Link>
         </p>
+
+        <div
+          onClick={() => navigate('/')} // If using useNavigate()
+          className="flex gap-3 mt-3 justify-center items-center cursor-pointer"
+          role="button"
+          tabIndex={0}
+        >
+          <IoIosArrowRoundBack size={28} />
+          <p className="text-center text-sm text-blue-600">
+            Back to Home
+          </p>
+        </div>
+
+
       </div>
 
       <ToastContainer

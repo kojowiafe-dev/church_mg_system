@@ -38,12 +38,12 @@ export default function HomePage() {
       {/* Navbar */}
       <header className="bg-indigo-50/80 shadow-md px-6 py-4 flex justify-between items-center relative z-10">
         <div className="flex items-center gap-2 text-xl font-bold text-indigo-600 relative z-20">
-          <FaChurch className="text-indigo-700" />
+          <FaChurch className="text-indigo-600" />
           KGCCI
         </div>
         
         <Link to='/login'>
-            <button className="cursor-pointer font-bold bg-indigo-600 text-white px-4 py-3 rounded hover:bg-indigo-700 flex items-center gap-2 transition" >
+            <button className="cursor-pointer font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-3 rounded hover:scale-110 flex items-center gap-2 transition duration-300 ease-in-out" >
             <FaSignInAlt /> Login
           </button>
         </Link>
@@ -64,7 +64,7 @@ export default function HomePage() {
           Streamline your church operations — {prefix} {" "}
           <div className="flex justify-center items-center"> 
             <TextTransition springConfig={presets.wobbly} inline className="text-3xl font-bold">
-              <span aria-live="polite" className="bg-clip-text text-transparent  bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
+              <span aria-live="polite" className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
             </TextTransition>
           </div>
           and more from one powerful dashboard.
