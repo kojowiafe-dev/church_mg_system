@@ -15,11 +15,11 @@ const DashboardCard = ({ title, value, colorClass, onClick }) => {
     <div
       data-aos="fade-up"
       onClick={onClick}
-      className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition cursor-pointer"
+      className="bg-white shadow-md rounded-2xl sm:p-6 p-4 border border-gray-200 hover:shadow-lg transition cursor-pointer"
     >
-      <h2 className="text-lg font-bold text-gray-700">{title}</h2>
-      <p className={`text-3xl font-bold mt-2 ${colorClass}`}>{value}</p>
-      <div className="flex justify-end items-center gap-2 text-sm font-bold text-gray-700">
+      <h2 className="sm:text-lg text-sm sm:font-bold font-semibold text-gray-700">{title}</h2>
+      <p className={`sm:text-3xl text-xl sm:font-bold font-semibold mt-2 ${colorClass}`}>{value}</p>
+      <div className="flex justify-end items-center gap-2 text-sm sm:font-bold font-semibold text-gray-700">
         View <FiChevronRight size={18} />
       </div>
     </div>

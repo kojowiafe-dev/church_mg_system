@@ -17,7 +17,7 @@ const DashboardLayout = () => {
     const [UserName, setUserName] = useState("");
     const sidebarRef = useRef();
     const [isOpen, setIsOpen] = useState(false);
-    // const windowSize = WindowResize();
+    const windowSize = WindowResize();
 
     const { auth, logout } = useAuth();
     const { role, username } = auth;
@@ -93,14 +93,14 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className='fixed top-0 left-0 w-full bg-white/95 shadow-md z-50'>
-        <div className='flex justify-between p-4 items-center pl-10 pr-10' ref={sidebarRef}>
+        <div className='flex justify-between p-4 items-center pl-7 pr-7' ref={sidebarRef}>
           <button onClick={() => setIsOpen(true)} className={`p-2 text-gray-700 rounded-md cursor-pointer hover:bg-gray-100 focus:outline-none`} aria-label="Open menu">
-            <HiMenu size={24} />
+            <HiMenu size={windowSize.width < 800 ? '20' : '24'} />
           </button>
-          <div className='text-lg text-gray-700 font-bold'>KGCCI</div>
+          <div className='sm:text-lg text-sm text-gray-700 font-bold'>KGCCI</div>
           <div className='font-bold flex items-center gap-2 text-gray-700'>
             <HiUserCircle size={24} />
-            <Link to={`/profile`} className='text-lg font-bold'>{username}</Link>
+            <Link to={`/profile`} className='sm:text-lg text-sm font-bold'>{username}</Link>
           </div>
         </div>
       </nav>
@@ -118,16 +118,16 @@ const DashboardLayout = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', stiffness: 230, damping: 20 }}
-              className='fixed top-0 left-0 h-full w-80 bg-white shadow-md transform transition-transform duration-300 ease-in-out z-50 flex flex-col'
+              className='fixed top-0 left-0 h-full sm:w-80 w-70 bg-white shadow-md transform transition-transform duration-300 ease-in-out z-50 flex flex-col'
               >
                 <div className='p-4 border-b-6 border-gray-700 flex justify-between items-center'>
-                  <span className='font-bold text-lg text-gray-700'>Menu</span>
+                  <span className='font-bold sm:text-lg text-sm text-gray-700'>Menu</span>
                   <button onClick={() => setIsOpen(false)} className='p-1 text-gray-700 rounded hover:bg-gray-100 cursor-pointer'>
-                    <HiX size={24} />
+                    <HiX size={windowSize.width < 800 ? '20' : '24'} />
                   </button>
                 </div>
 
-                <div className='flex flex-col gap-4 overflow-y-auto h-[calc(100vh-80px)] mt-4 p-4 font-bold text-lg text-gray-700 space-y-4'>
+                <div className='flex flex-col gap-4 overflow-y-auto h-[calc(100vh-80px)] mt-4 p-4 sm:font-bold font-semibold sm:text-lg text-md text-gray-700 space-y-4'>
                   {menu.map((data) => {
                     if (data.name === 'Logout') {
                       return (

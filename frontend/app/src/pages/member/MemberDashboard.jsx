@@ -37,7 +37,7 @@ const MemberDashboard = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 pt-18">
       <motion.h1
-        className="text-4xl font-bold text-center mb-6 text-blue-800"
+        className="sm:text-4xl text-md sm:font-bold font-semibold text-center mb-6 text-blue-800"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
       >

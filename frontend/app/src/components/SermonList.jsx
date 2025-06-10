@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiCalendar, FiBookOpen, FiSearch, FiPlus, FiTrash2, FiEdit2 } from 'react-icons/fi';
+import WindowResize from '../layouts/WindowResize';
 
 const SermonList = ({
   tab,
@@ -16,37 +17,43 @@ const SermonList = ({
   showActions = false
 }) => {
 
+
+  const windowSize = WindowResize();
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 pt-18">
 
       <motion.h1
-        className="text-4xl font-bold text-center mb-6 text-blue-800"
+        className="sm:text-4xl text-xl sm:font-bold font-semibold text-center mb-6 text-blue-800"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
       >
         Sermon & Event Manager
       </motion.h1>
 
-      <div className="flex justify-center mb-6 space-x-4">
+      <div className="flex justify-center mb-6 sm:space-x-4 space-x-2">
 
         <button
           onClick={() => setTab('sermons')}
-          className={`px-4 py-2 rounded-md font-bold cursor-pointer ${tab === 'sermons' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+          className={`sm:px-4 px-2 sm:py-2 py-0 rounded-md sm:font-bold font-semibold cursor-pointer ${tab === 'sermons' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
         >
-          <FiBookOpen className="inline-block mr-2" /> Sermons
+          <FiBookOpen className={`${windowSize.width < 800 ? 'hidden' : 'inline-block'} mr-2`} /> 
+          Sermons
         </button>
 
         <button
           onClick={() => setTab('events')}
-          className={`cursor-pointer px-4 py-2 rounded-md font-bold ${tab === 'events' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+          className={`cursor-pointer sm:px-4 px-3 sm:py-2 py-1 rounded-md sm:font-bold font-semibold ${tab === 'events' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
         >
-          <FiCalendar className="inline-block mr-2" /> Events
+          <FiCalendar className={`${windowSize.width < 800 ? 'hidden' : 'inline-block'} mr-2`} /> 
+          Events
         </button>
         <button
           onClick={onCreate}
-          className="px-4 py-2 cursor-pointer rounded-md font-bold bg-green-600 text-white hover:bg-green-700"
+          className="px-4 py-2 cursor-pointer rounded-md sm:font-bold font-semibold bg-green-600 text-white hover:bg-green-700 text-nowrap"
         >
-          <FiPlus className="inline-block mr-2" /> Create {tab === 'events' ? 'Event' : 'Sermon'}
+          <FiPlus className={`${windowSize.width < 800 ? 'hidden' : 'inline-block'} mr-2`} /> 
+          Create {tab === 'events' ? 'Event' : 'Sermon'}
         </button>
       </div>
 

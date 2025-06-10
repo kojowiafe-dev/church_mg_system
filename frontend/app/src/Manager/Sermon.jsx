@@ -281,7 +281,6 @@ const SermonManager = () => {
     }
   };
   
-  // Also verify that openDeleteModal is setting the itemToDelete correctly:
   const openDeleteModal = (item) => {
     console.log('=== DETAILED DEBUG DELETE MODAL ===');
     console.log('Full item received:', item);
@@ -352,7 +351,7 @@ const SermonManager = () => {
           value={form[name]}
           onChange={handleChange}
           placeholder={placeholder}
-          className={`w-full font-bold text-gray-700 border shadow-md p-4 rounded-xl hover:shadow-lg transition cursor-pointer outline-0 ${
+          className={`w-full sm:font-bold font-medium text-gray-700 border shadow-md sm:p-4 p-3 rounded-xl hover:shadow-lg transition cursor-pointer outline-0 ${
             formErrors[name] ? 'border-red-500' : 'border-gray-200'
           }`}
         />
@@ -381,10 +380,11 @@ const SermonManager = () => {
 
       {isModalOpen && (
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center p-4 overflow-y-auto min-h-screen">
-          <div className="bg-white rounded-xl p-6 max-w-lg w-full mt-35">
-            <h2 className="text-2xl font-bold mb-4">
+          <div className="bg-white rounded-xl p-6 max-w-lg w-full sm:mt-45 mt-20">
+            <h2 className="sm:text-2xl text-md sm:font-bold font-semibold mb-4">
               {editingId ? 'Edit' : 'Create'} {tab === 'sermons' ? 'Sermon' : 'Event'}
             </h2>
+            
             <form onSubmit={handleSubmit}>
               {renderFormField('title', tab === 'sermons' ? 'Title' : 'Name')}
               {renderFormField('preacher', 'Preacher')}
@@ -395,14 +395,14 @@ const SermonManager = () => {
                 <button
                   type="button"
                   onClick={cancelEdit}
-                  className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                  className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : 'Save'}
                 </button>

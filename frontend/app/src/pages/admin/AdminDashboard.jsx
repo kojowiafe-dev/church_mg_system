@@ -67,9 +67,9 @@ const AdminDashboard = () => {
 
       <div>
         <DashboardCards members={memberCount} donations={6520} events={eventCount} />
-        <div className={`${windowSize.width > 768 ? 'grid grid-cols-2' : 'block'}`}>
+        <div className={`${windowSize.width < 800 ? 'block' : 'grid grid-cols-2'}`}>
           <div className='col-span-1 text-center'>
-            <h2 className="text-lg font-bold mb-4 text-gray-700">Church Members Over Time</h2>
+            <h2 className="sm:text-lg text-md sm:font-bold font-semibold mb-4 text-gray-700">Church Members Over Time</h2>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={memberData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
             </ResponsiveContainer>
           </div>
           <div className='col-span-1 text-center'>
-            <h2 className="text-lg font-bold mb-4 text-gray-700">Church Revenue Over Time</h2>
+            <h2 className="sm:text-lg text-md sm:font-bold font-semibold mb-4 text-gray-700">Church Revenue Over Time</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={revenueData}>
                 <CartesianGrid strokeDasharray="3 3" />

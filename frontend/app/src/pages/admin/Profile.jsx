@@ -3,10 +3,12 @@ import { useAuth } from '../../context/AuthContext';
 import { FaUserCircle, FaEnvelope, FaPhone, FaChurch } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
+import WindowResize from '../../layouts/WindowResize';
 
 const Profile = () => {
   const { auth } = useAuth();
   const { username, email, phone, role, church } = auth;
+  const windowSize = WindowResize();
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -68,15 +70,15 @@ const Profile = () => {
   return (
     <div className="max-w-2xl mx-auto mt-18 p-6 bg-white shadow-xl rounded-xl">
       <div className="flex items-center gap-4 mb-6">
-        <FaUserCircle className="text-gray-700" size={48} />
+        <FaUserCircle className="text-gray-700" size={windowSize.width < 800 ? '24' : '48'} />
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800">{username}</h2>
+          <h2 className="sm:text-2xl text-sm font-semibold text-gray-800">{username}</h2>
           <p className="text-gray-500 capitalize">{role}</p>
         </div>
       </div>
 
       {!isEditing ? (
-        <div className="space-y-4">
+        <div className="sm:space-y-4 space-y-2 text-sm">
           <div className="flex items-center gap-3 text-gray-700">
             <FaEnvelope />
             <span>{email || 'Not provided'}</span>
