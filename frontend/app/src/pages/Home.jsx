@@ -92,34 +92,41 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section id="features" className="py-16 px-6 relative z-10">
-        <h2 className="text-3xl font-bold text-center text-indigo-800 mb-10" data-aos="fade-left">Key Features</h2>
+        <h2 className="text-3xl font-bold text-center text-indigo-800 mb-10" data-aos="fade-left">
+          Key Features
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           
-          <div data-aos="fade-up"
-            className="p-6 bg-indigo-50/45 rounded-2xl shadow text-center hover:shadow-lg cursor-pointer hover:bg-indigo-50 transition-transform duration-300 hover:-translate-y-2"
+          <div
+            data-aos="fade-up"
+            className="p-6 bg-indigo-50/45 rounded-2xl shadow text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-lg hover:bg-indigo-50 hover:-translate-y-2 hover:scale-[1.02]"
           >
             <FaUsers className="text-indigo-600 w-10 h-10 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-700 mb-2">Member Management</h3>
             <p className="text-gray-700">Track, engage, and support your church members with ease.</p>
           </div>
-          
-          <div data-aos="fade-down"
-            className="p-6 bg-indigo-50/80 rounded-2xl shadow text-center hover:shadow-lg cursor-pointer hover:bg-indigo-50 transition-transform duration-300 hover:-translate-y-2"
+
+          <div
+            data-aos="fade-down"
+            className="p-6 bg-indigo-50/80 rounded-2xl shadow text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-lg hover:bg-indigo-50 hover:-translate-y-2 hover:scale-[1.02]"
           >
             <FaCalendarAlt className="text-indigo-600 w-10 h-10 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-700 mb-2">Event Scheduling</h3>
             <p className="text-gray-700">Plan church events and services with a shared calendar system.</p>
           </div>
-          
-          <div data-aos="fade-up"
-            className="p-6 bg-indigo-50/45 rounded-2xl shadow text-center hover:shadow-lg cursor-pointer hover:bg-indigo-50 transition-transform duration-300 hover:-translate-y-2"
+
+          <div
+            data-aos="fade-up"
+            className="p-6 bg-indigo-50/45 rounded-2xl shadow text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-lg hover:bg-indigo-50 hover:-translate-y-2 hover:scale-[1.02]"
           >
             <FaChurch className="text-indigo-600 w-10 h-10 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-700 mb-2">Sermon Archive</h3>
             <p className="text-gray-700">Organize and share past sermons with your congregation online.</p>
           </div>
+
         </div>
       </section>
+
 
       {/* Footer */}
       {/* <footer className="text-indigo-600 bg-indigo-50/80 text-center py-6 mt-auto font-bold relative z-10">
