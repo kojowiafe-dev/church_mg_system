@@ -110,14 +110,14 @@ const MemberForm = () => {
       <div className="max-w-3xl mx-auto">
         <div className="md:flex md:items-center md:justify-between">
           <div className="min-w-0 flex-1">
-            <h2 className="text-2xl font-poppins font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+            <h2 className="text-xl font-poppins sm:font-bold font-semibold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
               {isEditMode ? 'Edit Member' : 'Add New Member'}
             </h2>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-8">
-          <div className="space-y-8 divide-y divide-gray-200">
+          <div className="sm:space-y-8 space-y-6 divide-y divide-gray-200">
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
                 <div>
@@ -352,14 +352,14 @@ const MemberForm = () => {
               <button
                 type="button"
                 onClick={() => navigate('/members')}
-                className="rounded-md cursor-pointer bg-white py-2 px-3 text-sm font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                className="rounded-md cursor-pointer bg-white py-2 px-3 text-sm sm:font-bold font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex cursor-pointer justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-bold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex cursor-pointer justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm sm:font-bold font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Saving...' : isEditMode ? 'Update Member' : 'Add Member'}
               </button>

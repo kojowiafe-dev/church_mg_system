@@ -380,7 +380,7 @@ const SermonManager = () => {
 
       {isModalOpen && (
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center p-4 overflow-y-auto min-h-screen">
-          <div className="bg-white rounded-xl p-6 max-w-lg w-full sm:mt-45 mt-20">
+          <div className="bg-white rounded-xl p-6 max-w-lg w-full sm:mt-45 mt-40">
             <h2 className="sm:text-2xl text-md sm:font-bold font-semibold mb-4">
               {editingId ? 'Edit' : 'Create'} {tab === 'sermons' ? 'Sermon' : 'Event'}
             </h2>
