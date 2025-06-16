@@ -33,9 +33,8 @@ app.include_router(events.router)
 
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=["http://10.107.25.97:5173"],
-    # allow_origins=["http://10.11.24.104:5173"],
-    allow_origins=["http://localhost:5173"],
+    # allow_origins=["http://localhost:5173"],
+    allow_origins=["http://10.11.25.240:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
