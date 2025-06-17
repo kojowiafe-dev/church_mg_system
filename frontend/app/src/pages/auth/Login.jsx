@@ -165,8 +165,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <BackgroundImage src={bgImage} className="absolute inset-0" fallbackColor="#222" style={{ opacity: 0.3 }} />
-      <div className="relative z-20 w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg rounded-lg pr-16 pl-16 p-8">
+      <BackgroundImage src={bgImage} className="fixed inset-0 w-full h-full" fallbackColor="#222" style={{ opacity: 0.3, objectFit: 'cover' }} />
+      <div className="relative z-20 w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg rounded-lg pr-16 pl-16 p-8 m-2">
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Welcome Back</h2>
         <LoginForm onSubmit={handleLogin} loading={loading} />
       </div>
