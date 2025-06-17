@@ -246,7 +246,7 @@ export default function HomePage() {
               <FaChurch className="text-indigo-300 w-8 h-8" />
               <div>
                 <div className="text-2xl font-bold text-white">KGCCI</div>
-                <div className="text-sm text-indigo-200">King of Glory Covenant Chapel</div>
+                <div className="text-sm text-indigo-200">King of Glory Covenant Chapel International</div>
               </div>
             </div>
             <p className="text-indigo-200 mt-4">
@@ -280,9 +280,9 @@ export default function HomePage() {
           <div>
             <h2 className="text-lg font-semibold mb-4 text-indigo-300">Contact Us</h2>
             <ul className="space-y-3">
-              <li className="text-indigo-200">123 Church Street</li>
-              <li className="text-indigo-200">City, State 12345</li>
-              <li className="text-indigo-200">Phone: (555) 123-4567</li>
+              <li className="text-indigo-200">Ofankor, Agya Herbal</li>
+              <li className="text-indigo-200">Accra</li>
+              <li className="text-indigo-200">Phone: (233) 591-783-838</li>
               <li className="text-indigo-200">Email: info@kgcci.org</li>
             </ul>
             <div className="flex space-x-4 mt-4">
