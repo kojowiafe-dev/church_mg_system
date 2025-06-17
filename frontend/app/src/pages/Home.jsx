@@ -42,7 +42,7 @@ export default function HomePage() {
           <FaChurch className="text-indigo-600 w-8 h-8" />
           <div>
             <div className="text-xl font-bold text-indigo-600">KGCCI</div>
-            <div className="text-xs text-gray-600">King of Glory Covenant Chapel</div>
+            <div className="text-xs text-gray-600">King of Glory Covenant Chapel Int.</div>
           </div>
         </div>
         
@@ -70,6 +70,7 @@ export default function HomePage() {
           <video style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.8' }} autoPlay muted loop>
             <source src={video} type="video/mp4" />
           </video>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-indigo-50/80 mb-4 drop-shadow-md" data-aos="fade-up">
           Welcome to <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 block">King Of Glory Covenant Chapel International</span>
