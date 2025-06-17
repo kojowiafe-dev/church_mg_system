@@ -37,14 +37,23 @@ export default function HomePage() {
       </div> */}
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
-      <header className="bg-indigo-300/30 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center fixed w-full z-50">
-        <div className="flex items-center gap-2 text-xl font-bold text-indigo-600 relative z-20">
-          <FaChurch className="text-indigo-600" />
-          KGCCI
+      <header className="bg-white/90 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center fixed w-full z-50">
+        <div className="flex items-center gap-3">
+          <FaChurch className="text-indigo-600 w-8 h-8" />
+          <div>
+            <div className="text-xl font-bold text-indigo-600">KGCCI</div>
+            <div className="text-xs text-gray-600">King of Glory Covenant Chapel</div>
+          </div>
+        </div>
+        
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#features" className="text-gray-600 hover:text-indigo-600 transition-colors">Features</a>
+          <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
+          <a href="#contact" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
         </div>
         
         <Link to='/login'>
-            <button className="cursor-pointer font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-3 rounded hover:scale-110 flex items-center gap-2 transition duration-300 ease-in-out" >
+          <button className="cursor-pointer font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2 rounded-lg hover:scale-105 flex items-center gap-2 transition duration-300 ease-in-out shadow-md" >
             <FaSignInAlt /> Login
           </button>
         </Link>
@@ -96,6 +105,51 @@ export default function HomePage() {
         </Link>
       </motion.section>
       
+      {/* Pastor Section */}
+      <section className="py-20 px-6 relative z-10 bg-gradient-to-b from-white to-indigo-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            {/* Pastor Image */}
+            <div className="w-full md:w-1/3" data-aos="fade-right">
+              <div className="relative">
+                <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-indigo-100 shadow-xl">
+                  <img 
+                    src="https://placehold.co/400x400" 
+                    alt="Prophet. Nelson Wiafe" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-full shadow-lg">
+                  General Overseer
+                </div>
+              </div>
+            </div>
+
+            {/* Pastor Info */}
+            <div className="w-full md:w-2/3 text-center md:text-left" data-aos="fade-left">
+              <h2 className="text-3xl font-bold text-indigo-800 mb-4">Meet Our General Overseer</h2>
+              <h3 className="text-2xl font-semibold text-indigo-600 mb-6">Prophet. Nelson Wiafe</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                With 8 years of dedicated service in ministry, Prophet. Nelson Wiafe has been leading King of Glory Covenant Chapel International since July 2017. His vision and commitment to spreading God's love, Jesus Christ, have transformed countless lives and built a strong, vibrant community of believers.
+              </p>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Under his leadership, our church has grown into a beacon of hope and spiritual guidance, reaching out to communities both locally and internationally. His teachings emphasize the importance of God's glory, faith, family, and God's love.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                <a href="#" className="text-indigo-600 hover:text-indigo-700 transition-colors">
+                  <FaFacebookF className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-indigo-600 hover:text-indigo-700 transition-colors">
+                  <FaTwitter className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-indigo-600 hover:text-indigo-700 transition-colors">
+                  <FaLinkedinIn className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="py-16 px-6 relative z-10 min-h-screen bg-gradient-to-b from-indigo-50 to-white">
@@ -183,44 +237,65 @@ export default function HomePage() {
 
 
       {/* Footer */}
-      {/* <footer className="text-indigo-600 bg-indigo-50/80 text-center py-6 mt-auto font-bold relative z-10">
-        <p>&copy; {new Date().getFullYear()} ChurchConnect. All rights reserved.</p>
-      </footer> */}
-      <footer className="bg-indigo-300/30 backdrop-blur-md text-white px-6 py-10 md:px-20">
-        <div className="grid md:grid-cols-3 gap-10">
+      <footer className="bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white px-6 py-16 md:px-20">
+        <div className="grid md:grid-cols-4 gap-10 max-w-7xl mx-auto">
           {/* Branding */}
-          <div>
-            <h1 className="text-3xl font-extrabold text-indigo-700">KGCCI</h1>
-            <p className="mt-4 text-gray-400">
-              Come and experience the King Of Glory.
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-3 mb-4">
+              <FaChurch className="text-indigo-300 w-8 h-8" />
+              <div>
+                <div className="text-2xl font-bold text-white">KGCCI</div>
+                <div className="text-sm text-indigo-200">King of Glory Covenant Chapel</div>
+              </div>
+            </div>
+            <p className="text-indigo-200 mt-4">
+              Empowering churches with modern management solutions for effective ministry.
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Quick Links */}
           <div>
-            <h2 className="text-xl font-semibold mb-4">Quick Links</h2>
-            <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-indigo-300/30">Home</a></li>
-              <li><a href="#" className="hover:text-indigo-300/30">Services</a></li>
-              <li><a href="#" className="hover:text-indigo-300/30">About</a></li>
-              <li><a href="#" className="hover:bg-indigo-300/30">Contact</a></li>
+            <h2 className="text-lg font-semibold mb-4 text-indigo-300">Quick Links</h2>
+            <ul className="space-y-3">
+              <li><a href="#features" className="text-indigo-200 hover:text-white transition-colors">Features</a></li>
+              <li><a href="#about" className="text-indigo-200 hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#contact" className="text-indigo-200 hover:text-white transition-colors">Contact</a></li>
+              <li><Link to="/register" className="text-indigo-200 hover:text-white transition-colors">Register</Link></li>
             </ul>
           </div>
 
-          {/* Social Media */}
+          {/* Ministry */}
           <div>
-            <h2 className="text-xl font-semibold mb-4">Follow Us</h2>
-            <div className="flex space-x-4 text-indigo-300/30 text-2xl">
-              <a href="#" className="text-indigo-700"><FaFacebookF /></a>
-              <a href="#" className="text-indigo-700"><FaTwitter /></a>
-              <a href="#" className="text-indigo-700"><FaLinkedinIn /></a>
-              <a href="#" className="text-indigo-700"><FaInstagram /></a>
+            <h2 className="text-lg font-semibold mb-4 text-indigo-300">Ministry</h2>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Worship Services</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Bible Study</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Youth Ministry</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Prayer Groups</a></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h2 className="text-lg font-semibold mb-4 text-indigo-300">Contact Us</h2>
+            <ul className="space-y-3">
+              <li className="text-indigo-200">123 Church Street</li>
+              <li className="text-indigo-200">City, State 12345</li>
+              <li className="text-indigo-200">Phone: (555) 123-4567</li>
+              <li className="text-indigo-200">Email: info@kgcci.org</li>
+            </ul>
+            <div className="flex space-x-4 mt-4">
+              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaFacebookF /></a>
+              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaTwitter /></a>
+              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaLinkedinIn /></a>
+              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaInstagram /></a>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
-          &copy; {new Date().getFullYear()} KGCCI. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-indigo-700 text-center text-indigo-200 text-sm">
+          <p>&copy; {new Date().getFullYear()} King of Glory Covenant Chapel International. All rights reserved.</p>
+          <p className="mt-2">Designed with ❤️ for the glory of God</p>
         </div>
       </footer>
     </div>
