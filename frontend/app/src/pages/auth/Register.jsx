@@ -386,7 +386,7 @@ const Register = () => {
         </p>
 
         <div
-          onClick={() => navigate('/')} // If using useNavigate()
+          onClick={() => navigate('/')} 
           className="flex gap-3 mt-3 justify-center items-center cursor-pointer"
           role="button"
           tabIndex={0}
