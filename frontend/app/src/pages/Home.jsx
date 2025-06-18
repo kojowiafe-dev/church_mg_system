@@ -8,6 +8,7 @@ import 'aos/dist/aos.css';
 import TextTransition, { presets } from "react-text-transition";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import video from '../video/5949377-hd_1920_1080_24fps.mp4'
+import Daddy from '../assets/Daddy.jpg'
 
 
 export default function HomePage() {
@@ -115,7 +116,7 @@ export default function HomePage() {
               <div className="relative">
                 <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-indigo-100 shadow-xl">
                   <img 
-                    src="https://placehold.co/400x400" 
+                    src={Daddy} 
                     alt="Prophet. Nelson Wiafe" 
                     className="w-full h-full object-cover"
                   />
