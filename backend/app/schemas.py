@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel, Field
 from datetime import datetime, date
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 from models import GenderEnum, MaritalStatusEnum, Sermon, Event
 
 # -------------------------- ADMIN DATABASE MODEL -----------------#
@@ -39,12 +39,12 @@ class UserUpdate(SQLModel):
     house_address: Optional[str]
     profile_image: Optional[str]
 
-class Token(BaseModel):
+class Token(SQLModel):
     access_token: str
     token_type: str
     role: str
 
-class TokenData(BaseModel):
+class TokenData(SQLModel):
     username: Optional[str] = None
 
 # Keep your sermon and event schemas as-is, no change needed
@@ -112,7 +112,7 @@ class SermonUpdate(SermonPublic):
     video_url: Optional[str] = None
 
 # New schemas for member management
-class MemberBase(BaseModel):
+class MemberBase(SQLModel):
     first_name: str
     last_name: str
     date_of_birth: date = None
@@ -139,7 +139,7 @@ class Member(MemberBase):
     class Config:
         from_attributes = True
 
-class FamilyBase(BaseModel):
+class FamilyBase(SQLModel):
     family_name: str
     head_of_family_id: int
     address: str
@@ -155,7 +155,7 @@ class Family(FamilyBase):
     class Config:
         from_attributes = True
 
-class FamilyMemberBase(BaseModel):
+class FamilyMemberBase(SQLModel):
     family_id: int
     member_id: int
     relationship: str
@@ -170,7 +170,7 @@ class FamilyMember(FamilyMemberBase):
     class Config:
         from_attributes = True
 
-class AttendanceBase(BaseModel):
+class AttendanceBase(SQLModel):
     member_id: int
     event_id: int
     date: datetime
@@ -188,7 +188,7 @@ class Attendance(AttendanceBase):
         from_attributes = True
 
 # Event schemas
-class EventBase(BaseModel):
+class EventBase(SQLModel):
     name: str
     preacher: str
     description: str
@@ -204,7 +204,7 @@ class Event(EventBase):
         from_attributes = True
 
 # Sermon schemas
-class SermonBase(BaseModel):
+class SermonBase(SQLModel):
     title: str
     preacher: str
     description: Optional[str] = None
@@ -242,5 +242,5 @@ class OAuth2LoginFormWithRole:
 
 
 
-class ForgotPasswordRequest(BaseModel):
-    email: str
+class ForgotPasswordRequest(SQLModel):
+    email: EmailStr
