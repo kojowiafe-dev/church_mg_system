@@ -9,6 +9,8 @@ import TextTransition, { presets } from "react-text-transition";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import video from '../video/5949377-hd_1920_1080_24fps.mp4'
 import Daddy from '../assets/Daddy.jpg'
+import { Disclosure } from '@headlessui/react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 
 export default function HomePage() {
@@ -36,76 +38,102 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col items-center relative overflow-x-hidden bg-indigo-50 text-gray-800">
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
-      <header className="bg-white/90 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center fixed gap-10 ml-5 mr-5 mt-5 z-50">
-        <div className="flex items-center gap-3">
-          <FaChurch className="text-indigo-600 w-8 h-8" />
-          <div>
-            <div className="text-xl font-bold text-indigo-600">KGCCI</div>
-            <div className="text-xs text-gray-600">King of Glory Covenant Chapel Int.</div>
-          </div>
-        </div>
-        
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#features" className="text-gray-600 hover:text-indigo-600 transition-colors">Features</a>
-          <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
-          <a href="#contact" className="text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
-        </div>
-        
-        <Link to='/login'>
-          <button className="cursor-pointer font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-6 py-2 rounded-lg hover:scale-105 flex items-center gap-2 transition duration-300 ease-in-out shadow-md" >
-            <FaSignInAlt /> Login
-          </button>
-        </Link>
-      </header>
+
+      <Disclosure as="nav" className="bg-white/80 dark:bg-gray-900 backdrop-blur-md fixed top-5 left-2 right-2 z-50 rounded-xl shadow-lg">
+        {({ open }) => (
+          <>
+            <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+              {/* Logo */}
+              <div className="flex items-center gap-3">
+                <FaChurch className="text-indigo-600 w-7 h-7" />
+                <span className="text-lg font-bold text-indigo-700">KGCCI</span>
+              </div>
+
+              {/* Desktop Nav */}
+              <div className="hidden md:flex items-center space-x-6 font-medium text-sm">
+                <a href="#features" className="hover:text-indigo-600 transition">Features</a>
+                <a href="#about" className="hover:text-indigo-600 transition">About</a>
+                <a href="#contact" className="hover:text-indigo-600 transition">Contact</a>
+
+                {/* Login Button for Desktop */}
+                <Link to="/login">
+                  <button className="ml-4 flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
+                    <FaSignInAlt /> Login
+                  </button>
+                </Link>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <Disclosure.Button className="md:hidden text-indigo-600 hover:text-indigo-800">
+                {open ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+              </Disclosure.Button>
+            </div>
+
+            {/* Mobile Nav */}
+            <Disclosure.Panel className="md:hidden px-4 pb-4 space-y-2">
+              <a href="#features" className="block py-2 text-sm hover:text-indigo-600">Features</a>
+              <a href="#about" className="block py-2 text-sm hover:text-indigo-600">About</a>
+              <a href="#contact" className="block py-2 text-sm hover:text-indigo-600">Contact</a>
+
+              {/* Login Button for Mobile */}
+              <Link to="/login">
+                <button className="w-full mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
+                  <FaSignInAlt /> Login
+                </button>
+              </Link>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+
+
 
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20 relative z-10 text-white min-h-screen"
+        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 py-20 text-white w-full"
       >
-        <div className="absolute inset-0 overflow-hidden">
-          <video style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.8' }} autoPlay muted loop>
+        <div className="absolute inset-0">
+          <video className="w-full h-full object-cover opacity-70" autoPlay muted loop>
             <source src={video} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="mt-16 flex items-center flex-col">
-          <h1 className="text-4xl md:text-5xl font-bold text-indigo-50/80 mb-4 drop-shadow-md" data-aos="fade-up">
-            Welcome to <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 block">King Of Glory Covenant Chapel International</span>
+
+        <div className="relative z-10 mt-20 md:mt-28">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-50/90 drop-shadow-xl leading-tight mb-4" data-aos="fade-up">
+            Welcome to{" "}
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 text-5xl md:text-6xl">
+              King Of Glory Covenant Chapel Int.
+            </span>
           </h1>
-          <div className="text-gray-300 text-lg md:text-xl mb-6 max-w-2xl mt-10" data-aos="fade-down">
-            {/* A modern church management system designed to empower your ministry and enhance community engagement. */}
-            Streamline your church operations — {prefix} {" "}
-            <div className="flex justify-center items-center"> 
+
+          <div className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mt-6 mb-10 leading-relaxed" data-aos="fade-down">
+            Streamline your church operations — {prefix}{" "}
+            <div className="flex justify-center items-center">
               <TextTransition springConfig={presets.wobbly} inline className="text-3xl font-bold">
-                <span aria-live="polite" className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">
+                  {words[wordIndex]}
+                </span>
               </TextTransition>
             </div>
             and more from one powerful dashboard.
           </div>
-          <Link to='/register'>
+
+          <Link to="/register">
             <motion.button
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              style={{
-                padding: '12px 24px',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
-              }}
-              className="cursor-pointer bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-indigo-700 transition mt-10"
-              // data-aos="fade-down"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl text-base font-semibold shadow-lg transition-all duration-300"
             >
               Get Started
             </motion.button>
           </Link>
         </div>
       </motion.section>
+
       
       {/* Pastor Section */}
       <section className="py-20 px-6 relative z-10 bg-gradient-to-b from-white w-full to-indigo-50">
