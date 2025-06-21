@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
-import { motion } from "framer-motion";
 import AOS from "aos";
 import { FaChurch, FaUsers, FaCalendarAlt, FaSignInAlt } from "react-icons/fa";
-import bgImage from '../assets/john-price-RAZQiZOX3mU-unsplash.jpg'
 import 'aos/dist/aos.css';
 import TextTransition, { presets } from "react-text-transition";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
@@ -36,7 +34,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col items-center relative overflow-x-hidden bg-indigo-50 text-gray-800">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-indigo-50 text-gray-800">
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
 
@@ -99,11 +97,11 @@ export default function HomePage() {
 
 
       {/* Hero Section */}
-      <motion.section
+      <section
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 py-20 text-white w-full"
+        className="relative z-10 flex flex-col justify-center items-center text-center px-6 py-20 text-white w-full"
       >
         <div className="absolute inset-0">
           <video className="w-full h-full object-cover opacity-70" autoPlay muted loop>
@@ -112,7 +110,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/60" />
         </div>
 
-        <div className="relative z-10 mt-20 md:mt-28">
+        <div className="relative z-10 mt-10 md:mt-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-50/90 drop-shadow-xl leading-tight mb-4" data-aos="fade-up">
             Welcome to{" "}
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 text-5xl md:text-6xl">
@@ -133,16 +131,16 @@ export default function HomePage() {
           </div>
 
           <Link to="/register">
-            <motion.button
+            <button
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl text-base font-semibold shadow-lg transition-all duration-300"
             >
               Get Started
-            </motion.button>
+            </button>
           </Link>
         </div>
-      </motion.section>
+      </section>
 
       
       {/* Pastor Section */}
@@ -192,7 +190,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-6 relative z-10 min-h-screen w-full bg-gradient-to-b from-indigo-50 to-white">
+      <section id="features" className="py-16 px-6 relative z-10 w-full bg-gradient-to-b from-indigo-50 to-white">
         <h2 className="text-4xl font-bold text-center text-indigo-800 mb-4" data-aos="fade-left">
           Powerful Features for Your Ministry
         </h2>
@@ -260,18 +258,19 @@ export default function HomePage() {
 
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white px-6 py-16 md:px-20">
-        <div className="grid md:grid-cols-4 gap-10 max-w-7xl mx-auto">
+      <footer className="bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white px-6 py-16 md:px-20 w-full mt-auto">
+        <div className="grid md:grid-cols-4 gap-12 max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+          
           {/* Branding */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <FaChurch className="text-indigo-300 w-8 h-8" />
+              <FaChurch className="text-indigo-300 w-8 h-8 animate-pulse" />
               <div>
                 <div className="text-2xl font-bold text-white">KGCCI</div>
-                <div className="text-sm text-indigo-200">King of Glory Covenant Chapel International</div>
+                <div className="text-sm text-indigo-200">King of Glory Covenant Chapel Int.</div>
               </div>
             </div>
-            <p className="text-indigo-200 mt-4">
+            <p className="text-indigo-200 mt-4 leading-relaxed">
               Empowering churches with modern management solutions for effective ministry.
             </p>
           </div>
@@ -279,48 +278,61 @@ export default function HomePage() {
           {/* Quick Links */}
           <div>
             <h2 className="text-lg font-semibold mb-4 text-indigo-300">Quick Links</h2>
-            <ul className="space-y-3">
-              <li><a href="#features" className="text-indigo-200 hover:text-white transition-colors">Features</a></li>
-              <li><a href="#about" className="text-indigo-200 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#contact" className="text-indigo-200 hover:text-white transition-colors">Contact</a></li>
-              <li><Link to="/register" className="text-indigo-200 hover:text-white transition-colors">Register</Link></li>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#features" className="text-indigo-200 hover:text-white transition">Features</a></li>
+              <li><a href="#about" className="text-indigo-200 hover:text-white transition">About Us</a></li>
+              <li><a href="#contact" className="text-indigo-200 hover:text-white transition">Contact</a></li>
+              <li><Link to="/register" className="text-indigo-200 hover:text-white transition">Register</Link></li>
             </ul>
           </div>
 
           {/* Ministry */}
           <div>
             <h2 className="text-lg font-semibold mb-4 text-indigo-300">Ministry</h2>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Worship Services</a></li>
-              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Bible Study</a></li>
-              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Youth Ministry</a></li>
-              <li><a href="#" className="text-indigo-200 hover:text-white transition-colors">Prayer Groups</a></li>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="text-indigo-200 hover:text-white transition">Worship Services</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition">Bible Study</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition">Youth Ministry</a></li>
+              <li><a href="#" className="text-indigo-200 hover:text-white transition">Prayer Groups</a></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h2 className="text-lg font-semibold mb-4 text-indigo-300">Contact Us</h2>
-            <ul className="space-y-3">
-              <li className="text-indigo-200">Ofankor, Agya Herbal</li>
-              <li className="text-indigo-200">Accra</li>
-              <li className="text-indigo-200">Phone: (233) 591-783-838</li>
-              <li className="text-indigo-200">Email: info@kgcci.org</li>
+            <ul className="space-y-2 text-sm text-indigo-200">
+              <li>Ofankor, Agya Herbal</li>
+              <li>Accra, Ghana</li>
+              <li>Phone: +233 591 783 838</li>
+              <li>Email: info@kgcci.org</li>
             </ul>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaFacebookF /></a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaTwitter /></a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaLinkedinIn /></a>
-              <a href="#" className="text-indigo-300 hover:text-white transition-colors"><FaInstagram /></a>
+
+            {/* Social Icons */}
+            <div className="flex gap-4 mt-4 text-lg">
+              <a href="#" className="hover:text-white transition transform hover:scale-125 duration-300"><FaFacebookF /></a>
+              <a href="#" className="hover:text-white transition transform hover:scale-125 duration-300"><FaTwitter /></a>
+              <a href="#" className="hover:text-white transition transform hover:scale-125 duration-300"><FaLinkedinIn /></a>
+              <a href="#" className="hover:text-white transition transform hover:scale-125 duration-300"><FaInstagram /></a>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-indigo-700 text-center text-indigo-200 text-sm">
+        {/* Marquee Section */}
+        <div className="mt-10 border-t border-indigo-700 pt-6">
+          <div className="overflow-hidden whitespace-nowrap">
+            <div className="inline-block animate-marquee text-indigo-300 text-sm">
+              ✨ "Let everything that has breath praise the Lord." — Psalm 150:6 &nbsp;&nbsp;|&nbsp;&nbsp; 🙌 Welcome to a digital church experience that empowers ministry 🌍 &nbsp;&nbsp;|&nbsp;&nbsp; 💒 Built with love for the Body of Christ.
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-8 text-center text-indigo-200 text-sm">
           <p>&copy; {new Date().getFullYear()} King of Glory Covenant Chapel International. All rights reserved.</p>
-          <p className="mt-2">Designed with ❤️ for the glory of God</p>
+          <p className="mt-2 text-xs">Designed with ❤️ for the glory of God</p>
         </div>
       </footer>
+
     </div>
   );
 }
