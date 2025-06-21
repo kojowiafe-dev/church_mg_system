@@ -6,6 +6,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import Admin from './pages/auth/Admin';
 
 import AdminDashboard from './pages/admin/AdminDashboard';
 import PastorDashboard from './pages/pastor/PastorDashboard';
@@ -41,6 +42,13 @@ const App = () => {
 
       {/* Protected Routes */}
       <Route element={<DashboardLayout role={localStorage.getItem("role")} />}>
+        <Route 
+          path='/admin-only'
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <Admin />
+            </ProtectedRoute>
+          }/>
         <Route
           path="/admin/dashboard"
           element={
