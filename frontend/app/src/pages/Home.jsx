@@ -101,7 +101,7 @@ export default function HomePage() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-10 flex flex-col justify-center items-center text-center px-6 py-20 text-white w-full"
+        className="relative z-10 flex flex-col justify-center items-center text-center px-6 py-30 text-white w-full h-full"
       >
         <div className="absolute inset-0">
           <video className="w-full h-full object-cover opacity-70" autoPlay muted loop>
@@ -235,7 +235,7 @@ export default function HomePage() {
               key={idx}
               data-aos="fade-up"
               data-aos-delay={idx * 100}
-              className="group relative overflow-hidden p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03]"
+              className="group relative overflow-hidden p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:border-blue-600 "
             >
               <div className="absolute inset-0 bg-indigo-50 dark:bg-gray-800 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
               <div className="relative">
