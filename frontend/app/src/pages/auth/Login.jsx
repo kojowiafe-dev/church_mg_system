@@ -56,7 +56,7 @@ const LoginForm = ({ onSubmit, loading }) => {
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
             >
               <option value="">Select a role</option>
-              <option value="admin">Admin</option>
+              {/* <option value="admin">Admin</option> */}
               <option value="pastor">Pastor</option>
               <option value="member">Member</option>
             </select>
