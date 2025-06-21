@@ -63,7 +63,7 @@ export default function HomePage() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20 relative z-10 text-white min-h-screen mt-16"
+        className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20 relative z-10 text-white min-h-screen"
       >
         <div className="absolute inset-0 overflow-hidden">
           <video style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.8' }} autoPlay muted loop>
@@ -71,38 +71,40 @@ export default function HomePage() {
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-indigo-50/80 mb-4 drop-shadow-md" data-aos="fade-up">
-          Welcome to <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 block">King Of Glory Covenant Chapel International</span>
-        </h1>
-        <div className="text-gray-300 text-lg md:text-xl mb-6 max-w-2xl mt-10" data-aos="fade-down">
-          {/* A modern church management system designed to empower your ministry and enhance community engagement. */}
-          Streamline your church operations — {prefix} {" "}
-          <div className="flex justify-center items-center"> 
-            <TextTransition springConfig={presets.wobbly} inline className="text-3xl font-bold">
-              <span aria-live="polite" className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
-            </TextTransition>
+        <div className="mt-16 flex items-center flex-col">
+          <h1 className="text-4xl md:text-5xl font-bold text-indigo-50/80 mb-4 drop-shadow-md" data-aos="fade-up">
+            Welcome to <span className="text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 block">King Of Glory Covenant Chapel International</span>
+          </h1>
+          <div className="text-gray-300 text-lg md:text-xl mb-6 max-w-2xl mt-10" data-aos="fade-down">
+            {/* A modern church management system designed to empower your ministry and enhance community engagement. */}
+            Streamline your church operations — {prefix} {" "}
+            <div className="flex justify-center items-center"> 
+              <TextTransition springConfig={presets.wobbly} inline className="text-3xl font-bold">
+                <span aria-live="polite" className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400 inline-block">{words[wordIndex]}</span>
+              </TextTransition>
+            </div>
+            and more from one powerful dashboard.
           </div>
-          and more from one powerful dashboard.
+          <Link to='/register'>
+            <motion.button
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              style={{
+                padding: '12px 24px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+              }}
+              className="cursor-pointer bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-indigo-700 transition mt-10"
+              // data-aos="fade-down"
+            >
+              Get Started
+            </motion.button>
+          </Link>
         </div>
-        <Link to='/register'>
-          <motion.button
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            style={{
-              padding: '12px 24px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
-            }}
-            className="cursor-pointer bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-indigo-700 transition mt-10"
-            // data-aos="fade-down"
-          >
-            Get Started
-          </motion.button>
-        </Link>
       </motion.section>
       
       {/* Pastor Section */}
