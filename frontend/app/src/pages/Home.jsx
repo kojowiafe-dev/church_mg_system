@@ -194,24 +194,29 @@ export default function HomePage() {
               desc: 'Track church resources, equipment, and facilities with an easy-to-use inventory system.',
             },
           ].map((item, idx) => (
+            // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 py-12">
             <div
               key={idx}
               data-aos="fade-up"
               data-aos-delay={idx * 100}
-              className="group p-8 bg-white rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:bg-indigo-50"
+              className="group relative overflow-hidden p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03]"
             >
-              <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:bg-indigo-200">
-                {item.icon}
+              <div className="absolute inset-0 bg-indigo-50 dark:bg-gray-800 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+              <div className="relative">
+                <div className="bg-indigo-100 dark:bg-indigo-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-700 animate-icon">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-700 transition-colors duration-300">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
-                {item.desc}
-              </p>
             </div>
           ))}
         </div>
+
 
       </section>
 
