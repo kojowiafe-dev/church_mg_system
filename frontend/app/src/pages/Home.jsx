@@ -33,12 +33,10 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-indigo-50 text-gray-800">
-      {/* <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bgImage})`, opacity: 0.5 }}>
-      </div> */}
+    <div className="min-h-screen flex flex-col items-center relative overflow-x-hidden bg-indigo-50 text-gray-800">
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
-      <header className="bg-white/90 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center fixed w-full z-50">
+      <header className="bg-white/90 backdrop-blur-md shadow-md px-6 py-4 flex justify-between items-center fixed gap-10 ml-5 mr-5 mt-5 z-50">
         <div className="flex items-center gap-3">
           <FaChurch className="text-indigo-600 w-8 h-8" />
           <div>
@@ -108,7 +106,7 @@ export default function HomePage() {
       </motion.section>
       
       {/* Pastor Section */}
-      <section className="py-20 px-6 relative z-10 bg-gradient-to-b from-white to-indigo-50">
+      <section className="py-20 px-6 relative z-10 bg-gradient-to-b from-white w-full to-indigo-50">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Pastor Image */}
@@ -154,7 +152,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-6 relative z-10 min-h-screen bg-gradient-to-b from-indigo-50 to-white">
+      <section id="features" className="py-16 px-6 relative z-10 min-h-screen w-full bg-gradient-to-b from-indigo-50 to-white">
         <h2 className="text-4xl font-bold text-center text-indigo-800 mb-4" data-aos="fade-left">
           Powerful Features for Your Ministry
         </h2>
