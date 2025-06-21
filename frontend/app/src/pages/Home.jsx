@@ -161,80 +161,58 @@ export default function HomePage() {
         <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto" data-aos="fade-right">
           Streamline your church operations and enhance community engagement with our comprehensive management tools
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          
-          <div
-            data-aos="fade-up"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaUsers className="text-indigo-600 w-8 h-8" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+          {[
+            {
+              icon: <FaUsers className="text-indigo-600 w-8 h-8" />,
+              title: 'Member Management',
+              desc: 'Track attendance, manage member profiles, and maintain family relationships within your congregation.',
+            },
+            {
+              icon: <FaCalendarAlt className="text-indigo-600 w-8 h-8" />,
+              title: 'Event & Service Planning',
+              desc: 'Schedule services, events, and meetings. Send automated reminders to members and volunteers.',
+            },
+            {
+              icon: <FaChurch className="text-indigo-600 w-8 h-8" />,
+              title: 'Sermon & Media Library',
+              desc: 'Organize and share sermons, worship songs, and media content with your congregation.',
+            },
+            {
+              icon: <FaUsers className="text-indigo-600 w-8 h-8" />,
+              title: 'Volunteer Management',
+              desc: 'Coordinate ministry teams, schedule volunteers, and track service hours efficiently.',
+            },
+            {
+              icon: <FaCalendarAlt className="text-indigo-600 w-8 h-8" />,
+              title: 'Ministry Groups',
+              desc: 'Manage small groups, Bible studies, and ministry teams with dedicated communication tools.',
+            },
+            {
+              icon: <FaChurch className="text-indigo-600 w-8 h-8" />,
+              title: 'Resource Management',
+              desc: 'Track church resources, equipment, and facilities with an easy-to-use inventory system.',
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              data-aos="fade-up"
+              data-aos-delay={idx * 100}
+              className="group p-8 bg-white rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:bg-indigo-50"
+            >
+              <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:bg-indigo-200">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-700 transition-colors duration-300">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+                {item.desc}
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Member Management</h3>
-            <p className="text-gray-600">Track attendance, manage member profiles, and maintain family relationships within your congregation.</p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaCalendarAlt className="text-indigo-600 w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Event & Service Planning</h3>
-            <p className="text-gray-600">Schedule services, events, and meetings. Send automated reminders to members and volunteers.</p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaChurch className="text-indigo-600 w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Sermon & Media Library</h3>
-            <p className="text-gray-600">Organize and share sermons, worship songs, and media content with your congregation.</p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="300"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaUsers className="text-indigo-600 w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Volunteer Management</h3>
-            <p className="text-gray-600">Coordinate ministry teams, schedule volunteers, and track service hours efficiently.</p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="400"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaCalendarAlt className="text-indigo-600 w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Ministry Groups</h3>
-            <p className="text-gray-600">Manage small groups, Bible studies, and ministry teams with dedicated communication tools.</p>
-          </div>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="500"
-            className="p-8 bg-white rounded-2xl shadow-lg text-center cursor-pointer transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border border-indigo-100"
-          >
-            <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaChurch className="text-indigo-600 w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">Resource Management</h3>
-            <p className="text-gray-600">Track church resources, equipment, and facilities with an easy-to-use inventory system.</p>
-          </div>
-
+          ))}
         </div>
+
       </section>
 
 
