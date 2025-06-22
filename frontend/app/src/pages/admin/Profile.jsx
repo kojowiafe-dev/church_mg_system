@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import { FaUserCircle, FaEnvelope, FaPhone, FaChurch } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import WindowResize from '../../layouts/WindowResize';
+import api from '../api';
 
 const Profile = () => {
-  const { auth } = useAuth();
-  const { username, email, phone, role, church } = auth;
   const windowSize = WindowResize();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -15,15 +13,36 @@ const Profile = () => {
     username: '',
     email: '',
     phone: '',
-    church: '',
+    house_address: '',
+    profile_image: ''
   });
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await api.get('/auth/me');
+        setProfile(res.data);
+        setFormData({
+          username: res.data.username || '',
+          email: res.data.email || '',
+          phone: res.data.phone || '',
+          house_address: res.data.house_address || '',
+          profile_image: res.data.profile_image || ''
+        });
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      }
+    };
+    fetchProfile();
+  }, []);
 
   // Handle welcome toast
   useEffect(() => {
     const showWelcomeToast = () => {
       const popup = localStorage.getItem('loginToken');
-      if (popup && username) {
-        toast.success(`Welcome ${username}!`, {
+      if (popup && profile?.username) {
+        toast.success(`Welcome ${profile.username}!`, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -41,19 +60,7 @@ const Profile = () => {
     // Small delay to ensure auth context is loaded
     const timer = setTimeout(showWelcomeToast, 500);
     return () => clearTimeout(timer);
-  }, [username]);
-
-  // Handle form data updates
-  useEffect(() => {
-    if (username || email || phone || church) {
-      setFormData({
-        username: username || '',
-        email: email || '',
-        phone: phone || '',
-        church: church || '',
-      });
-    }
-  }, [username, email, phone, church]);
+  }, [profile?.username]);
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -72,8 +79,8 @@ const Profile = () => {
       <div className="flex items-center gap-4 mb-6">
         <FaUserCircle className="text-gray-700" size={windowSize.width < 800 ? '24' : '48'} />
         <div>
-          <h2 className="sm:text-2xl text-sm font-semibold text-gray-800">{username}</h2>
-          <p className="text-gray-500 capitalize">{role}</p>
+          <h2 className="sm:text-2xl text-sm font-semibold text-gray-800">{profile?.username}</h2>
+          <p className="text-gray-500 capitalize">{profile?.role}</p>
         </div>
       </div>
 
@@ -81,15 +88,15 @@ const Profile = () => {
         <div className="sm:space-y-4 space-y-2 text-sm">
           <div className="flex items-center gap-3 text-gray-700">
             <FaEnvelope />
-            <span>{email || 'Not provided'}</span>
+            <span>{profile?.email || 'Not provided'}</span>
           </div>
           <div className="flex items-center gap-3 text-gray-700">
             <FaPhone />
-            <span>{phone || 'Not provided'}</span>
+            <span>{profile?.phone || 'Not provided'}</span>
           </div>
           <div className="flex items-center gap-3 text-gray-700">
             <FaChurch />
-            <span>{church || 'Not assigned'}</span>
+            <span>Not assigned</span>
           </div>
 
           <button

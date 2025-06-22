@@ -24,7 +24,7 @@ def get_user_by_id(id: int, session: SessionDep):
     return user
 
 @router.put("/{id}", response_model=UserUpdate)
-def update_member(
+def update_user(
     user_id: int,
     member_update: UserUpdate,
     session: SessionDep,
