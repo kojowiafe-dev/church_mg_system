@@ -6,7 +6,7 @@ import schemas, database, models, token_access, hashing, oauth2
 from typing import Annotated
 from datetime import datetime
 from schemas import OAuth2LoginFormWithRole
-from utils import email
+import mail
 import random
 from utils import otp
 import logging
@@ -210,7 +210,37 @@ async def forgot_password(
         )
         
     try:
-        reset_entry = models
+        reset_entry = models.PasswordResetCode(
+            email = email,
+            code = code,
+            expires_at = expires_at
+        )
+        session.add(reset_entry)
+        session.commit()
+
+    except Exception as e:
+        session.rollback()
+        logging.error(f"Database error: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Database error: {str(e)}"
+        )
+    
+    # Send OTP via email
+    try:
+        await mail.send_verification_email(
+            email,
+            "Your password reset code",
+            f"Your OTP is: {code}"
+        )
+    except Exception as e:
+        logging.error(f"Failed to send email: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to send email: {str(e)}"
+        )
+
+    return {"msg": "OTP sent to email"}
     
 @router.post("/reset-password")
 async def reset_password(
