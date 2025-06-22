@@ -34,7 +34,7 @@ async def send_verification_email(email: str, token: str, content: str):
     
 
 @router.get('/verify-email')
-def verify_email(token: str, session: database.SessionLocal):
+def verify_email(token: str, session: database.SessionDep):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email = payload.get("sub")

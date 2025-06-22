@@ -6,7 +6,7 @@ import schemas, database, models, token_access, hashing, oauth2
 from typing import Annotated
 from datetime import datetime
 from schemas import OAuth2LoginFormWithRole
-import mail
+from routers import mail
 import random
 from utils import otp
 import logging
@@ -260,7 +260,7 @@ async def verify_reset_code(data: schemas.VerifyResetCodeRequest, session: datab
 
     
 @router.post("/reset-password")
-async def reset_password(session:database.SessionLocal, data: schemas.ResetPasswordRequest):
+async def reset_password(session:database.SessionDep, data: schemas.ResetPasswordRequest):
     entry = (
         session.query(models.PasswordResetCode)
         .filter(models.PasswordResetCode.email == data.email,
