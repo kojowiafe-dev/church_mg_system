@@ -244,3 +244,19 @@ class OAuth2LoginFormWithRole:
 
 class ForgotPasswordRequest(SQLModel):
     email: EmailStr
+
+
+class ResetPasswordSchema(SQLModel):
+    token: str
+    new_password: str
+
+
+class VerifyResetCodeRequest(SQLModel):
+    email: EmailStr
+    code: str
+
+
+class ResetPasswordRequest(SQLModel):
+    email: EmailStr
+    code: str
+    new_password: str

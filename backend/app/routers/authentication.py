@@ -241,6 +241,23 @@ async def forgot_password(
         )
 
     return {"msg": "OTP sent to email"}
+
+
+@router.post("/verify-reset-code")
+async def verify_reset_code(data: schemas.VerifyResetCodeRequest, session: database.SessionDep):
+    entry = (
+        session.query(models.PasswordResetCode)
+        .filter(models.PasswordResetCode.email == data.email, 
+                models.PasswordResetCode.code == data.code)
+        .order_by(models.PasswordResetCode.created_at.desc())
+        .first()
+    )
+
+    if not entry or entry.expires_at < datetime.utcnow():
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired code")
+    
+    return {"msg": "Code verified"}
+
     
 @router.post("/reset-password")
 async def reset_password(
