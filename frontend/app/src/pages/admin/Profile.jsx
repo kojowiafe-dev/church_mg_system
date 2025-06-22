@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserCircle, FaEnvelope, FaPhone, FaChurch } from 'react-icons/fa';
+import { FaUserCircle, FaEnvelope, FaPhone, FaChurch, FaHome } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import WindowResize from '../../layouts/WindowResize';
@@ -66,18 +66,43 @@ const Profile = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Call update profile API here
-    console.log('Updated data:', formData);
-    setIsEditing(false);
-    toast.success('Profile updated successfully!');
+    if (!profile?.id) {
+      toast.error('User ID not found!');
+      return;
+    }
+    try {
+      const res = await api.put(`/users/${profile.id}`, formData);
+      setProfile(res.data);
+      setFormData({
+        username: res.data.username || '',
+        email: res.data.email || '',
+        phone: res.data.phone || '',
+        house_address: res.data.house_address || '',
+        profile_image: res.data.profile_image || ''
+      });
+      setIsEditing(false);
+      toast.success('Profile updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update profile!');
+      console.error(error);
+    }
   };
 
   return (
     <div className="max-w-2xl mx-auto mt-18 p-6 bg-white shadow-xl rounded-xl">
       <div className="flex items-center gap-4 mb-6">
-        <FaUserCircle className="text-gray-700" size={windowSize.width < 800 ? '24' : '48'} />
+        {profile?.profile_image ? (
+          <img
+            src={profile.profile_image}
+            alt="Profile"
+            className="rounded-full object-cover"
+            style={{ width: windowSize.width < 800 ? 48 : 96, height: windowSize.width < 800 ? 48 : 96 }}
+          />
+        ) : (
+          <FaUserCircle className="text-gray-700" size={windowSize.width < 800 ? '24' : '48'} />
+        )}
         <div>
           <h2 className="sm:text-2xl text-sm font-semibold text-gray-800">{profile?.username}</h2>
           <p className="text-gray-500 capitalize">{profile?.role}</p>
@@ -95,8 +120,8 @@ const Profile = () => {
             <span>{profile?.phone || 'Not provided'}</span>
           </div>
           <div className="flex items-center gap-3 text-gray-700">
-            <FaChurch />
-            <span>Not assigned</span>
+            <FaHome />
+            <span>{profile?.house_address || 'Not provided'}</span>
           </div>
 
           <button
@@ -139,13 +164,23 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label className="block text-md text-gray-500 font-bold">Church</label>
+            <label className="block text-md text-gray-500 font-bold">House Address</label>
             <input
               type="text"
-              name="church"
-              value={formData.church}
+              name="house_address"
+              value={formData.house_address}
               onChange={handleChange}
               className="w-full shadow-lg border-1 border-gray-300 px-5 py-4 rounded-2xl focus:outline-2 outline-gray-700 "
+            />
+          </div>
+          <div>
+            <label className="block text-gray-500 text-md font-bold">Profile Image URL</label>
+            <input
+              type="text"
+              name="profile_image"
+              value={formData.profile_image}
+              onChange={handleChange}
+              className="w-full shadow-lg border-1 border-gray-300 px-5 py-4 rounded-2xl focus:outline-2 outline-gray-700"
             />
           </div>
           <div className="flex gap-2 mt-4">
