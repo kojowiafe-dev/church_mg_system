@@ -260,42 +260,25 @@ async def verify_reset_code(data: schemas.VerifyResetCodeRequest, session: datab
 
     
 @router.post("/reset-password")
-async def reset_password(
-    token: str,
-    new_password: str,
-    session: database.SessionDep
-):
-    try:
-        user_id = token_access.verify_reset_token(token)
-        
-        if not user_id:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid or expired reset token"
-            )
-        
-        user = session.exec(
-            select(models.User).where(models.User.id == user_id)
-        ).first()
-        
-        if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="User not found"
-            )
-        
-        hashed_password = hashing.get_password_hash(new_password)
-        user.password = hashed_password
-        session.commit()
-        
-        return {
-            "message": "Password reset successfully"
-        }   
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"An error occurred during password reset: {str(e)}"
-        )
+async def reset_password(session:database.SessionLocal, data: schemas.ResetPasswordRequest):
+    entry = (
+        session.query(models.PasswordResetCode)
+        .filter(models.PasswordResetCode.email == data.email,
+                models.PasswordResetCode.code == data.code)
+        .order_by(models.PasswordResetCode.created_at.desc())
+        .first()
+    )
+    if not entry or entry.expires_at < datetime.utcnow():
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invald or expired code")
+    
+    user = session.query(models.User).filter(models.User.email == data.email).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    hashed_pw = hashing.pwd_cxt.hash(data.new_password)
+    user.password = hashed_pw
+    session.commit()
+    return {"msg": "Password reset successful"}
 
 
 @router.post("/verify-code")
