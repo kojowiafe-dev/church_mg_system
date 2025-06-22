@@ -181,11 +181,3 @@ const DashboardLayout = () => {
 }
 
 export default DashboardLayout
-
-
-
-// You’re now running a clean, centralized, role-aware layout powered by context!
-
-// Would you like help making your <DashboardLayout /> only render if the user is authenticated (e.g., wrap with a ProtectedRoute inside it)?
-
-// Create a reusable <RedirectByRole /> component for /dashboard route?

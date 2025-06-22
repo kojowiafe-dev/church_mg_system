@@ -7,14 +7,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 def send_email(subject: str, body: str, to: list[str]):
-    """
-    Send an email using SMTP.
-    
-    Args:
-        subject (str): Email subject
-        body (str): Email body (can be HTML)
-        to (list[str]): List of recipient email addresses
-    """
     try:
         # Check if SMTP credentials are configured
         if not config.settings.SMTP_USERNAME or not config.settings.SMTP_PASSWORD:
