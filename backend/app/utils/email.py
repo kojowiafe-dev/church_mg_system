@@ -1,42 +1,51 @@
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from core import config
-import logging
+from jose import JWTError, jwt
+from fastapi import HTTPException, status, APIRouter, Depends
+from email.message import EmailMessage
+import database, models
 
-logger = logging.getLogger(__name__)
 
-def send_email(subject: str, body: str, to: list[str]):
+SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+
+router = APIRouter(
+    prefix='/mail',
+    tags=['Mail']
+)
+
+async def send_verification_email(email: str, subject: str, body: str):
+    message = EmailMessage()
+    message["Subject"] = subject
+    message["From"] = "wiafejeremiah@gmail.com"
+    message["To"] = email
+    message.set_content(body)
+
     try:
-        # Check if SMTP credentials are configured
-        if not config.settings.SMTP_USERNAME or not config.settings.SMTP_PASSWORD:
-            logger.error("SMTP credentials not configured")
-            raise ValueError("Email service not configured")
-
-        msg = MIMEMultipart()
-        msg['From'] = config.settings.SMTP_USERNAME
-        msg['To'] = ', '.join(to)
-        msg['Subject'] = subject
-
-        # Attach body
-        msg.attach(MIMEText(body, 'html'))
-
-        logger.info(f"Attempting to send email to {to} using {config.settings.SMTP_HOST}:{config.settings.SMTP_PORT}")
-
-        # Connect to SMTP server and send email
-        with smtplib.SMTP(config.settings.SMTP_HOST, config.settings.SMTP_PORT) as server:
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
-            server.login(config.settings.SMTP_USERNAME, config.settings.SMTP_PASSWORD)
-            server.send_message(msg)
-            
-        logger.info(f"Email sent successfully to {to}")
-        
-    except smtplib.SMTPAuthenticationError:
-        logger.error("SMTP authentication failed")
-        raise ValueError("Email service authentication failed")
-    except smtplib.SMTPException as e:
-        logger.error(f"SMTP error: {str(e)}")
-        raise ValueError(f"Failed to send email: {str(e)}")
+            server.login("wiafejeremiah@gmail.com", "moid yxus tial suwd")
+            server.send_message(message)
+
     except Exception as e:
-        logger.error(f"Unexpected error sending email: {str(e)}")
-        raise ValueError(f"Failed to send email: {str(e)}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Email not sent: {str(e)}")
+
+        
+@router.get('/verify-email')
+def verify_email(token: str, session: database.SessionDep):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email = payload.get("sub")
+
+        if not email:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Token")
+        
+        user = session.query(models.User).filter(models.User.email == email).first()
+        if not user:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User not found")
+        
+        return {"message": "Email verified successfully"}
+    except JWTError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired token")
+

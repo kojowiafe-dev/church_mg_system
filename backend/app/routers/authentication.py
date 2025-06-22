@@ -8,6 +8,8 @@ from datetime import datetime
 from schemas import OAuth2LoginFormWithRole
 from utils import email
 import random
+from utils import otp
+import logging
 
 router = APIRouter(
     tags=['Authentication'],
@@ -185,63 +187,30 @@ async def forgot_password(
     request: schemas.ForgotPasswordRequest,
     session: database.SessionDep
 ):
-    try:
-        print(f"Processing forgot password request for email: {request.email}")
-        
-        user = session.exec(
-            select(models.User).where(models.User.email == request.email)
-        ).first()
-        
-        if not user:
-            print(f"User not found for email: {request.email}")  # Debug log
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="User not found"
-            )
-        
-        # Generate a verification code (6 digits) when using forgot password ------------------
+    email = request.email
 
-        # there is a problem on the email side
-        verification_code = ''.join([str(random.randint(0, 9)) for _ in range(6)])
-        user.verification_code = verification_code
-        session.commit()
-        
-        print(f"Generated verification code for user: {user.username}")  # Debug log
-        
-        # Send verification code to user's email
-        email_body = f"""
-        Your password reset verification code is: {verification_code}
-        
-        This code will expire in 10 minutes.
-        If you didn't request this, please ignore this email.
-        """
-        
-        try:
-            email.send_email(
-                subject="Password Reset Verification Code",
-                body=email_body,
-                to=[request.email]
-            )
-            print(f"Verification email sent to: {request.email}")  # Debug log
-        except ValueError as email_error:
-            print(f"Email error: {str(email_error)}")  # Debug log
-            # Return a more specific error message
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=str(email_error)
-            )
-        
-        return {
-            "message": "Verification code sent to your email"
-        }
-    except HTTPException:
-        raise
+    # check if the user exists
+    user = session.query(models.User).filter(models.User.email == email).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Email not found"
+        )
+    
+    # Generate OTP and expiry
+    try:
+        code = otp.generate_otp()
+        expires_at = otp.get_expiry()
+    
     except Exception as e:
-        print(f"Error in forgot_password: {str(e)}")  # Debug log
+        logging.error(f"Error generating OTP: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"An error occurred during password reset: {str(e)}"
+            detail=f"Error generating OTP: {str(e)}"
         )
+        
+    try:
+        reset_entry = models
     
 @router.post("/reset-password")
 async def reset_password(

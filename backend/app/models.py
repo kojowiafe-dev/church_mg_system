@@ -108,3 +108,11 @@ class Sermon(SQLModel, table=True):
     description: Optional[str]
     video_url: Optional[str]
     date: date
+
+
+class PasswordResetCode(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    email: str
+    code: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    expires_at: datetime
