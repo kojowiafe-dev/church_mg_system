@@ -44,6 +44,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.11.3",
     "gsap": "^3.12.7",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.503.0",
     "moment": "^2.30.1",
     "prop-types": "^15.8.1",
