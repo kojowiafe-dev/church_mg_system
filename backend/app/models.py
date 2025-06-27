@@ -21,10 +21,8 @@ class GenderEnum(str, Enum):
     other = "other"
 
 class User(SQLModel, table=True):
-    __tablename__ = 'users'
-
     id: int = Field(default=None, primary_key=True, index=True)
-    member_id: int = Field(foreign_key="members.id", nullable=False)
+    member_id: int = Field(foreign_key="member.id", nullable=False)
     username: str = Field(unique=True, index=True)
     email: Optional[str] = Field(default=None, unique=True, index=True)
     password: str
@@ -34,7 +32,7 @@ class User(SQLModel, table=True):
     role: str = Field(default="member", index=True)
     profile_image: Optional[str] = None
     join_date: date = Field(default_factory=date.today)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    # updated_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: date = Field(default_factory=date.today)
 
     # Relationships
@@ -42,8 +40,7 @@ class User(SQLModel, table=True):
     # attendance_records: List['Attendance'] = Relationship(back_populates="member") 
 
 class Member(SQLModel, table=True):
-    __tablename__ = 'members'
-
+    # __tablename__ = "members"
     id: Optional[int] = Field(default=None, primary_key=True)
     # user_id: int = Field(foreign_key="users.id", nullable=False)
     first_name: str
@@ -62,37 +59,36 @@ class Member(SQLModel, table=True):
     updated_at: date = Field(default_factory=date.today)
 
 class Family(SQLModel, table=True):
-    __tablename__ = 'families'
+    # __tablename__ = 'families'
 
     id: Optional[int] = Field(default=None, primary_key=True)
     family_name: str
-    head_of_family_id: int = Field(foreign_key="members.id")
+    head_of_family_id: int = Field(foreign_key="member.id")
     address: str
     created_at: date = Field(default_factory=date.today)
     updated_at: date = Field(default_factory=date.today)
 
 class FamilyMember(SQLModel, table=True):
-    __tablename__ = 'family_members'
+    # __tablename__ = 'family_members'
 
     id: Optional[int] = Field(default=None, primary_key=True)
     family_id: int = Field(foreign_key="families.id")
-    member_id: int = Field(foreign_key="members.id")
+    member_id: int = Field(foreign_key="member.id")
     relationship: str  # e.g., "spouse", "child", "parent"
     created_at: date = Field(default_factory=date.today)
 
 class Attendance(SQLModel, table=True):
-    __tablename__ = 'attendance'
+    # __tablename__ = 'attendance'
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    member_id: int = Field(foreign_key="members.id")
+    member_id: int = Field(foreign_key="member.id")
     event_id: int = Field(foreign_key="events.id")
     date: date
     status: str  # "present", "absent", "excused"
     notes: Optional[str] = None
-    created_at: date = Field(default_factory=date.today)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class Event(SQLModel, table=True):
-    __tablename__ = 'events'
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     preacher: str
@@ -100,7 +96,6 @@ class Event(SQLModel, table=True):
     date: date
 
 class Sermon(SQLModel, table=True):
-    __tablename__ = 'sermons'
     id: Optional[int] = Field(default=None, primary_key=True)
     title: str
     preacher: str

@@ -11,4 +11,8 @@ sqlalchemy
 timescaledb
 requests
 python-decouple
+aiosmtplib
 psycopg[binary]
+pydantic[email]
+python-multipart
+python-dotenv

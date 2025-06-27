@@ -28,7 +28,7 @@ def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 # Create tables on startup
-create_db_and_tables()
+# create_db_and_tables()
 
 @event.listens_for(Engine, "connect")
 def enable_sqlite_foreign_keys(dpapi_connection, connection_record):
