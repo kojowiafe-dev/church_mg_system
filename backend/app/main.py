@@ -45,4 +45,6 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
+    # Load the environment variables
+    load_dotenv()
     database.create_db_and_tables()
