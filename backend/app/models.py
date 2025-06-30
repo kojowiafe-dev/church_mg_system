@@ -72,7 +72,7 @@ class FamilyMember(SQLModel, table=True):
     # __tablename__ = 'family_members'
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    family_id: int = Field(foreign_key="families.id")
+    family_id: int = Field(foreign_key="family.id")
     member_id: int = Field(foreign_key="member.id")
     relationship: str  # e.g., "spouse", "child", "parent"
     created_at: date = Field(default_factory=date.today)
