@@ -1,31 +1,32 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import AuthLayout from './layouts/AuthLayout';
-import DashboardLayout from './layouts/DashboardLayout';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import AuthLayout from "./layouts/AuthLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import ForgotPassword from './pages/auth/ForgotPassword';
-import Admin from './pages/auth/Admin';
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import Admin from "./pages/auth/Admin";
 
-import AdminDashboard from './pages/admin/AdminDashboard';
-import PastorDashboard from './pages/pastor/PastorDashboard';
-import MemberDashboard from './pages/member/MemberDashboard';
-import Profile from './pages/admin/Profile';
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import PastorDashboard from "./pages/pastor/PastorDashboard";
+import MemberDashboard from "./pages/member/MemberDashboard";
+import Profile from "./pages/admin/Profile";
 
-import Sermon from './Manager/Sermon';
-import EventsPage from './Manager/Events';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
+import Sermon from "./Manager/Sermon";
+import EventsPage from "./Manager/Events";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import ContactPage from "./pages/Contact";
 
 // Member Management Components
-import MemberList from './pages/Members/MemberList';
-import MemberForm from './pages/Members/MemberForm';
-import FamilyManagement from './pages/Members/FamilyManagement';
-import AttendanceTracking from './pages/Members/AttendanceTracking';
+import MemberList from "./pages/Members/MemberList";
+import MemberForm from "./pages/Members/MemberForm";
+import FamilyManagement from "./pages/Members/FamilyManagement";
+import AttendanceTracking from "./pages/Members/AttendanceTracking";
 
-import ProtectedRoute from './layouts/ProtectedRoute';
-import Users from './pages/admin/Users';
+import ProtectedRoute from "./layouts/ProtectedRoute";
+import Users from "./pages/admin/Users";
 
 const App = () => {
   return (
@@ -35,24 +36,33 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
 
       <Route path="/" element={<Home />} />
-      <Route path="/:role/unauthorized" element={<div className='text-center mt-20 text-red-600 text-xl font-bold'>Unauthorized access</div>} />
+      <Route
+        path="/:role/unauthorized"
+        element={
+          <div className="text-center mt-20 text-red-600 text-xl font-bold">
+            Unauthorized access
+          </div>
+        }
+      />
 
       {/* Protected Routes */}
       <Route element={<DashboardLayout role={localStorage.getItem("role")} />}>
-        <Route 
-          path='/admin-only'
+        <Route
+          path="/admin-only"
           element={
-            <ProtectedRoute allowedRoles={['admin']}>
+            <ProtectedRoute allowedRoles={["admin"]}>
               <Admin />
             </ProtectedRoute>
-          }/>
+          }
+        />
         <Route
           path="/admin/dashboard"
           element={
-            <ProtectedRoute allowedRoles={['admin']}>
+            <ProtectedRoute allowedRoles={["admin"]}>
               <AdminDashboard />
             </ProtectedRoute>
           }
@@ -60,7 +70,7 @@ const App = () => {
         <Route
           path="/profile"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'member']}>
+            <ProtectedRoute allowedRoles={["admin", "member"]}>
               <Profile />
             </ProtectedRoute>
           }
@@ -68,7 +78,7 @@ const App = () => {
         <Route
           path="/admin/users"
           element={
-            <ProtectedRoute allowedRoles={['admin']}>
+            <ProtectedRoute allowedRoles={["admin"]}>
               <Users />
             </ProtectedRoute>
           }
@@ -76,7 +86,7 @@ const App = () => {
         <Route
           path="/pastor/dashboard"
           element={
-            <ProtectedRoute allowedRoles={['pastor']}>
+            <ProtectedRoute allowedRoles={["pastor"]}>
               <PastorDashboard />
             </ProtectedRoute>
           }
@@ -84,16 +94,16 @@ const App = () => {
         <Route
           path="/member/home"
           element={
-            <ProtectedRoute allowedRoles={['member']}>
+            <ProtectedRoute allowedRoles={["member"]}>
               <MemberDashboard />
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/events"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <EventsPage />
             </ProtectedRoute>
           }
@@ -101,7 +111,7 @@ const App = () => {
         <Route
           path="/manager"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <Sermon />
             </ProtectedRoute>
           }
@@ -111,7 +121,7 @@ const App = () => {
         <Route
           path="/members"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <MemberList />
             </ProtectedRoute>
           }
@@ -119,7 +129,7 @@ const App = () => {
         <Route
           path="/members/new"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <MemberForm />
             </ProtectedRoute>
           }
@@ -127,7 +137,7 @@ const App = () => {
         <Route
           path="/members/edit/:id"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <MemberForm />
             </ProtectedRoute>
           }
@@ -135,7 +145,7 @@ const App = () => {
         <Route
           path="/members/families"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <FamilyManagement />
             </ProtectedRoute>
           }
@@ -143,7 +153,7 @@ const App = () => {
         <Route
           path="/members/attendance"
           element={
-            <ProtectedRoute allowedRoles={['admin', 'pastor']}>
+            <ProtectedRoute allowedRoles={["admin", "pastor"]}>
               <AttendanceTracking />
             </ProtectedRoute>
           }
