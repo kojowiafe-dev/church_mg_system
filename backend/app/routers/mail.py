@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException, status, APIRouter, Depends
 from email.message import EmailMessage
 import aiosmtplib
-import database, models
+import database, models.model as model
 import smtplib
 
 
@@ -42,7 +42,7 @@ def verify_email(token: str, session: database.SessionDep):
         if not email:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Token")
     
-        user = session.query(models.User).filter(models.User.email == email).first()
+        user = session.query(model.User).filter(model.User.email == email).first()
         if not user:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User not found")
         

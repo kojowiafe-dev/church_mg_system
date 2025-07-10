@@ -4,7 +4,7 @@ from typing import List
 from datetime import datetime, date
 
 from database import get_session, SessionDep
-from models import Member, Family, FamilyMember, Attendance
+from models.model import Member, Family, FamilyMember, Attendance
 from schemas import (
     MemberCreate, Member as MemberSchema,
     FamilyCreate, Family as FamilySchema,

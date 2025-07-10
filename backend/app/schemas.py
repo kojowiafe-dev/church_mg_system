@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, Field
 from datetime import datetime, date
 from typing import Optional, List
 from pydantic import EmailStr
-from models import GenderEnum, MaritalStatusEnum, Sermon, Event
+from models.model import GenderEnum, MaritalStatusEnum
 
 # -------------------------- ADMIN DATABASE MODEL -----------------#
 
@@ -28,9 +28,6 @@ class UserPublic(UserBase):
     join_date: datetime
     is_active: bool = True
 
-    class Config:
-        from_attributes = True
-
 class UserUpdate(SQLModel):
     username: Optional[str]
     email: Optional[str]
@@ -38,92 +35,20 @@ class UserUpdate(SQLModel):
     phone: Optional[str]
     house_address: Optional[str]
     profile_image: Optional[str]
-
-class Token(SQLModel):
-    access_token: str
-    token_type: str
-    role: str
-
-class TokenData(SQLModel):
-    username: Optional[str] = None
-
-# Keep your sermon and event schemas as-is, no change needed
-
-
-
-class Token(SQLModel):
-    access_token: str
-    token_type: str
-    role: str
-
-
-class TokenData(SQLModel):
-    username: str | None = None
-
-
-class EventBase(SQLModel):
-    name: str
-    preacher: str
-    description: str
-    date: datetime
-
-
-class Event(EventBase):
-    id: int
-
-
-class EventPublic(Event):
-    pass
-
-
-    class Config:
-        from_attributes = True
-
-class EventUpdate(EventPublic):
-    name: Optional[str] = None
-    preacher: Optional[str] = None
-    description: Optional[str] = None
-    date: Optional[datetime] = None
-
-
-class SermonBase(SQLModel):
-    title: str
-    preacher: str
-    description: Optional[str] | None
-    video_url: Optional[str] | None
-    date: datetime
-
-
-class Sermon(SermonBase):
-    id: int
-
-
-class SermonPublic(Sermon):
-    pass
-
-    class Config:
-        from_attributes = True
-
-class SermonUpdate(SermonPublic):
-    title: Optional[str] = None
-    preacher: Optional[str] = None
-    date: Optional[datetime] = None
-    description: Optional[str] = None
-    video_url: Optional[str] = None
-
-# New schemas for member management
+    
+    
 class MemberBase(SQLModel):
     first_name: str
     last_name: str
-    date_of_birth: date = None
+    date_of_birth: Optional[date] = None
     gender: GenderEnum
     marital_status: MaritalStatusEnum
-    occupation: str = None
-    emergency_contact: str = None
-    emergency_contact_phone: str = None
-    baptism_date: date = None
-    membership_date: date = None
-    notes: str = None
+    occupation: Optional[str] = None
+    emergency_contact: Optional[str] = None
+    emergency_contact_phone: Optional[str] = None
+    baptism_date: Optional[date] = None
+    membership_date: Optional[date] = None
+    notes: Optional[str] = None
 
 class MemberCreate(MemberBase):
     pass
@@ -136,8 +61,51 @@ class Member(MemberBase):
     created_at: date
     updated_at: date
 
-    class Config:
-        from_attributes = True
+
+class EventBase(SQLModel):
+    name: str
+    preacher: str
+    description: str
+    date: datetime
+    
+    
+class Event(EventBase):
+    id: int
+
+
+class EventPublic(Event):
+    pass
+
+class EventCreate(EventBase):
+    pass
+
+class EventUpdate(SQLModel):
+    name: Optional[str] = None
+    preacher: Optional[str] = None
+    description: Optional[str] = None
+    date: Optional[datetime] = None
+    
+    
+class SermonBase(SQLModel):
+    title: str
+    preacher: str
+    description: Optional[str] = None
+    video_url: Optional[str] = None
+    date: datetime
+
+class SermonCreate(SermonBase):
+    pass
+
+class Sermon(SermonBase):
+    id: int
+    
+class SermonUpdate(SQLModel):
+    title: Optional[str] = None
+    preacher: Optional[str] = None
+    date: Optional[datetime] = None
+    description: Optional[str] = None
+    video_url: Optional[str] = None
+
 
 class FamilyBase(SQLModel):
     family_name: str
@@ -152,9 +120,6 @@ class Family(FamilyBase):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        from_attributes = True
-
 class FamilyMemberBase(SQLModel):
     family_id: int
     member_id: int
@@ -166,9 +131,6 @@ class FamilyMemberCreate(FamilyMemberBase):
 class FamilyMember(FamilyMemberBase):
     id: int
     created_at: datetime
-
-    class Config:
-        from_attributes = True
 
 class AttendanceBase(SQLModel):
     member_id: int
@@ -184,46 +146,18 @@ class Attendance(AttendanceBase):
     id: int
     created_at: datetime
 
-    class Config:
-        from_attributes = True
 
-# Event schemas
-class EventBase(SQLModel):
-    name: str
-    preacher: str
-    description: str
-    date: datetime
-
-class EventCreate(EventBase):
-    pass
-
-class Event(EventBase):
-    id: int
-
-    class Config:
-        from_attributes = True
-
-# Sermon schemas
-class SermonBase(SQLModel):
-    title: str
-    preacher: str
-    description: Optional[str] = None
-    video_url: Optional[str] = None
-    date: datetime
-
-class SermonCreate(SermonBase):
-    pass
-
-class Sermon(SermonBase):
-    id: int
-
-    class Config:
-        from_attributes = True
 
 # Combined registration schema
 class CombinedRegistration(SQLModel):
     user: UserRegister
     member: MemberBase
+
+
+
+
+
+# ---------------------------------------------------------------#
 
 
 from fastapi import Form
@@ -241,6 +175,14 @@ class OAuth2LoginFormWithRole:
         self.role = role
 
 
+class TokenData(SQLModel):
+    username: Optional[str] = None
+
+
+class Token(SQLModel):
+    access_token: str
+    token_type: str
+    role: str
 
 class ForgotPasswordRequest(SQLModel):
     email: EmailStr

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordBearer
 from typing import Annotated
-from models import Admin, Member, Pastor
+from models.model import Admin, Member, Pastor
 from dependencies import role_required
 from fastapi import Depends
-import models
+import church_mg_system.backend.app.models.model as model
 
 router = APIRouter(
     prefix="/protected",
@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.get("/admin/dashboard")
-def get_dashboard_data(current_user: models.Admin = Depends(role_required("admin"))):    
+def get_dashboard_data(current_user: model.Admin = Depends(role_required("admin"))):    
     return {"message": f"Welcome to the admin dashboard, {current_user.username}"}
 
 @router.get("/member/profile")

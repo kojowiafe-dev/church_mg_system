@@ -4,7 +4,7 @@ from typing import Optional
 # import models, schemas, hashing, database
 from schemas import UserPublic, UserUpdate
 from database import SessionDep
-from models import User
+from models.model import User
 from hashing import get_password_hash
 from datetime import date
 
@@ -18,7 +18,7 @@ def get_users(session: SessionDep):
 
 @router.get("/{id}", response_model=UserPublic)
 def get_user_by_id(id: int, session: SessionDep):
-    user = session.get('models'.User, id)
+    user = session.get(User, id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user

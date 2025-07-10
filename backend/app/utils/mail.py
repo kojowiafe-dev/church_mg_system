@@ -2,7 +2,7 @@ import smtplib
 from jose import JWTError, jwt
 from fastapi import HTTPException, status, APIRouter, Depends
 from email.message import EmailMessage
-import database, models
+import database, models.model as model
 
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
@@ -41,7 +41,7 @@ def verify_email(token: str, session: database.SessionDep):
         if not email:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Token")
         
-        user = session.query(models.User).filter(models.User.email == email).first()
+        user = session.query(model.User).filter(model.User.email == email).first()
         if not user:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User not found")
         

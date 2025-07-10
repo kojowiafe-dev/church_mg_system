@@ -89,7 +89,8 @@ class Attendance(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class Event(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    __tablename__ = 'events'
+    id: int = Field(default=None, primary_key=True)
     name: str
     preacher: str
     description: str
@@ -105,8 +106,9 @@ class Sermon(SQLModel, table=True):
 
 
 class PasswordResetCode(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    email: str
-    code: str
+    id: int | None = Field(default=None, primary_key=True, index=True)
+    email: str = Field(nullable=False)
+    code: str = Field(nullable=False, max_length=6)
+    expires_at: datetime = Field(nullable=False)
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    expires_at: datetime
+    verified: bool = Field(default=False)

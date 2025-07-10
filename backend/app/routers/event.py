@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status, HTTPException
-import schemas, models, database
+import schemas, models.model as model, database
 from sqlmodel import select
 
 
@@ -13,13 +13,13 @@ router = APIRouter(
 
 @router.get('/', response_model=list[schemas.EventBase], status_code=status.HTTP_200_OK)
 def get_events(session: database.SessionDep):
-    events = session.exec(select(models.Event)).all()
+    events = session.exec(select(model.Event)).all()
     return events
 
 
 @router.get('/{event_id}', response_model=schemas.EventBase, status_code=status.HTTP_200_OK)
 def get_event(event_id: int, session: database.SessionDep):
-    event = session.get(models.Event, event_id)
+    event = session.get(model.Event, event_id)
     if not event:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found")
     return event
@@ -27,11 +27,11 @@ def get_event(event_id: int, session: database.SessionDep):
 
 @router.post('/', response_model=schemas.EventBase, status_code=status.HTTP_201_CREATED)
 def create_event(request: schemas.EventBase, session: database.SessionDep):
-    existing_event = session.exec(select(models.Event).where(models.Event.name == request.name)).first()
+    existing_event = session.exec(select(model.Event).where(model.Event.name == request.name)).first()
     if existing_event:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Event already available")
     
-    new_event = models.Event.model_validate(request)
+    new_event = model.Event.model_validate(request)
     session.add(new_event)
     session.commit()
     session.refresh(new_event)
@@ -40,7 +40,7 @@ def create_event(request: schemas.EventBase, session: database.SessionDep):
 
 @router.delete('/{event_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_event(event_id: int, session: database.SessionDep):
-    event = session.get(models.Event, event_id)
+    event = session.get(model.Event, event_id)
     if not event:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Event not found')
     session.delete(event)
@@ -50,7 +50,7 @@ def delete_event(event_id: int, session: database.SessionDep):
 
 @router.patch('/{event_id}', response_model=schemas.EventBase, status_code=status.HTTP_200_OK)
 def update_event(event_id: int, request: schemas.EventUpdate, session: database.SessionDep):
-    event = session.get(models.Event, event_id)
+    event = session.get(model.Event, event_id)
     if not event:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found")
     event_data = request.model_dump(exclude_unset=True)
