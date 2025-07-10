@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlmodel import select
+from sqlalchemy import desc
 from fastapi.security import OAuth2PasswordRequestForm
 # import schemas, database, models, token_access, hashing, oauth2
 import schemas, database, models, token_access, hashing, oauth2
@@ -70,6 +71,7 @@ async def login(
             detail=f"An error occurred during login: {str(e)}"
         )
 
+
 @router.post("/register", response_model=schemas.UserPublic)
 async def register(
     registration_data: schemas.CombinedRegistration,
@@ -80,7 +82,6 @@ async def register(
         existing_user = session.exec(
             select(models.User).where(models.User.username == registration_data.user.username)
         ).first()
-        
         if existing_user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -92,14 +93,13 @@ async def register(
             existing_email = session.exec(
                 select(models.User).where(models.User.email == registration_data.user.email)
             ).first()
-            
             if existing_email:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Email already registered"
                 )
-            
 
+        # Create member
         db_member = models.Member(
             first_name=registration_data.member.first_name,
             last_name=registration_data.member.last_name,
@@ -121,8 +121,13 @@ async def register(
         session.commit()
         session.refresh(db_member)
 
-        # Create new user
+        # Create user
         hashed_password = hashing.get_password_hash(registration_data.user.password)
+        if db_member.id is None:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Failed to create member: member ID is None"
+            )
         db_user = models.User(
             member_id=db_member.id,
             username=registration_data.user.username,
@@ -138,27 +143,7 @@ async def register(
         session.commit()
         session.refresh(db_user)
 
-        # Create member profile
-        db_member = models.Member(
-            first_name=registration_data.member.first_name,
-            last_name=registration_data.member.last_name,
-            date_of_birth=registration_data.member.date_of_birth,
-            gender=registration_data.member.gender,
-            marital_status=registration_data.member.marital_status,
-            occupation=registration_data.member.occupation,
-            emergency_contact=registration_data.member.emergency_contact,
-            emergency_contact_phone=registration_data.member.emergency_contact_phone,
-            baptism_date=registration_data.member.baptism_date,
-            membership_date=registration_data.member.membership_date or datetime.utcnow(),
-            notes=registration_data.member.notes,
-            is_active=True,
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow()
-        )
-
-        
-
-        return db_user
+        return db_user  # FastAPI will use response_model to serialize this
 
     except HTTPException:
         raise
@@ -166,8 +151,9 @@ async def register(
         print(f"Registration error: {str(e)}")  # Debug log
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"An error occurred during registration: {str(e)}"
+            detail=f"An error occurred during registration."
         )
+
 
 @router.get("/me", response_model=schemas.UserPublic)
 async def read_users_me(
@@ -190,7 +176,9 @@ async def forgot_password(
     email = request.email
 
     # check if the user exists
-    user = session.query(models.User).filter(models.User.email == email).first()
+    user = session.exec(
+        select(models.User).where(models.User.email == email)
+    ).first()
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -246,10 +234,10 @@ async def forgot_password(
 @router.post("/verify-reset-code")
 async def verify_reset_code(data: schemas.VerifyResetCodeRequest, session: database.SessionDep):
     entry = (
-        session.query(models.PasswordResetCode)
-        .filter(models.PasswordResetCode.email == data.email, 
+        session.exec(select(models.PasswordResetCode).where(models.PasswordResetCode.email == data.email, 
                 models.PasswordResetCode.code == data.code)
         .order_by(models.PasswordResetCode.created_at.desc())
+        )
         .first()
     )
 
@@ -262,20 +250,20 @@ async def verify_reset_code(data: schemas.VerifyResetCodeRequest, session: datab
 @router.post("/reset-password")
 async def reset_password(session:database.SessionDep, data: schemas.ResetPasswordRequest):
     entry = (
-        session.query(models.PasswordResetCode)
-        .filter(models.PasswordResetCode.email == data.email,
+        session.exec(select(models.PasswordResetCode)
+        .where(models.PasswordResetCode.email == data.email,
                 models.PasswordResetCode.code == data.code)
-        .order_by(models.PasswordResetCode.created_at.desc())
+        .order_by(models.PasswordResetCode.created_at.desc()))
         .first()
     )
     if not entry or entry.expires_at < datetime.utcnow():
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invald or expired code")
     
-    user = session.query(models.User).filter(models.User.email == data.email).first()
+    user = session.exec(select(models.User).where(models.User.email == data.email)).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
-    hashed_pw = hashing.pwd_cxt.hash(data.new_password)
+    hashed_pw = hashing.pass_context.hash(data.new_password)
     user.password = hashed_pw
     session.commit()
     return {"msg": "Password reset successful"}
