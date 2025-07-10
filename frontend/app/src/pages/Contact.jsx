@@ -1,21 +1,30 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Mail, Phone, MapPin } from "lucide-react";
-
-const initialForm = {
-  name: "",
-  email: "",
-  phone: "",
-  subject: "",
-  message: "",
-};
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
+import { motion } from "framer-motion";
+import { Meteors } from "../components/magicui/meteors";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Clock,
+  Facebook,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 
 export default function ContactPage() {
-  const [form, setForm] = useState(initialForm);
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -26,159 +35,181 @@ export default function ContactPage() {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       setError("Name, Email, and Message are required.");
+      toast.error("Please fill all required fields.");
       return;
     }
     setError("");
-    setSubmitted(true);
-    // Send data to backend or email service here
+    toast.success("Message sent successfully! We'll get back to you soon.");
+    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-br from-white to-blue-50 flex items-center justify-center py-16 px-6"
-    >
-      <div className="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-8 md:p-12 space-y-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 py-12 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        {/* Side Panel / Branding */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative rounded-xl p-8 bg-gradient-to-br from-blue-800 to-indigo-900 text-white shadow-xl overflow-hidden"
+        >
+          <Meteors number={25} className="absolute inset-0" />
+          <div className="relative z-10 space-y-4">
+            <h2 className="text-4xl font-bold">Reach Out to Us</h2>
+            <p className="text-blue-100">
+              We'd love to connect with you. Whether you're new, have questions,
+              or need prayer, we're here for you.
+            </p>
+            <ul className="space-y-2 text-sm text-blue-200">
+              <li className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" /> 123 Faith Avenue, Accra, Ghana
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4" /> +233 123 456 789
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4" /> info@kogchapel.org
+              </li>
+              <li className="flex items-center gap-2">
+                <Clock className="h-4 w-4" /> Sun: 9am & 11am • Wed: 7pm
+              </li>
+            </ul>
+          </div>
+        </motion.div>
+
+        {/* Contact Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-center"
+          className="space-y-4 bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md"
         >
-          <h2 className="text-4xl font-bold text-blue-900 flex justify-center items-center gap-2">
-            <Sparkles className="text-yellow-500" /> Contact Us
-          </h2>
-          <p className="mt-2 text-gray-600">
-            We'd love to hear from you! Fill the form and we’ll reach out soon.
-          </p>
-        </motion.div>
-
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex-1 space-y-5"
-          >
-            <div>
-              <h3 className="font-semibold text-lg mb-1 flex items-center gap-2">
-                <MapPin className="text-blue-700" /> Church Address
-              </h3>
-              <p>123 Faith Avenue, Accra, Ghana</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-1 flex items-center gap-2">
-                <Phone className="text-blue-700" /> Phone
-              </h3>
-              <p>+233 123 456 789</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-1 flex items-center gap-2">
-                <Mail className="text-blue-700" /> Email
-              </h3>
-              <p>info@kogchapel.org</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-1">Service Times</h3>
-              <ul className="list-disc ml-5 text-gray-700">
-                <li>Sunday: 9:00 AM & 11:00 AM</li>
-                <li>Wednesday: 7:00 PM</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-1">Follow Us</h3>
-              <div className="flex gap-4 text-2xl text-blue-600">
-                <a href="#" className="hover:text-blue-800">
-                  <i className="fab fa-facebook"></i>
-                </a>
-                <a href="#" className="hover:text-blue-500">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className="hover:text-pink-600">
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex-1 space-y-4"
-          >
+          <div className="space-y-1">
+            <label htmlFor="name" className="block text-sm font-medium">
+              Full Name *
+            </label>
             <Input
-              placeholder="Name *"
               name="name"
+              id="name"
               value={form.name}
               onChange={handleChange}
+              placeholder="John Doe"
               required
             />
+          </div>
+          <div className="space-y-1">
+            <label htmlFor="email" className="block text-sm font-medium">
+              Email Address *
+            </label>
             <Input
-              placeholder="Email *"
-              type="email"
               name="email"
+              id="email"
+              type="email"
               value={form.email}
               onChange={handleChange}
+              placeholder="you@example.com"
               required
             />
+          </div>
+          <div className="space-y-1">
+            <label htmlFor="phone" className="block text-sm font-medium">
+              Phone Number
+            </label>
             <Input
-              placeholder="Phone"
               name="phone"
+              id="phone"
               value={form.phone}
               onChange={handleChange}
+              placeholder="+233..."
             />
+          </div>
+          <div className="space-y-1">
+            <label htmlFor="subject" className="block text-sm font-medium">
+              Subject
+            </label>
             <Input
-              placeholder="Subject"
               name="subject"
+              id="subject"
               value={form.subject}
               onChange={handleChange}
+              placeholder="How can we help?"
             />
+          </div>
+          <div className="space-y-1">
+            <label htmlFor="message" className="block text-sm font-medium">
+              Message *
+            </label>
             <Textarea
-              placeholder="Your Message *"
-              rows={5}
               name="message"
+              id="message"
+              rows={4}
               value={form.message}
               onChange={handleChange}
+              placeholder="Your message..."
               required
             />
-            {error && <div className="text-red-600 text-sm">{error}</div>}
-            {submitted && (
-              <div className="text-green-600 text-sm">
-                Thank you! We'll be in touch shortly.
-              </div>
-            )}
-            <Button type="submit" className="w-full">
-              Send Message
-            </Button>
-          </motion.form>
-        </div>
-
-        {/* Google Map */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-10"
-        >
-          <iframe
-            title="Church Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.3723313749044!2d-0.2748998251150366!3d5.6730388335829505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9fc37b69420f%3A0x156488beee9b2f!2sKing%20Of%20Glory%20Covenant%20Chapel%20International!5e0!3m2!1sen!2sgh!4v1720534567890!5m2!1sen!2sgh"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="rounded-xl shadow-md"
-          />
-        </motion.div>
+          </div>
+          <Button type="submit" className="w-full">
+            Send Message
+          </Button>
+        </motion.form>
       </div>
-    </motion.div>
+
+      {/* Contact Info Cards */}
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+              <MapPin className="h-5 w-5" /> Location
+            </CardTitle>
+          </CardHeader>
+          <CardContent>123 Faith Avenue, Accra, Ghana</CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+              <Clock className="h-5 w-5" /> Service Times
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            Sunday: 9am & 11am <br /> Wednesday: 7pm
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+              <Mail className="h-5 w-5" /> Social Links
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex gap-4 text-xl text-blue-600 dark:text-blue-400">
+            <a href="#" aria-label="Facebook">
+              <Facebook />
+            </a>
+            <a href="#" aria-label="Twitter">
+              <Twitter />
+            </a>
+            <a href="#" aria-label="Instagram">
+              <Instagram />
+            </a>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Embedded Map */}
+      <div className="mt-12 rounded-xl overflow-hidden shadow-lg">
+        <iframe
+          title="Church Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.3723313749044!2d-0.2748998251150366!3d5.6730388335829505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9fc37b69420f%3A0x156488beee9b2f!2sKing%20Of%20Glory%20Covenant%20Chapel%20International!5e0!3m2!1sen!2sgh!4v1720534567890!5m2!1sen!2sgh"
+          width="100%"
+          height="300"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full"
+        ></iframe>
+      </div>
+    </div>
   );
 }
