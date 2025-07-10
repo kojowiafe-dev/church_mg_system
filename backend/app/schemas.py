@@ -34,6 +34,7 @@ class UserUpdate(SQLModel):
     password: Optional[str]
     phone: Optional[str]
     house_address: Optional[str]
+    updated_at: Optional[datetime]
     profile_image: Optional[str]
     
     

@@ -32,7 +32,7 @@ class User(SQLModel, table=True):
     role: str = Field(default="member", index=True)
     profile_image: Optional[str] = None
     join_date: date = Field(default_factory=date.today)
-    # updated_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: date = Field(default_factory=date.today)
 
     # Relationships

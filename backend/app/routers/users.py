@@ -6,7 +6,7 @@ from schemas import UserPublic, UserUpdate
 from database import SessionDep
 from models.model import User
 from hashing import get_password_hash
-from datetime import date
+from datetime import datetime
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -25,20 +25,18 @@ def get_user_by_id(id: int, session: SessionDep):
 
 @router.put("/{id}", response_model=UserUpdate)
 def update_user(
-    user_id: int,
+    id: int,
     member_update: UserUpdate,
-    session: SessionDep,
-    # current_user: dict = Depends(get_current_user)
+    session: SessionDep
 ):
-    db_user = session.get(User, user_id)
+    db_user = session.get(User, id)
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    for key, value in member_update.dict().items():
+    for key, value in member_update.dict(exclude_unset=True).items():
         setattr(db_user, key, value)
     
-    db_user.updated_at = date.today()
-    session.add(db_user)
+    db_user.updated_at = datetime.today()
     session.commit()
     session.refresh(db_user)
     return db_user
