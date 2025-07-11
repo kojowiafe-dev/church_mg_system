@@ -33,6 +33,8 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(error);
+
     if (!form.name || !form.email || !form.message) {
       setError("Name, Email, and Message are required.");
       toast.error("Please fill all required fields.");
