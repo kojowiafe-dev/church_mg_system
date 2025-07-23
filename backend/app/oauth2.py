@@ -5,7 +5,7 @@ from jose import jwt, JWTError
 from sqlmodel import select
 import database, token_access, models.model as model
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")  # Use generic login path
+oauth2_scheme=OAuth2PasswordBearer(tokenUrl="/auth/login")  # Use generic login path
 
 def get_current_user(
     session: database.SessionDep, 

@@ -6,7 +6,6 @@ import schemas, database, token_access, hashing, oauth2
 import models.model as model
 from typing import Annotated
 from datetime import datetime
-from schemas import OAuth2LoginFormWithRole
 from routers import mail
 import random
 from utils import otp
@@ -20,7 +19,7 @@ router = APIRouter(
 
 @router.post("/login", response_model=schemas.Token)
 async def login(
-    form_data: Annotated[OAuth2LoginFormWithRole, Depends()],
+    form_data: schemas.UserLogin,
     session: database.SessionDep
 ):
     try:

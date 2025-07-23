@@ -164,16 +164,10 @@ class CombinedRegistration(SQLModel):
 from fastapi import Form
 from typing import Annotated
 
-class OAuth2LoginFormWithRole:
-    def __init__(
-        self,
-        username: Annotated[str, Form()],
-        password: Annotated[str, Form()],
-        role: Annotated[str, Form()],
-    ):
-        self.username = username
-        self.password = password
-        self.role = role
+# class OAuth2LoginFormWithRole:
+#     username: str
+#     password: str
+#     role: str
 
 
 class TokenData(SQLModel):

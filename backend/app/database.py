@@ -6,15 +6,15 @@ from fastapi import Depends
 # import os
 
 
-sqlite_file_name = 'church.db'
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{sqlite_file_name}"
+sqlite_file_name='church.db'
+SQLALCHEMY_DATABASE_URL=f"sqlite:///{sqlite_file_name}"
 
 # Remove existing database file if it exists
 # if os.path.exists(sqlite_file_name):
 #     os.remove(sqlite_file_name)
 
 # setup the engine for the database
-engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True, connect_args={"check_same_thread": False})
+engine=create_engine(SQLALCHEMY_DATABASE_URL, echo=True, connect_args={"check_same_thread": False})
 
 def get_session():
     with Session(engine) as session:
