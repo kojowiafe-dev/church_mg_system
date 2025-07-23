@@ -134,7 +134,7 @@ const Login = () => {
 
       const response = await api.post('/auth/login', payload, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',
         },
       });
