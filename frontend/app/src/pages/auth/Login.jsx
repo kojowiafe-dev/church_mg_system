@@ -6,8 +6,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import api from '../api';
 import bgImage from '../../assets/elianna-gill-DppEkXKjahk-unsplash.jpg';
 import BackgroundImage from '../../components/BackgroundImage';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import  { notifySuccess, notifyError } from '../../utils/toastHelpers';
 
 const formValidation = {
   username: {
@@ -118,7 +117,7 @@ const Login = () => {
   useEffect(() => {
     const popup = localStorage.getItem('registerToken');
     if (popup) {
-      toast.success("You've registered!", { position: 'top-right', autoClose: 3000 });
+      notifySuccess("You've registered!", { position: 'top-right', autoClose: 3000 });
       localStorage.removeItem('registerToken');
     }
   }, []);
@@ -159,7 +158,7 @@ const Login = () => {
         (error.message === 'Network Error' && "Cannot connect to server. Please check your connection.") ||
         "Something went wrong";
 
-      toast.error(message, { style: { background: "#000", color: "#fff" } });
+      notifyError(message, { style: { background: "#000", color: "#fff" } });
 
     } finally {
       setLoading(false);
@@ -173,13 +172,13 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Welcome Back</h2>
         <LoginForm onSubmit={handleLogin} loading={loading} />
       </div>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={3000}
         theme="dark"
         toastClassName="bg-slate-800 text-white px-6 py-4 rounded-xl shadow-lg"
         bodyClassName="text-sm font-medium"
-      />
+      /> */}
     </div>
   );
 };
