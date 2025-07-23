@@ -126,10 +126,13 @@ const Login = () => {
   const handleLogin = async (data) => {
     setLoading(true);
     try {
-      const formData = new URLSearchParams();
-      Object.entries(data).forEach(([key, value]) => key !== 'remember_me' && formData.append(key, value));
+      const payload = {
+        username: data.username,
+        password: data.password,
+        role: data.role,
+      };
 
-      const response = await api.post('/auth/login', formData.toString(), {
+      const response = await api.post('/auth/login', payload, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',

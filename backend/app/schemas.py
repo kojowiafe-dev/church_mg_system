@@ -9,6 +9,7 @@ from models.model import GenderEnum, MaritalStatusEnum
 class UserBase(SQLModel):
     username: str
     email: Optional[str] = None
+    password: str
     phone: str
     house_address: str
     role: str
