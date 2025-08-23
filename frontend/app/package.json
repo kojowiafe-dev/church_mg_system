@@ -1,5 +1,6 @@
 {
   "name": "app",
+  "homepage": "https://kojowiafe-dev.github.io/church_mg_system/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
