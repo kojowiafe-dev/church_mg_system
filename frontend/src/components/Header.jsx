@@ -71,24 +71,24 @@ const Header = () => {
                 static
                 className="md:hidden px-4 pb-4 space-y-2"
               >
-                <a
-                  href="/features"
+                <Link
+                  to="/features"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   Features
-                </a>
-                <a
-                  href="/about"
+                </Link>
+                <Link
+                  to="/about"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   About
-                </a>
-                <a
-                  href="/contact"
+                </Link>
+                <Link
+                  to="/contact"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   Contact
-                </a>
+                </Link>
                 {/* Login Button for Mobile */}
                 <Link to="/login">
                   <button className="w-full mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
