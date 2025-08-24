@@ -72,19 +72,19 @@ const Header = () => {
                 className="md:hidden px-4 pb-4 space-y-2"
               >
                 <a
-                  href="#features"
+                  href="/features"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   Features
                 </a>
                 <a
-                  href="#about"
+                  href="/about"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   About
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="block py-2 text-sm hover:text-indigo-600"
                 >
                   Contact
