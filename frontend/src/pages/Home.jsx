@@ -13,7 +13,7 @@ import {
 import video from "../video/5949377-hd_1920_1080_24fps.mp4";
 import Daddy from "../assets/Daddy.jpg";
 
-import Header from "../components/Header";
+// import Header from "../components/Header";
 
 export default function HomePage() {
   // const navigate = useNavigate();
@@ -42,7 +42,7 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
 
-      <Header />
+      {/* <Header /> */}
 
       {/* Hero Section */}
       <section

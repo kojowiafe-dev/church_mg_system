@@ -209,7 +209,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center py-12 md:py-24">
       <div className="fixed inset-0 w-full h-full">
         <video
           className="absolute w-full h-full object-cover"

@@ -46,7 +46,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 py-12 md:py-24 px-4 md:px-8">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         {/* Side Panel / Branding */}
         <motion.div
@@ -64,16 +64,16 @@ export default function ContactPage() {
             </p>
             <ul className="space-y-2 text-sm text-blue-200">
               <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" /> 123 Faith Avenue, Accra, Ghana
+                <MapPin className="h-4 w-4" /> Ofankor Agya Herbal, Accra, Ghana
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" /> +233 123 456 789
+                <Phone className="h-4 w-4" /> +233 591 783 838
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" /> info@kogchapel.org
               </li>
               <li className="flex items-center gap-2">
-                <Clock className="h-4 w-4" /> Sun: 9am & 11am • Wed: 7pm
+                <Clock className="h-4 w-4" /> Sun: 9:30am - 12pm • Wed: 7pm
               </li>
             </ul>
           </div>
@@ -157,7 +157,6 @@ export default function ContactPage() {
           </Button>
         </motion.form>
       </div>
-
       {/* Contact Info Cards */}
       <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         <Card>
@@ -166,7 +165,10 @@ export default function ContactPage() {
               <MapPin className="h-5 w-5" /> Location
             </CardTitle>
           </CardHeader>
-          <CardContent>123 Faith Avenue, Accra, Ghana</CardContent>
+          <CardContent>
+            Ofankor, Agya Herbal, Accra, Ghana <br /> Behind the Sheveeca
+            Restaurant
+          </CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -175,7 +177,8 @@ export default function ContactPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            Sunday: 9am & 11am <br /> Wednesday: 7pm
+            Sunday: 9:30am - 12pm <br /> Monday Teachings: 7pm <br /> Wednesday
+            Worship: 7pm <br /> Friday Prayers: 7pm
           </CardContent>
         </Card>
         <Card>
@@ -197,7 +200,6 @@ export default function ContactPage() {
           </CardContent>
         </Card>
       </div>
-
       {/* Embedded Map */}
       <div className="mt-12 rounded-xl overflow-hidden shadow-lg">
         <iframe
