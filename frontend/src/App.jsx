@@ -33,13 +33,13 @@ const App = () => {
     <Routes>
       {/* Public Routes */}
       <Route element={<AuthLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/contact" element={<ContactPage />} />
       </Route>
 
-      <Route path="/" element={<Home />} />
       <Route
         path="/:role/unauthorized"
         element={
