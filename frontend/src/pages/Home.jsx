@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import video from "../video/5949377-hd_1920_1080_24fps.mp4";
 import Daddy from "../assets/Daddy.jpg";
+import Church from "../assets/Adobe Express - file.png";
 
 // import Header from "../components/Header";
 
@@ -259,7 +260,12 @@ export default function HomePage() {
           {/* Branding */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <FaChurch className="text-indigo-300 w-8 h-8 animate-pulse" />
+              {/* <FaChurch className="text-indigo-300 w-8 h-8 animate-pulse" /> */}
+              <img
+                src={Church}
+                alt="Church Logo"
+                className="w-10 h-10 animate-pulse"
+              />
               <div>
                 <div className="text-2xl font-bold text-white">KGCCI</div>
                 <div className="text-sm text-indigo-200">
