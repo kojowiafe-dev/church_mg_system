@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import { FaChurch, FaSignInAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import Church from "../assets/Adobe Express - file.png";
 
 const Header = () => {
   return (
@@ -17,8 +18,13 @@ const Header = () => {
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
               {/* Logo */}
               <div className="flex items-center gap-3">
-                <FaChurch className="text-indigo-600 w-7 h-7" />
-                <span className="text-lg font-bold text-indigo-700">KGCCI</span>
+                <Link to="/">
+                  <img src={Church} alt="Church Logo" className="w-10 h-10" />
+                </Link>
+                {/* <FaChurch className="text-indigo-600 w-7 h-7" />
+                <span className="text-lg font-bold text-indigo-700">
+                  <Link to="/">KGCCI</Link>
+                </span> */}
               </div>
 
               {/* Desktop Nav */}
