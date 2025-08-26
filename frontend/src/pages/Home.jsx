@@ -42,9 +42,7 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col relative overflow-x-hidden bg-indigo-50 text-gray-800">
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Navbar */}
-
       {/* <Header /> */}
-
       {/* Hero Section */}
       <section
         initial={{ opacity: 0, y: 40 }}
@@ -105,7 +103,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
       {/* Pastor Section */}
       <section className="py-20 px-6 relative z-10 bg-gradient-to-b from-white w-full to-indigo-50">
         <div className="max-w-6xl mx-auto">
@@ -172,6 +169,90 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Battle Cry Section */}
+      <section className="relative py-24 px-6 bg-black/70 overflow-hidden">
+        {/* Background Orbs */}
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 right-0 w-[30rem] h-[30rem] bg-purple-500/20 rounded-full blur-[140px] animate-bounce"></div>
+
+        <div className="flex items-center justify-center py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent"></div>
+            <div className="px-4 py-2 text-blue-600 font-semibold text-sm bg-white rounded-full shadow-md border border-blue-100">
+              Our Declaration
+            </div>
+            <div className="w-8 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent"></div>
+          </div>
+        </div>
+
+        <div className="relative max-w-6xl mx-auto text-center text-white z-10">
+          {/* Heading with Futuristic Glow */}
+          <h2
+            data-aos="fade-up"
+            className="text-5xl md:text-7xl font-extrabold mb-10 tracking-tight leading-tight bg-gradient-to-r from-indigo-300 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(99,102,241,0.8)]"
+          >
+            When We Shout
+          </h2>
+
+          {/* Split Layout */}
+          <div className="grid md:grid-cols-3 gap-10 mt-12 items-center">
+            {/* Left Call */}
+            <div
+              data-aos="fade-right"
+              className="p-8 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300"
+            >
+              <p className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-white bg-clip-text text-transparent">
+                KING OF GLORY!
+              </p>
+            </div>
+
+            {/* Middle Connector */}
+            <div className="flex flex-col items-center justify-center gap-4">
+              <span className="text-lg uppercase tracking-widest text-indigo-200">
+                We Respond
+              </span>
+              <div className="w-1 h-20 bg-gradient-to-b from-indigo-400 to-purple-400 rounded-full"></div>
+            </div>
+
+            {/* Right Call */}
+            <div
+              data-aos="fade-left"
+              className="p-8 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300"
+            >
+              <p className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent">
+                THE LORD STRONG IN BATTLE!
+              </p>
+            </div>
+          </div>
+
+          {/* Scripture */}
+          <blockquote
+            data-aos="zoom-in"
+            className="mt-16 text-xl md:text-2xl italic font-light text-indigo-200 max-w-3xl mx-auto leading-relaxed"
+          >
+            “For the Lord is a warrior; Yahweh is His name.”
+            <br />
+            <span className="text-sm opacity-70">— Exodus 15:3</span>
+          </blockquote>
+
+          {/* Futuristic CTA Button */}
+          {/* <div className="mt-14">
+            <button
+              onClick={() => {
+                const audio = new Audio("/battle-cry.mp3");
+                audio.play();
+              }}
+              className="group relative inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-lg 
+                   bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-600 
+                   hover:scale-105 hover:shadow-[0_0_25px_rgba(139,92,246,0.7)] transition-all duration-500"
+            >
+              <span className="relative z-10">⚡ Sound the Battle Cry</span>
+              <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </button>
+          </div> */}
         </div>
       </section>
 
@@ -249,7 +330,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 text-white px-6 py-16 md:px-20 w-full mt-auto">
         <div
