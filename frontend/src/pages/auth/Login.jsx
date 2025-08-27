@@ -33,12 +33,12 @@ const formValidation = {
   role: { required: "Role is required" },
 };
 
-const LoginForm = ({ onSubmit, loading }) => {
+export const LoginForm = ({ onSubmit, loading }) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -84,9 +84,9 @@ const LoginForm = ({ onSubmit, loading }) => {
               placeholder={`Enter your ${field}`}
             />
           )}
-          {errors[field] && (
+          {/* {errors[field] && (
             <p className="text-red-500 text-sm mt-1">{errors[field].message}</p>
-          )}
+          )} */}
         </div>
       ))}
 
@@ -107,7 +107,7 @@ const LoginForm = ({ onSubmit, loading }) => {
         </Link>
       </div>
 
-      <Button
+      <button
         type="submit"
         disabled={loading}
         className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 cursor-pointer
@@ -144,7 +144,7 @@ const LoginForm = ({ onSubmit, loading }) => {
         ) : (
           "Sign In"
         )}
-      </Button>
+      </button>
 
       <p className="text-center text-sm text-gray-600">
         Don't have an account?{" "}
@@ -239,46 +239,6 @@ const Login = () => {
         </h2>
         <LoginForm onSubmit={handleLogin} loading={loading} />
       </div>
-
-      {/* <motion.form
-        // onSubmit={handleSubmit}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="space-y-4 bg-white dark:bg-slate-900 px-22 py-18 rounded-xl mt-6 shadow-md z-20"
-      >
-        <div className="space-y-1">
-          <label htmlFor="name" className="block text-sm font-medium">
-            Username *
-          </label>
-          <Input
-            name="username"
-            id="username"
-            // value={form.name}
-            // onChange={handleChange}
-            placeholder="John Doe"
-            required
-            className="border border-gray-300 rounded-md p-2 w-full"
-          />
-        </div>
-        <div className="space-y-1">
-          <label htmlFor="password" className="block text-sm font-medium">
-            Password *
-          </label>
-          <Input
-            name="password"
-            id="password"
-            type="password"
-            // value={form.email}
-            // onChange={handleChange}
-            placeholder="Password"
-            required
-          />
-        </div>
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-      </motion.form> */}
     </div>
   );
 };

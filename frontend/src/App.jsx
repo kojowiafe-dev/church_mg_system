@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layouts/AuthLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 
-import Login from "./pages/auth/Login";
+// import Login from "./pages/auth/Login";
 import NewLogin from "./pages/auth/NewLogin";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -36,8 +36,8 @@ const App = () => {
       <Route element={<AuthLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/new-login" element={<NewLogin />} />
+        <Route path="/login" element={<NewLogin />} />
+        {/* <Route path="/new-login" element={<NewLogin />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
