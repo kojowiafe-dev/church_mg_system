@@ -9,6 +9,17 @@ import api from "../api";
 import { notifySuccess, notifyError } from "../../utils/toastHelpers";
 // import video from "../video/5949377-hd_1920_1080_24fps.mp4";
 import video from "../../video/5949377-hd_1920_1080_24fps.mp4";
+// import { motion } from "framer-motion";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formValidation = {
   username: {
@@ -33,7 +44,7 @@ const LoginForm = ({ onSubmit, loading }) => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-1">
       {["username", "password", "role"].map((field, index) => (
         <div className="space-y-2" key={index}>
           <label className="block text-sm font-medium text-gray-700">
@@ -41,7 +52,7 @@ const LoginForm = ({ onSubmit, loading }) => {
           </label>
           {field === "password" ? (
             <div className="relative">
-              <input
+              <Input
                 {...register(field, formValidation[field])}
                 type={showPassword ? "text" : "password"}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
@@ -56,17 +67,18 @@ const LoginForm = ({ onSubmit, loading }) => {
               </button>
             </div>
           ) : field === "role" ? (
-            <select
-              {...register(field, formValidation[field])}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
-            >
-              <option value="">Select a role</option>
-              <option value="admin">Admin</option>
-              <option value="pastor">Pastor</option>
-              <option value="member">Member</option>
-            </select>
+            <Select {...register(field, formValidation[field])}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="pastor">Pastor</SelectItem>
+                <SelectItem value="member">Member</SelectItem>
+              </SelectContent>
+            </Select>
           ) : (
-            <input
+            <Input
               {...register(field, formValidation[field])}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
               placeholder={`Enter your ${field}`}
@@ -80,7 +92,7 @@ const LoginForm = ({ onSubmit, loading }) => {
 
       <div className="flex items-center justify-between">
         <label className="flex items-center text-sm text-gray-700">
-          <input
+          <Input
             {...register("remember_me")}
             type="checkbox"
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2"
@@ -95,7 +107,7 @@ const LoginForm = ({ onSubmit, loading }) => {
         </Link>
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
         className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 cursor-pointer
@@ -132,7 +144,7 @@ const LoginForm = ({ onSubmit, loading }) => {
         ) : (
           "Sign In"
         )}
-      </button>
+      </Button>
 
       <p className="text-center text-sm text-gray-600">
         Don't have an account?{" "}
@@ -209,7 +221,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 md:py-24">
+    <div className="h-screen flex items-center justify-center overflow-hidden">
       <div className="fixed inset-0 w-full h-full">
         <video
           className="absolute w-full h-full object-cover"
@@ -221,18 +233,52 @@ const Login = () => {
         </video>
         <div className="absolute inset-0 bg-black/60" />
       </div>
-      {/* <BackgroundImage
-        src={bgImage}
-        className="fixed inset-0 w-full h-full"
-        fallbackColor="#222"
-        style={{ opacity: 0.3, objectFit: "cover" }}
-      /> */}
-      <div className="relative z-20 w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg rounded-lg pr-16 pl-16 p-8 m-2">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <div className="relative z-20 w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg rounded-lg px-16 py-8 mt-18">
+        <h2 className="text-3xl font-bold text-center mb-2 text-gray-800">
           Welcome Back
         </h2>
         <LoginForm onSubmit={handleLogin} loading={loading} />
       </div>
+
+      {/* <motion.form
+        // onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="space-y-4 bg-white dark:bg-slate-900 px-22 py-18 rounded-xl mt-6 shadow-md z-20"
+      >
+        <div className="space-y-1">
+          <label htmlFor="name" className="block text-sm font-medium">
+            Username *
+          </label>
+          <Input
+            name="username"
+            id="username"
+            // value={form.name}
+            // onChange={handleChange}
+            placeholder="John Doe"
+            required
+            className="border border-gray-300 rounded-md p-2 w-full"
+          />
+        </div>
+        <div className="space-y-1">
+          <label htmlFor="password" className="block text-sm font-medium">
+            Password *
+          </label>
+          <Input
+            name="password"
+            id="password"
+            type="password"
+            // value={form.email}
+            // onChange={handleChange}
+            placeholder="Password"
+            required
+          />
+        </div>
+        <Button type="submit" className="w-full">
+          Login
+        </Button>
+      </motion.form> */}
     </div>
   );
 };
