@@ -18,7 +18,46 @@ import {
   Shield,
   Users,
 } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
 import api from "../api";
+
+const FeatureCard = React.memo(function FeatureCard({
+  feature,
+  selected,
+  onToggle,
+}) {
+  const Icon = feature.icon;
+  return (
+    <div
+      key={feature.id}
+      onClick={() => onToggle(feature.id)}
+      className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+        selected
+          ? "border-purple-500 bg-purple-500/20"
+          : "border-white/20 bg-white/5 hover:border-white/40"
+      }`}
+    >
+      <div className="flex items-center space-x-3">
+        <Icon
+          className={`w-5 h-5 ${
+            selected ? "text-purple-400" : "text-gray-400"
+          }`}
+        />
+        <span className="font-medium">{feature.label}</span>
+      </div>
+    </div>
+  );
+});
 
 const RegisterForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -86,17 +125,17 @@ const RegisterForm = () => {
     }
   };
   return (
-    <div>
+    <div className="bg-red-400">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-2xl mx-auto mb-12"
+        className="w-full flex items-center justify-center bg-green-300"
       >
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-2">
           {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${
+                className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold ${
                   step <= currentStep
                     ? "bg-cyan-500 text-white"
                     : "bg-gray-700 text-gray-400"
@@ -118,19 +157,19 @@ const RegisterForm = () => {
             </div>
           ))}
         </div>
-        <div className="text-center text-sm text-gray-400">
+        {/* <div className="text-center text-sm text-gray-400 flex items-center justify-center">
           Step {currentStep} of 4
-        </div>
+        </div> */}
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="max-w-4xl mx-auto"
+        className="w-full bg-amber-700"
       >
         <Card className="bg-white/10 backdrop-blur-lg border-white/20 text-white">
-          <CardHeader className="text-center">
+          {/* <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">
               {currentStep === 1 && "Tell us about your company"}
               {currentStep === 2 && "What are your goals?"}
@@ -144,8 +183,8 @@ const RegisterForm = () => {
               {currentStep === 3 && "Share details about your specific needs"}
               {currentStep === 4 && "Thank you for choosing Eventus 🚀"}
             </CardDescription>
-          </CardHeader>
-          <CardContent className="p-8">
+          </CardHeader> */}
+          <CardContent className="p-5 bg-blue-400">
             <form onSubmit={handleSubmit}>
               {/* Step 1: Company Information */}
               {currentStep === 1 && (
@@ -154,7 +193,7 @@ const RegisterForm = () => {
                   animate={{ opacity: 1, x: 0 }}
                   className="space-y-6"
                 >
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-yellow-200 grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="companyName">Company Name</Label>
                       <Input
@@ -393,9 +432,11 @@ const RegisterForm = () => {
 
 const NewRegister = () => {
   return (
-    <div>
-      <div className="h-screen grid grid-cols-2 px-16 py-6 pt-18">
-        <div className="flex items-center justify-center bg-white dark:bg-slate-900 px-20 py-15 rounded-xl mt-6 shadow-md z-20"></div>
+    <div className="bg-cyan-300 min-h-screen">
+      <div className="grid grid-cols-2 px-16 py-6 pt-18">
+        <div className="flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20">
+          <RegisterForm />
+        </div>
         <div className="bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <video
