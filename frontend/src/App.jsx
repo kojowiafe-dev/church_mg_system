@@ -8,6 +8,7 @@ import NewLogin from "./pages/auth/NewLogin";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Admin from "./pages/auth/Admin";
+import NewRegister from "./pages/auth/NewRegister";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import PastorDashboard from "./pages/pastor/PastorDashboard";
@@ -37,7 +38,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<NewLogin />} />
-        {/* <Route path="/new-login" element={<NewLogin />} /> */}
+        <Route path="/new-register" element={<NewRegister />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
