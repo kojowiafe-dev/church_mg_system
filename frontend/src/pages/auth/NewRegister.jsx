@@ -131,11 +131,11 @@ const RegisterForm = () => {
     }
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col p-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full flex items-center justify-center py-4"
+        className="mb-6"
       >
         <div className="flex items-center justify-between">
           {[1, 2, 3, 4].map((step) => (
@@ -168,15 +168,16 @@ const RegisterForm = () => {
         </div> */}
       </motion.div>
 
-      <div
-        // initial={{ opacity: 0, y: 40 }}
-        // animate={{ opacity: 1, y: 0 }}
-        // transition={{ delay: 0.2 }}
-        className="w-full h-[calc(100%-4rem)]"
-      >
-        <Card className=" bg-white border-white backdrop-blur-lg text-white h-full">
-          <CardContent className="p-5 h-full overflow-y-auto">
-            <form onSubmit={handleSubmit}>
+      {/* <div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="w-full bg-blue-400"
+      > */}
+      <Card className=" bg-red-400 border-white backdrop-blur-lg text-white flex-1">
+        <CardContent className="h-full p-6">
+          <form onSubmit={handleSubmit} className="h-full flex flex-col">
+            <div className="flex-1">
               {/* Step 1: Company Information */}
               {currentStep === 1 && (
                 <div className="space-y-4">
@@ -295,7 +296,6 @@ const RegisterForm = () => {
                   </div>
                 </div>
               )}
-
               {/* Step 2: Features Selection */}
               {currentStep === 2 && (
                 <motion.div
@@ -418,7 +418,6 @@ const RegisterForm = () => {
                   </div>
                 </motion.div>
               )}
-
               {/* Step 3: Project Details */}
               {currentStep === 3 && (
                 <motion.div
@@ -542,83 +541,96 @@ const RegisterForm = () => {
                 </motion.div>
               )}
               {/* Success Step */}
+
               {currentStep === 4 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex flex-col items-center justify-center py-12"
+                  className="h-full flex flex-col items-center justify-center space-y-6"
                 >
-                  <div className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 mb-6">
-                    <CheckCircle className="text-green-400 w-12 h-12" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-2">
-                    Success!
-                  </h2>
-                  <p className="text-lg text-gray-300 max-w-md text-center">
-                    We'll be in touch shortly. Your journey with{" "}
-                    <span className="text-gradient bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                      Eventus
-                    </span>{" "}
-                    starts now 🚀
-                  </p>
-                </motion.div>
-              )}
-
-              {/* Navigation Buttons */}
-              {currentStep < 4 && (
-                <div className="flex justify-between items-center pt-8 border-t border-white/20">
-                  {currentStep > 1 ? (
+                  {/* <div className="flex items-center justify-center rounded-full bg-green-500/10 p-4">
+                  <CheckCircle className="text-green-400 w-16 h-16" />
+                </div> */}
+                  <div className="w-full max-w-md mx-auto text-center">
+                    <h2 className="text-2xl font-semibold text-white mb-4">
+                      Registration Successful!
+                    </h2>
+                    <p className="text-sm text-gray-300 mb-8">
+                      Welcome to{" "}
+                      <span className="text-gradient bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
+                        Church Management System
+                      </span>
+                      . Your account has been created successfully! 🚀
+                    </p>
                     <Button
                       type="button"
-                      variant="ghost"
-                      onClick={prevStep}
-                      disabled={currentStep === 1}
-                      className="text-white hover:bg-white/10"
-                    >
-                      Previous
-                    </Button>
-                  ) : (
-                    <div />
-                  )}
-                  {currentStep === 3 ? (
-                    <Button
-                      type="button"
-                      onClick={nextStep}
                       className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                      onClick={() => {
+                        // Add navigation to login or dashboard
+                      }}
                     >
-                      Submit Application
-                      <Sparkles className="w-4 h-4 ml-2" />
-                    </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      onClick={nextStep}
-                      className="bg-cyan-500 hover:bg-cyan-700 text-white cursor-pointer"
-                    >
-                      Next Step
+                      Continue to Login
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
-                  )}
-                </div>
+                  </div>
+                </motion.div>
               )}
-            </form>
-          </CardContent>
-        </Card>
-      </div>
+            </div>
+            {/* Navigation Buttons */}
+            {currentStep < 4 && (
+              <div className="flex justify-between items-center pt-8 border-t border-white/20">
+                {currentStep > 1 ? (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={prevStep}
+                    disabled={currentStep === 1}
+                    className="text-white hover:bg-white/10"
+                  >
+                    Previous
+                  </Button>
+                ) : (
+                  <div />
+                )}
+                {currentStep === 3 ? (
+                  <Button
+                    type="button"
+                    onClick={nextStep}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                  >
+                    Submit Application
+                    <Sparkles className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    onClick={nextStep}
+                    className="bg-cyan-500 hover:bg-cyan-700 text-white cursor-pointer"
+                  >
+                    Next Step
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                )}
+              </div>
+            )}
+          </form>
+        </CardContent>
+      </Card>
+      {/* </div> */}
     </div>
   );
 };
 
 const NewRegister = () => {
   return (
-    <div className="bg-cyan-300 h-screen overflow-hidden">
-      <div className="h-full grid grid-cols-2 px-16 py-6 gap-6">
+    <div className="h-screen overflow-hidden">
+      <div className="h-full grid grid-cols-2 px-16 py-6 pt-24">
         <div className="flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
-          <div className="w-full h-full overflow-y-auto">
-            <RegisterForm />
-          </div>
+          {/* <div className="w-full h-full overflow-y-auto"> */}
+          <RegisterForm />
+          {/* </div> */}
         </div>
-        <div className="bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20 relative overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl shadow-md z-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <video
               className="w-full h-full object-cover rounded-xl"
