@@ -84,22 +84,22 @@ const RegisterForm = () => {
     agreeToTerms: false,
   });
 
-  const features = [
-    { id: "ai-agents", label: "AI Automation Agents", icon: Sparkles },
-    { id: "web-systems", label: "Web Systems", icon: Zap },
-    { id: "data-analytics", label: "Data Analytics", icon: Users },
-    { id: "security", label: "Security Solutions", icon: Shield },
-    { id: "team-collaboration", label: "Team Collaboration", icon: Users },
-  ];
+  // const features = [
+  //   { id: "ai-agents", label: "AI Automation Agents", icon: Sparkles },
+  //   { id: "web-systems", label: "Web Systems", icon: Zap },
+  //   { id: "data-analytics", label: "Data Analytics", icon: Users },
+  //   { id: "security", label: "Security Solutions", icon: Shield },
+  //   { id: "team-collaboration", label: "Team Collaboration", icon: Users },
+  // ];
 
-  const handleFeatureToggle = useCallback((featureId) => {
-    setFormData((prev) => ({
-      ...prev,
-      features: prev.features.includes(featureId)
-        ? prev.features.filter((id) => id !== featureId)
-        : [...prev.features, featureId],
-    }));
-  }, []);
+  // const handleFeatureToggle = useCallback((featureId) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     features: prev.features.includes(featureId)
+  //       ? prev.features.filter((id) => id !== featureId)
+  //       : [...prev.features, featureId],
+  //   }));
+  // }, []);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -135,9 +135,9 @@ const RegisterForm = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-6"
+        className="mb-6 bg-amber-500"
       >
-        <div className="flex items-center justify-between">
+        <div className="w-full bg-green-300 flex items-center justify-between">
           {[1, 2, 3, 4].map((step) => (
             <div key={step} className="flex items-center">
               <div
@@ -168,455 +168,447 @@ const RegisterForm = () => {
         </div> */}
       </motion.div>
 
-      {/* <div
+      <div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="w-full bg-blue-400"
-      > */}
-      <Card className=" bg-red-400 border-white backdrop-blur-lg text-white flex-1">
-        <CardContent className="h-full p-6">
-          <form onSubmit={handleSubmit} className="h-full flex flex-col">
-            <div className="flex-1">
-              {/* Step 1: Company Information */}
-              {currentStep === 1 && (
-                <div className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Your last name"
-                      />
-                    </div>
+        className="w-[450px] h-[500px] flex items-center justify-center bg-blue-400"
+      >
+        <form onSubmit={handleSubmit} className="h-full flex flex-col">
+          <div className="flex-1">
+            {/* Step 1: Company Information */}
+            {currentStep === 1 && (
+              <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={(e) =>
+                        handleInputChange("firstName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Enter your first name"
+                    />
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Gender</Label>
-                      <Controller
-                        name="role"
-                        control={control}
-                        // rules={formValidation.role}
-                        render={({ field }) => (
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                          >
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select a role" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="admin">Admin</SelectItem>
-                              <SelectItem value="pastor">Pastor</SelectItem>
-                              <SelectItem value="member">Member</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          handleInputChange("phone", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="+1 (555) 123-4567"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="industry">Industry</Label>
-                      <Select
-                        value={formData.industry}
-                        onValueChange={(value) =>
-                          handleInputChange("industry", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select your industry" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="technology">Technology</SelectItem>
-                          <SelectItem value="healthcare">Healthcare</SelectItem>
-                          <SelectItem value="finance">Finance</SelectItem>
-                          <SelectItem value="retail">Retail</SelectItem>
-                          <SelectItem value="manufacturing">
-                            Manufacturing
-                          </SelectItem>
-                          <SelectItem value="education">Education</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="companySize">Company Size</Label>
-                      <Select
-                        value={formData.companySize}
-                        onValueChange={(value) =>
-                          handleInputChange("companySize", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select company size" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="1-10">1-10 employees</SelectItem>
-                          <SelectItem value="11-50">11-50 employees</SelectItem>
-                          <SelectItem value="51-200">
-                            51-200 employees
-                          </SelectItem>
-                          <SelectItem value="201-1000">
-                            201-1000 employees
-                          </SelectItem>
-                          <SelectItem value="1000+">1000+ employees</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={(e) =>
+                        handleInputChange("lastName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Your last name"
+                    />
                   </div>
                 </div>
-              )}
-              {/* Step 2: Features Selection */}
-              {currentStep === 2 && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="space-y-4"
-                >
-                  <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Your last name"
-                      />
-                    </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Gender</Label>
+                    <Controller
+                      name="role"
+                      control={control}
+                      // rules={formValidation.role}
+                      render={({ field }) => (
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a role" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="pastor">Pastor</SelectItem>
+                            <SelectItem value="member">Member</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Gender</Label>
-                      <Controller
-                        name="role"
-                        control={control}
-                        // rules={formValidation.role}
-                        render={({ field }) => (
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                          >
-                            <SelectTrigger className="w-full h-10">
-                              <SelectValue placeholder="Select a role" />
-                            </SelectTrigger>
-                            <SelectContent className="max-h-[300px] overflow-y-auto">
-                              <SelectItem value="admin">Admin</SelectItem>
-                              <SelectItem value="pastor">Pastor</SelectItem>
-                              <SelectItem value="member">Member</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          handleInputChange("phone", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="+1 (555) 123-4567"
-                      />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="+1 (555) 123-4567"
+                    />
                   </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="industry">Industry</Label>
-                      <Select
-                        value={formData.industry}
-                        onValueChange={(value) =>
-                          handleInputChange("industry", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select your industry" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="technology">Technology</SelectItem>
-                          <SelectItem value="healthcare">Healthcare</SelectItem>
-                          <SelectItem value="finance">Finance</SelectItem>
-                          <SelectItem value="retail">Retail</SelectItem>
-                          <SelectItem value="manufacturing">
-                            Manufacturing
-                          </SelectItem>
-                          <SelectItem value="education">Education</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="companySize">Company Size</Label>
-                      <Select
-                        value={formData.companySize}
-                        onValueChange={(value) =>
-                          handleInputChange("companySize", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select company size" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="1-10">1-10 employees</SelectItem>
-                          <SelectItem value="11-50">11-50 employees</SelectItem>
-                          <SelectItem value="51-200">
-                            51-200 employees
-                          </SelectItem>
-                          <SelectItem value="201-1000">
-                            201-1000 employees
-                          </SelectItem>
-                          <SelectItem value="1000+">1000+ employees</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-              {/* Step 3: Project Details */}
-              {currentStep === 3 && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="space-y-4"
-                >
-                  <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="Your last name"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Gender</Label>
-                      <Controller
-                        name="role"
-                        control={control}
-                        // rules={formValidation.role}
-                        render={({ field }) => (
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                          >
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select a role" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="admin">Admin</SelectItem>
-                              <SelectItem value="pastor">Pastor</SelectItem>
-                              <SelectItem value="member">Member</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          handleInputChange("phone", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="+1 (555) 123-4567"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="industry">Industry</Label>
-                      <Select
-                        value={formData.industry}
-                        onValueChange={(value) =>
-                          handleInputChange("industry", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select your industry" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="technology">Technology</SelectItem>
-                          <SelectItem value="healthcare">Healthcare</SelectItem>
-                          <SelectItem value="finance">Finance</SelectItem>
-                          <SelectItem value="retail">Retail</SelectItem>
-                          <SelectItem value="manufacturing">
-                            Manufacturing
-                          </SelectItem>
-                          <SelectItem value="education">Education</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="companySize">Company Size</Label>
-                      <Select
-                        value={formData.companySize}
-                        onValueChange={(value) =>
-                          handleInputChange("companySize", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select company size" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="1-10">1-10 employees</SelectItem>
-                          <SelectItem value="11-50">11-50 employees</SelectItem>
-                          <SelectItem value="51-200">
-                            51-200 employees
-                          </SelectItem>
-                          <SelectItem value="201-1000">
-                            201-1000 employees
-                          </SelectItem>
-                          <SelectItem value="1000+">1000+ employees</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-              {/* Success Step */}
-
-              {currentStep === 4 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="h-full flex flex-col items-center justify-center space-y-6"
-                >
-                  {/* <div className="flex items-center justify-center rounded-full bg-green-500/10 p-4">
-                  <CheckCircle className="text-green-400 w-16 h-16" />
-                </div> */}
-                  <div className="w-full max-w-md mx-auto text-center">
-                    <h2 className="text-2xl font-semibold text-white mb-4">
-                      Registration Successful!
-                    </h2>
-                    <p className="text-sm text-gray-300 mb-8">
-                      Welcome to{" "}
-                      <span className="text-gradient bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
-                        Church Management System
-                      </span>
-                      . Your account has been created successfully! 🚀
-                    </p>
-                    <Button
-                      type="button"
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-                      onClick={() => {
-                        // Add navigation to login or dashboard
-                      }}
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="industry">Industry</Label>
+                    <Select
+                      value={formData.industry}
+                      onValueChange={(value) =>
+                        handleInputChange("industry", value)
+                      }
                     >
-                      Continue to Login
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select your industry" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="technology">Technology</SelectItem>
+                        <SelectItem value="healthcare">Healthcare</SelectItem>
+                        <SelectItem value="finance">Finance</SelectItem>
+                        <SelectItem value="retail">Retail</SelectItem>
+                        <SelectItem value="manufacturing">
+                          Manufacturing
+                        </SelectItem>
+                        <SelectItem value="education">Education</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </motion.div>
-              )}
-            </div>
-            {/* Navigation Buttons */}
-            {currentStep < 4 && (
-              <div className="flex justify-between items-center pt-8 border-t border-white/20">
-                {currentStep > 1 ? (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={prevStep}
-                    disabled={currentStep === 1}
-                    className="text-white hover:bg-white/10"
-                  >
-                    Previous
-                  </Button>
-                ) : (
-                  <div />
-                )}
-                {currentStep === 3 ? (
-                  <Button
-                    type="button"
-                    onClick={nextStep}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-                  >
-                    Submit Application
-                    <Sparkles className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button
-                    type="button"
-                    onClick={nextStep}
-                    className="bg-cyan-500 hover:bg-cyan-700 text-white cursor-pointer"
-                  >
-                    Next Step
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                )}
+                  <div className="space-y-2">
+                    <Label htmlFor="companySize">Company Size</Label>
+                    <Select
+                      value={formData.companySize}
+                      onValueChange={(value) =>
+                        handleInputChange("companySize", value)
+                      }
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select company size" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="1-10">1-10 employees</SelectItem>
+                        <SelectItem value="11-50">11-50 employees</SelectItem>
+                        <SelectItem value="51-200">51-200 employees</SelectItem>
+                        <SelectItem value="201-1000">
+                          201-1000 employees
+                        </SelectItem>
+                        <SelectItem value="1000+">1000+ employees</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
             )}
-          </form>
-        </CardContent>
-      </Card>
-      {/* </div> */}
+            {/* Step 2: Features Selection */}
+            {currentStep === 2 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="space-y-4"
+              >
+                <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={(e) =>
+                        handleInputChange("firstName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={(e) =>
+                        handleInputChange("lastName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Your last name"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Gender</Label>
+                    <Controller
+                      name="role"
+                      control={control}
+                      // rules={formValidation.role}
+                      render={({ field }) => (
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full h-10">
+                            <SelectValue placeholder="Select a role" />
+                          </SelectTrigger>
+                          <SelectContent className="max-h-[300px] overflow-y-auto">
+                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="pastor">Pastor</SelectItem>
+                            <SelectItem value="member">Member</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="industry">Industry</Label>
+                    <Select
+                      value={formData.industry}
+                      onValueChange={(value) =>
+                        handleInputChange("industry", value)
+                      }
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select your industry" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="technology">Technology</SelectItem>
+                        <SelectItem value="healthcare">Healthcare</SelectItem>
+                        <SelectItem value="finance">Finance</SelectItem>
+                        <SelectItem value="retail">Retail</SelectItem>
+                        <SelectItem value="manufacturing">
+                          Manufacturing
+                        </SelectItem>
+                        <SelectItem value="education">Education</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="companySize">Company Size</Label>
+                    <Select
+                      value={formData.companySize}
+                      onValueChange={(value) =>
+                        handleInputChange("companySize", value)
+                      }
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select company size" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="1-10">1-10 employees</SelectItem>
+                        <SelectItem value="11-50">11-50 employees</SelectItem>
+                        <SelectItem value="51-200">51-200 employees</SelectItem>
+                        <SelectItem value="201-1000">
+                          201-1000 employees
+                        </SelectItem>
+                        <SelectItem value="1000+">1000+ employees</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+            {/* Step 3: Project Details */}
+            {currentStep === 3 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="space-y-4"
+              >
+                <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={(e) =>
+                        handleInputChange("firstName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={(e) =>
+                        handleInputChange("lastName", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Your last name"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Gender</Label>
+                    <Controller
+                      name="role"
+                      control={control}
+                      // rules={formValidation.role}
+                      render={({ field }) => (
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a role" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="pastor">Pastor</SelectItem>
+                            <SelectItem value="member">Member</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="industry">Industry</Label>
+                    <Select
+                      value={formData.industry}
+                      onValueChange={(value) =>
+                        handleInputChange("industry", value)
+                      }
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select your industry" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="technology">Technology</SelectItem>
+                        <SelectItem value="healthcare">Healthcare</SelectItem>
+                        <SelectItem value="finance">Finance</SelectItem>
+                        <SelectItem value="retail">Retail</SelectItem>
+                        <SelectItem value="manufacturing">
+                          Manufacturing
+                        </SelectItem>
+                        <SelectItem value="education">Education</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="companySize">Company Size</Label>
+                    <Select
+                      value={formData.companySize}
+                      onValueChange={(value) =>
+                        handleInputChange("companySize", value)
+                      }
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectValue placeholder="Select company size" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                        <SelectItem value="1-10">1-10 employees</SelectItem>
+                        <SelectItem value="11-50">11-50 employees</SelectItem>
+                        <SelectItem value="51-200">51-200 employees</SelectItem>
+                        <SelectItem value="201-1000">
+                          201-1000 employees
+                        </SelectItem>
+                        <SelectItem value="1000+">1000+ employees</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+            {/* Success Step */}
+            {currentStep === 4 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="h-full w-full flex flex-col items-center justify-center space-y-4"
+              >
+                {/* <div className="flex items-center justify-center rounded-full bg-green-500/10 p-4">
+                  <CheckCircle className="text-green-400 w-16 h-16" />
+                </div> */}
+                <div className="w-full max-w-sm mx-auto text-center">
+                  <h2 className="text-2xl font-semibold text-white mb-2">
+                    Registration Successful!
+                  </h2>
+                  <p className="text-sm text-gray-300 mb-8">
+                    Welcome to{" "}
+                    <span className="text-gradient bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
+                      Church Management System
+                    </span>
+                    . Your account has been created successfully! 🚀
+                  </p>
+                  <Button
+                    type="button"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                    onClick={() => {
+                      // Add navigation to login or dashboard
+                    }}
+                  >
+                    Continue to Login
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              </motion.div>
+            )}
+          </div>
+          {/* Navigation Buttons */}
+          {currentStep < 4 && (
+            <div className="flex justify-between items-center pt-8 border-t border-white/20">
+              {currentStep > 1 ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={prevStep}
+                  disabled={currentStep === 1}
+                  className="text-white hover:bg-white/10"
+                >
+                  Previous
+                </Button>
+              ) : (
+                <div />
+              )}
+              {currentStep === 3 ? (
+                <Button
+                  type="button"
+                  onClick={nextStep}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                >
+                  Submit Application
+                  <Sparkles className="w-4 h-4 ml-2" />
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={nextStep}
+                  className="bg-cyan-500 hover:bg-cyan-700 text-white cursor-pointer"
+                >
+                  Next Step
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              )}
+            </div>
+          )}
+        </form>
+
+        {/* </CardContent>
+      </Card> */}
+      </div>
     </div>
   );
 };
@@ -625,7 +617,7 @@ const NewRegister = () => {
   return (
     <div className="h-screen overflow-hidden">
       <div className="h-full grid grid-cols-2 px-16 py-6 pt-24">
-        <div className="flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
+        <div className="flex items-center justify-center bg-red-400 dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
           {/* <div className="w-full h-full overflow-y-auto"> */}
           <RegisterForm />
           {/* </div> */}
