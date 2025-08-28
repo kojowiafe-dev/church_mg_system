@@ -42,7 +42,7 @@ const LoginForm = ({ onSubmit, loading }) => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-1">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
       {["username", "password", "role"].map((field, index) => (
         <div className="space-y-2" key={index}>
           <label className="block text-sm font-medium text-gray-700">
@@ -228,7 +228,7 @@ const NewLogin = () => {
   };
   return (
     <div>
-      <div className="h-screen grid grid-cols-2 px-16 py-8 pt-20">
+      <div className="h-screen grid grid-cols-2 px-16 py-6 pt-18">
         <div className="bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <video
