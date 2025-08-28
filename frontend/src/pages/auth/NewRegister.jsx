@@ -69,8 +69,8 @@ const FeatureCard = React.memo(function FeatureCard({
 });
 
 const RegisterForm = () => {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = (React.useState < Date) | (undefined > undefined);
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState();
   const [currentStep, setCurrentStep] = useState(1);
   const [showSavePrompt, setShowSavePrompt] = useState(false);
   const [submissionId, setSubmissionId] = useState(null);
@@ -226,10 +226,10 @@ const RegisterForm = () => {
                           onValueChange={field.onChange}
                           value={field.value}
                         >
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className="w-full bg-white/10 border-white/20 text-white">
                             <SelectValue placeholder="Select a role" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-gray-800 border-gray-700 text-white">
                             <SelectItem value="admin">Admin</SelectItem>
                             <SelectItem value="pastor">Pastor</SelectItem>
                             <SelectItem value="member">Member</SelectItem>
@@ -272,48 +272,38 @@ const RegisterForm = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
+                    <Label htmlFor="gender">Gender</Label>
                     <Select
-                      value={formData.industry}
+                      // value={formData.industry}
                       onValueChange={(value) =>
                         handleInputChange("industry", value)
                       }
                     >
                       <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                        <SelectValue placeholder="Select your industry" />
+                        <SelectValue placeholder="Select your gender" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="finance">Finance</SelectItem>
-                        <SelectItem value="retail">Retail</SelectItem>
-                        <SelectItem value="manufacturing">
-                          Manufacturing
-                        </SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="technology">Male</SelectItem>
+                        <SelectItem value="healthcare">Female</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="companySize">Company Size</Label>
+                    <Label htmlFor="marital_status">Marital Status</Label>
                     <Select
-                      value={formData.companySize}
+                      // value={formData.companySize}
                       onValueChange={(value) =>
-                        handleInputChange("companySize", value)
+                        handleInputChange("marital_status", value)
                       }
                     >
                       <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                        <SelectValue placeholder="Select company size" />
+                        <SelectValue placeholder="Select marital status" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                        <SelectItem value="1-10">1-10 employees</SelectItem>
-                        <SelectItem value="11-50">11-50 employees</SelectItem>
-                        <SelectItem value="51-200">51-200 employees</SelectItem>
-                        <SelectItem value="201-1000">
-                          201-1000 employees
-                        </SelectItem>
-                        <SelectItem value="1000+">1000+ employees</SelectItem>
+                        <SelectItem value="single">Single</SelectItem>
+                        <SelectItem value="married">Married</SelectItem>
+                        <SelectItem value="divorced">Divorced</SelectItem>
+                        <SelectItem value="2widowed">Widowed</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
