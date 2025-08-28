@@ -12,6 +12,13 @@ import { Controller } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { useForm } from "react-hook-form";
+import { ChevronDownIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   ArrowRight,
   CheckCircle,
@@ -62,6 +69,8 @@ const FeatureCard = React.memo(function FeatureCard({
 });
 
 const RegisterForm = () => {
+  const [open, setOpen] = React.useState(false);
+  const [date, setDate] = (React.useState < Date) | (undefined > undefined);
   const [currentStep, setCurrentStep] = useState(1);
   const [showSavePrompt, setShowSavePrompt] = useState(false);
   const [submissionId, setSubmissionId] = useState(null);
@@ -207,7 +216,7 @@ const RegisterForm = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Gender</Label>
+                    <Label htmlFor="role">Role</Label>
                     <Controller
                       name="role"
                       control={control}
@@ -229,17 +238,36 @@ const RegisterForm = () => {
                       )}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      value={formData.phone}
-                      onChange={(e) =>
-                        handleInputChange("phone", e.target.value)
-                      }
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      placeholder="+1 (555) 123-4567"
-                    />
+                  <div className="flex flex-col gap-3">
+                    <Label htmlFor="date" className="px-1">
+                      Date of birth
+                    </Label>
+                    <Popover open={open} onOpenChange={setOpen}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          id="date"
+                          className="w-48 justify-between font-normal"
+                        >
+                          {date ? date.toLocaleDateString() : "Select date"}
+                          <ChevronDownIcon />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className="w-auto overflow-hidden p-0"
+                        align="start"
+                      >
+                        <Calendar
+                          mode="single"
+                          selected={date}
+                          captionLayout="dropdown"
+                          onSelect={(date) => {
+                            setDate(date);
+                            setOpen(false);
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
