@@ -73,6 +73,7 @@ const RegisterForm = () => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
   const [currentStep, setCurrentStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [showSavePrompt, setShowSavePrompt] = useState(false);
   const [submissionId, setSubmissionId] = useState(null);
   const {
@@ -565,7 +566,7 @@ const RegisterForm = () => {
                   variant="ghost"
                   onClick={prevStep}
                   disabled={currentStep === 1}
-                  className="text-white hover:bg-white/10"
+                  className="text-black hover:bg-white/70 cursor-pointer"
                 >
                   Previous
                 </Button>
@@ -574,11 +575,43 @@ const RegisterForm = () => {
               )}
               {currentStep === 3 ? (
                 <Button
-                  type="button"
+                  type="submit"
                   onClick={nextStep}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                  disabled={loading}
+                  className={` py-3 rounded-lg text-white font-semibold transition-all duration-300 cursor-pointer
+                          ${
+                            loading
+                              ? "bg-blue-400 cursor-not-allowed"
+                              : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                          }`}
                 >
-                  Submit Application
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Registering...
+                    </div>
+                  ) : (
+                    "Register"
+                  )}
                   <Sparkles className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
