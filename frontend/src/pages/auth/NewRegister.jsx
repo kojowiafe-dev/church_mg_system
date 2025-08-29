@@ -177,7 +177,7 @@ const RegisterForm = () => {
         </div> */}
       </motion.div>
 
-      <div
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -187,7 +187,11 @@ const RegisterForm = () => {
           <div className="flex-1">
             {/* Step 1: Company Information */}
             {currentStep === 1 && (
-              <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="space-y-4"
+              >
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
@@ -238,39 +242,6 @@ const RegisterForm = () => {
                       )}
                     />
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <Label htmlFor="date" className="px-1">
-                      Date of birth
-                    </Label>
-                    <Popover open={open} onOpenChange={setOpen}>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          id="date"
-                          className="w-48 justify-between font-normal"
-                        >
-                          {date ? date.toLocaleDateString() : "Select date"}
-                          <ChevronDownIcon />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent
-                        className="w-auto overflow-hidden p-0"
-                        align="start"
-                      >
-                        <Calendar
-                          mode="single"
-                          selected={date}
-                          captionLayout="dropdown"
-                          onSelect={(date) => {
-                            setDate(date);
-                            setOpen(false);
-                          }}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="gender">Gender</Label>
                     <Select
@@ -288,6 +259,40 @@ const RegisterForm = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-3">
+                      <Label htmlFor="date" className="px-1">
+                        Date of birth
+                      </Label>
+                      <Popover open={open} onOpenChange={setOpen}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            id="date"
+                            className="w-48 justify-between font-normal"
+                          >
+                            {date ? date.toLocaleDateString() : "Select date"}
+                            <ChevronDownIcon />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          className="w-auto overflow-hidden p-0"
+                          align="start"
+                        >
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            captionLayout="dropdown"
+                            onSelect={(date) => {
+                              setDate(date);
+                              setOpen(false);
+                            }}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="marital_status">Marital Status</Label>
                     <Select
@@ -308,7 +313,7 @@ const RegisterForm = () => {
                     </Select>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )}
             {/* Step 2: Features Selection */}
             {currentStep === 2 && (
@@ -319,52 +324,41 @@ const RegisterForm = () => {
               >
                 <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="username">Username</Label>
                     <Input
-                      id="firstName"
-                      value={formData.firstName}
+                      id="username"
+                      value={formData.username}
                       onChange={(e) =>
-                        handleInputChange("firstName", e.target.value)
+                        handleInputChange("username", e.target.value)
                       }
                       className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      placeholder="Enter your first name"
+                      placeholder="Enter your username"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
-                      id="lastName"
-                      value={formData.lastName}
+                      id="email"
+                      value={formData.email}
                       onChange={(e) =>
-                        handleInputChange("lastName", e.target.value)
+                        handleInputChange("email", e.target.value)
                       }
                       className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      placeholder="Your last name"
+                      placeholder="Your email"
                     />
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Gender</Label>
-                    <Controller
-                      name="role"
-                      control={control}
-                      // rules={formValidation.role}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger className="w-full h-10">
-                            <SelectValue placeholder="Select a role" />
-                          </SelectTrigger>
-                          <SelectContent className="max-h-[300px] overflow-y-auto">
-                            <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="pastor">Pastor</SelectItem>
-                            <SelectItem value="member">Member</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
+                    <Label htmlFor="house_address">House Address</Label>
+                    <Input
+                      id="house_address"
+                      value={formData.house_address}
+                      onChange={(e) =>
+                        handleInputChange("house_address", e.target.value)
+                      }
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Your house address"
                     />
                   </div>
                   <div className="space-y-2">
@@ -380,52 +374,40 @@ const RegisterForm = () => {
                     />
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select
-                      value={formData.industry}
-                      onValueChange={(value) =>
-                        handleInputChange("industry", value)
+                    <Label htmlFor="emergency_contact_name">
+                      Emergency Contact Name
+                    </Label>
+                    <Input
+                      id="emergency_contact_name"
+                      value={formData.emergency_contact_name}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "emergency_contact_name",
+                          e.target.value
+                        )
                       }
-                    >
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="finance">Finance</SelectItem>
-                        <SelectItem value="retail">Retail</SelectItem>
-                        <SelectItem value="manufacturing">
-                          Manufacturing
-                        </SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="Your emergency contact name"
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="companySize">Company Size</Label>
-                    <Select
-                      value={formData.companySize}
-                      onValueChange={(value) =>
-                        handleInputChange("companySize", value)
+                    <Label htmlFor="emergency_contact_phone">
+                      Emergency Contact Number
+                    </Label>
+                    <Input
+                      id="emergency_contact_phone"
+                      value={formData.emergency_contact_phone}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "emergency_contact_phone",
+                          e.target.value
+                        )
                       }
-                    >
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                        <SelectValue placeholder="Select company size" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                        <SelectItem value="1-10">1-10 employees</SelectItem>
-                        <SelectItem value="11-50">11-50 employees</SelectItem>
-                        <SelectItem value="51-200">51-200 employees</SelectItem>
-                        <SelectItem value="201-1000">
-                          201-1000 employees
-                        </SelectItem>
-                        <SelectItem value="1000+">1000+ employees</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                      placeholder="+1 (555) 123-4567"
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -439,7 +421,7 @@ const RegisterForm = () => {
               >
                 <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="firstName">Occupation</Label>
                     <Input
                       id="firstName"
                       value={formData.firstName}
@@ -626,7 +608,7 @@ const RegisterForm = () => {
 
         {/* </CardContent>
       </Card> */}
-      </div>
+      </motion.div>
     </div>
   );
 };
