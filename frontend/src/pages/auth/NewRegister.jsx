@@ -405,56 +405,64 @@ const RegisterForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 className="space-y-4"
               >
-                <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">Occupation</Label>
-                    <Input
-                      id="firstName"
-                      value={formData.firstName}
-                      onChange={(e) =>
-                        handleInputChange("firstName", e.target.value)
-                      }
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      placeholder="Enter your first name"
-                    />
+                <div className="bg-yellow-200 items-center grid md:grid-cols-1 gap-4">
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                    <h2 className="text-lg font-semibold">
+                      Additional Information
+                    </h2>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-3">
-                      <Label htmlFor="date" className="px-1">
-                        Date of birth
-                      </Label>
-                      <Popover open={open} onOpenChange={setOpen}>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            id="date"
-                            className="w-48 justify-between font-normal"
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">Occupation</Label>
+                      <Input
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={(e) =>
+                          handleInputChange("firstName", e.target.value)
+                        }
+                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        placeholder="Enter your first name"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="flex flex-col gap-3">
+                        <Label htmlFor="date" className="whitespace no-wrap">
+                          Baptism Date
+                        </Label>
+                        <Popover open={open} onOpenChange={setOpen}>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="outline"
+                              id="date"
+                              className="w-48 justify-between font-normal"
+                            >
+                              {date ? date.toLocaleDateString() : "Select date"}
+                              <ChevronDownIcon />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent
+                            className="w-auto overflow-hidden p-0"
+                            align="start"
                           >
-                            {date ? date.toLocaleDateString() : "Select date"}
-                            <ChevronDownIcon />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent
-                          className="w-auto overflow-hidden p-0"
-                          align="start"
-                        >
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            captionLayout="dropdown"
-                            onSelect={(date) => {
-                              setDate(date);
-                              setOpen(false);
-                            }}
-                          />
-                        </PopoverContent>
-                      </Popover>
+                            <Calendar
+                              mode="single"
+                              selected={date}
+                              captionLayout="dropdown"
+                              onSelect={(date) => {
+                                setDate(date);
+                                setOpen(false);
+                              }}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="items-center grid md:grid-cols-1 gap-4">
-                  <div className="block w-full bg-red-300">
-                    <h2>Account Security</h2>
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                    <h2 className="text-lg font-semibold">Account Security</h2>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="relative space-y-2">
