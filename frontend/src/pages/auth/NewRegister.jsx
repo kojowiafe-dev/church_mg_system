@@ -179,7 +179,7 @@ const RegisterForm = () => {
                 className="space-y-4"
               >
                 <div className="items-center grid md:grid-cols-1 gap-4">
-                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">
                       Personal Information
                     </h2>
@@ -317,13 +317,13 @@ const RegisterForm = () => {
                 className="space-y-4"
               >
                 <div className="items-center grid md:grid-cols-1 gap-4">
-                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">
                       Contact Information
                     </h2>
                   </div>
 
-                  <div className="bg-yellow-200 grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="username">Username</Label>
                       <Input
@@ -421,8 +421,8 @@ const RegisterForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 className="space-y-4"
               >
-                <div className="bg-yellow-200 items-center grid md:grid-cols-1 gap-4">
-                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                <div className="items-center grid md:grid-cols-1 gap-4">
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">
                       Additional Information
                     </h2>
@@ -477,7 +477,7 @@ const RegisterForm = () => {
                   </div>
                 </div>
                 <div className="items-center grid md:grid-cols-1 gap-4">
-                  <div className="flex justify-center items-center py-2 rounded-lg w-full bg-red-300">
+                  <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">Account Security</h2>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -606,7 +606,7 @@ const NewRegister = () => {
   return (
     <div className="h-screen overflow-hidden">
       <div className="h-full grid grid-cols-2 px-16 py-6 pt-24">
-        <div className="flex items-center justify-center bg-red-400 dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
+        <div className="flex items-center justify-center dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
           {/* <div className="w-full h-full overflow-y-auto"> */}
           <RegisterForm />
           {/* </div> */}
