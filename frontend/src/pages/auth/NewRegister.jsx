@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { useForm } from "react-hook-form";
 import { ChevronDownIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Popover,
   PopoverContent,
@@ -93,22 +94,7 @@ const RegisterForm = () => {
     agreeToTerms: false,
   });
 
-  // const features = [
-  //   { id: "ai-agents", label: "AI Automation Agents", icon: Sparkles },
-  //   { id: "web-systems", label: "Web Systems", icon: Zap },
-  //   { id: "data-analytics", label: "Data Analytics", icon: Users },
-  //   { id: "security", label: "Security Solutions", icon: Shield },
-  //   { id: "team-collaboration", label: "Team Collaboration", icon: Users },
-  // ];
-
-  // const handleFeatureToggle = useCallback((featureId) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     features: prev.features.includes(featureId)
-  //       ? prev.features.filter((id) => id !== featureId)
-  //       : [...prev.features, featureId],
-  //   }));
-  // }, []);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -432,42 +418,55 @@ const RegisterForm = () => {
                       placeholder="Enter your first name"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        handleInputChange("lastName", e.target.value)
-                      }
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      placeholder="Your last name"
-                    />
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="flex flex-col gap-3">
+                      <Label htmlFor="date" className="px-1">
+                        Date of birth
+                      </Label>
+                      <Popover open={open} onOpenChange={setOpen}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            id="date"
+                            className="w-48 justify-between font-normal"
+                          >
+                            {date ? date.toLocaleDateString() : "Select date"}
+                            <ChevronDownIcon />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          className="w-auto overflow-hidden p-0"
+                          align="start"
+                        >
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            captionLayout="dropdown"
+                            onSelect={(date) => {
+                              setDate(date);
+                              setOpen(false);
+                            }}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Gender</Label>
-                    <Controller
-                      name="role"
-                      control={control}
-                      // rules={formValidation.role}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select a role" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="pastor">Pastor</SelectItem>
-                            <SelectItem value="member">Member</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
+                  <div className="relative space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
+                      placeholder={`Enter your password`}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
