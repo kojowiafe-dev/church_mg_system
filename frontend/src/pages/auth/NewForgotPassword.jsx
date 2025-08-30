@@ -60,7 +60,7 @@ const ForgotPasswordForm = () => {
       console.log("Forgot password response:", response.data);
 
       if (response.data.message) {
-        toast.success(response.data.message, {
+        notifySuccess(response.data.message, {
           style: { background: "#000", color: "#fff" },
         });
         setEmail(data.email);
@@ -94,7 +94,7 @@ const ForgotPasswordForm = () => {
           "Cannot connect to server. Please check your connection.";
       }
 
-      toast.error(errorMessage, {
+      notifyError(errorMessage, {
         style: { background: "#000", color: "#fff" },
       });
     } finally {
@@ -110,13 +110,13 @@ const ForgotPasswordForm = () => {
         code: data.code,
       });
       setStep(3);
-      toast.success("Code verified successfully!", {
+      notifySuccess("Code verified successfully!", {
         style: { background: "#000", color: "#fff" },
       });
     } catch (error) {
       const errorMessage =
         error.response?.data?.detail || "Invalid verification code";
-      toast.error(errorMessage, {
+      notifyError(errorMessage, {
         style: { background: "#000", color: "#fff" },
       });
     } finally {
@@ -133,7 +133,7 @@ const ForgotPasswordForm = () => {
       });
 
       setShowSuccess(true);
-      toast.success(
+      notifySuccess(
         <div>
           <h4 className="font-bold mb-2">Password Reset Successful!</h4>
           <p>You can now login with your new password.</p>
@@ -147,7 +147,7 @@ const ForgotPasswordForm = () => {
     } catch (error) {
       const errorMessage =
         error.response?.data?.detail || "Failed to reset password";
-      toast.error(errorMessage, {
+      notifyError(errorMessage, {
         style: { background: "#000", color: "#fff" },
       });
     } finally {
@@ -163,7 +163,7 @@ const ForgotPasswordForm = () => {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
         {/* Background Image */}
-        <BackgroundImage
+        {/* <BackgroundImage
           src={bgImage}
           className="absolute inset-0"
           fallbackColor="#222"
