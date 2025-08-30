@@ -192,7 +192,7 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("first_name", { required: true })}
                         type="text"
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                       {errors.first_name && (
@@ -209,7 +209,7 @@ const RegisterForm = () => {
                           required: "Last name is required",
                         })}
                         type="text"
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Your last name"
                       />
                       {errors.last_name && (
@@ -222,58 +222,63 @@ const RegisterForm = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="role">Role</Label>
+
                       <Controller
                         name="role"
-                        control={control}
-                        // rules={formValidation.role}
-                        render={({ field }) => (
-                          <Select
-                            {...register("role", {
-                              required: "Role is required",
-                            })}
-                            onValueChange={field.onChange}
-                            // value={field.value}
-                          >
-                            <SelectTrigger className="w-full bg-white/10 border-white/20 text-white">
-                              <SelectValue placeholder="Select a role" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                              {/* <SelectItem value="admin">Admin</SelectItem> */}
-                              <SelectItem value="pastor">Pastor</SelectItem>
-                              <SelectItem value="member">Member</SelectItem>
-                            </SelectContent>
-                          </Select>
+                        control={control} // from useForm()
+                        rules={{ required: "Role is required" }}
+                        render={({ field, fieldState }) => (
+                          <div className="space-y-1">
+                            <Select
+                              value={field.value || ""} // bind form value
+                              onValueChange={field.onChange} // update form state
+                            >
+                              <SelectTrigger className="bg-white/10 border-white/20 text-foreground">
+                                <SelectValue placeholder="Select role" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                                <SelectItem value="member">Member</SelectItem>
+                                <SelectItem value="guest">Pastor</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            {fieldState.error && (
+                              <p className="text-red-500 text-sm">
+                                {fieldState.error.message}
+                              </p>
+                            )}
+                          </div>
                         )}
                       />
-                      {errors.role && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.role.message}
-                        </p>
-                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="gender">Gender</Label>
-                      <Select
-                        {...register("gender", {
-                          required: "Gender is required",
-                        })}
-                        onValueChange={(value) =>
-                          handleInputChange("gender", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select your gender" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.gender && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.gender.message}
-                        </p>
-                      )}
+
+                      <Controller
+                        name="gender"
+                        control={control} // from useForm()
+                        rules={{ required: "Gender is required" }}
+                        render={({ field, fieldState }) => (
+                          <div className="space-y-1">
+                            <Select
+                              value={field.value || ""} // bind form value
+                              onValueChange={field.onChange} // update form state
+                            >
+                              <SelectTrigger className="bg-white/10 border-white/20 text-foreground">
+                                <SelectValue placeholder="Select gender" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                                <SelectItem value="male">Male</SelectItem>
+                                <SelectItem value="female">Female</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            {fieldState.error && (
+                              <p className="text-red-500 text-sm">
+                                {fieldState.error.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-3">
@@ -285,7 +290,7 @@ const RegisterForm = () => {
                           name="date_of_birth"
                           control={control} // comes from useForm()
                           rules={{ required: "Date of birth is required" }}
-                          render={({ field, fieldState }) => (
+                          render={({ field }) => (
                             <Popover open={open} onOpenChange={setOpen}>
                               <PopoverTrigger asChild>
                                 <Button
@@ -317,11 +322,11 @@ const RegisterForm = () => {
                                   }}
                                 />
                               </PopoverContent>
-                              {fieldState.error && (
+                              {/* {fieldState.error && (
                                 <p className="text-red-500 text-sm mt-1">
                                   {fieldState.error.message}
                                 </p>
-                              )}
+                              )} */}
                             </Popover>
                           )}
                         />
@@ -330,22 +335,37 @@ const RegisterForm = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="marital_status">Marital Status</Label>
-                      <Select
-                        // value={formData.companySize}
-                        onValueChange={(value) =>
-                          handleInputChange("marital_status", value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select marital status" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="single">Single</SelectItem>
-                          <SelectItem value="married">Married</SelectItem>
-                          <SelectItem value="divorced">Divorced</SelectItem>
-                          <SelectItem value="2widowed">Widowed</SelectItem>
-                        </SelectContent>
-                      </Select>
+
+                      <Controller
+                        name="marital_status"
+                        control={control} // from useForm()
+                        rules={{ required: "Marital status is required" }}
+                        render={({ field, fieldState }) => (
+                          <div className="space-y-1">
+                            <Select
+                              value={field.value || ""} // bind form value
+                              onValueChange={field.onChange} // update form state
+                            >
+                              <SelectTrigger className="bg-white/10 border-white/20 text-foreground">
+                                <SelectValue placeholder="Select marital status" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                                <SelectItem value="single">Single</SelectItem>
+                                <SelectItem value="married">Married</SelectItem>
+                                <SelectItem value="divorced">
+                                  Divorced
+                                </SelectItem>
+                                <SelectItem value="widowed">Widowed</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            {fieldState.error && (
+                              <p className="text-red-500 text-sm">
+                                {fieldState.error.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
                     </div>
                   </div>
                 </div>
@@ -370,25 +390,39 @@ const RegisterForm = () => {
                       <Label htmlFor="username">Username</Label>
                       <Input
                         id="username"
-                        value={formData.username}
-                        onChange={(e) =>
-                          handleInputChange("username", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("username", {
+                          required: "Username is required",
+                        })}
+                        type="text"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your username"
                       />
+                      {errors.username && (
+                        <p className="text-red-500 text-sm">
+                          {errors.username.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          handleInputChange("email", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: "Invalid email address",
+                          },
+                        })}
+                        type="email"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Your email"
                       />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -396,27 +430,38 @@ const RegisterForm = () => {
                       <Label htmlFor="house_address">House Address</Label>
                       <Input
                         id="house_address"
-                        value={formData.house_address}
-                        onChange={(e) =>
-                          handleInputChange("house_address", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("house_address", {
+                          required: "House address is required",
+                        })}
+                        type="text"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Your house address"
                       />
+                      {errors.house_address && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.house_address.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input
                         id="phone"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          handleInputChange("phone", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("phone", {
+                          required: "Phone number is required",
+                        })}
+                        type="tel"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="+1 (555) 123-4567"
                       />
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.phone.message}
+                        </p>
+                      )}
                     </div>
                   </div>
+
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="emergency_contact_name">
@@ -424,14 +469,9 @@ const RegisterForm = () => {
                       </Label>
                       <Input
                         id="emergency_contact_name"
-                        value={formData.emergency_contact_name}
-                        onChange={(e) =>
-                          handleInputChange(
-                            "emergency_contact_name",
-                            e.target.value
-                          )
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("emergency_contact_name")}
+                        type="text"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Your emergency contact name"
                       />
                     </div>
@@ -441,15 +481,10 @@ const RegisterForm = () => {
                       </Label>
                       <Input
                         id="emergency_contact_phone"
-                        value={formData.emergency_contact_phone}
-                        onChange={(e) =>
-                          handleInputChange(
-                            "emergency_contact_phone",
-                            e.target.value
-                          )
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                        placeholder="+1 (555) 123-4567"
+                        {...register("emergency_contact_phone")}
+                        type="tel"
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        placeholder="Your emergency contact phone"
                       />
                     </div>
                   </div>
@@ -474,11 +509,12 @@ const RegisterForm = () => {
                       <Label htmlFor="firstName">Occupation</Label>
                       <Input
                         id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                        {...register("occupation")}
+                        type="text"
+                        // onChange={(e) =>
+                        //   handleInputChange("firstName", e.target.value)
+                        // }
+                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                     </div>
@@ -488,32 +524,46 @@ const RegisterForm = () => {
                         <Label htmlFor="date" className="whitespace no-wrap">
                           Baptism Date
                         </Label>
-                        <Popover open={open} onOpenChange={setOpen}>
-                          <PopoverTrigger asChild>
-                            <Button
-                              variant="outline"
-                              id="date"
-                              className="w-48 justify-between font-normal"
-                            >
-                              {date ? date.toLocaleDateString() : "Select date"}
-                              <ChevronDownIcon />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent
-                            className="w-auto overflow-hidden p-0"
-                            align="start"
-                          >
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              captionLayout="dropdown"
-                              onSelect={(date) => {
-                                setDate(date);
-                                setOpen(false);
-                              }}
-                            />
-                          </PopoverContent>
-                        </Popover>
+
+                        <Controller
+                          name="date_of_birth"
+                          control={control} // from useForm()
+                          rules={{ required: "Date of birth is required" }}
+                          render={({ field }) => (
+                            <Popover open={open} onOpenChange={setOpen}>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  id="date"
+                                  className="w-48 justify-between font-normal"
+                                >
+                                  {field.value
+                                    ? new Date(field.value).toLocaleDateString()
+                                    : "Select date"}
+                                  <ChevronDownIcon />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                className="w-auto overflow-hidden p-0"
+                                align="start"
+                              >
+                                <Calendar
+                                  mode="single"
+                                  selected={
+                                    field.value
+                                      ? new Date(field.value)
+                                      : undefined
+                                  }
+                                  captionLayout="dropdown"
+                                  onSelect={(date) => {
+                                    field.onChange(date); // updates form state
+                                    setOpen(false);
+                                  }}
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>
@@ -528,24 +578,47 @@ const RegisterForm = () => {
                       <div className="relative">
                         <Input
                           type={showPassword ? "text" : "password"}
+                          {...register("password", {
+                            required: "Password is required",
+                            minLength: {
+                              value: 8,
+                              message: "Password must be at least 8 characters",
+                            },
+                            pattern: {
+                              value:
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                              message:
+                                "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+                            },
+                          })}
                           className="relative w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Enter your password`}
                         />
 
                         <button
                           type="button"
-                          onClick={() => setShowPassword((prev) => !prev)}
+                          onClick={() => setShowPassword(!showPassword)}
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                         >
                           {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                       </div>
+                      {errors.password && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.password.message}
+                        </p>
+                      )}
                     </div>
                     <div className="relative space-y-2">
                       <Label htmlFor="confirmPassword">Confirm Password</Label>
                       <div className="relative">
                         <Input
                           type={showPassword ? "text" : "password"}
+                          {...register("confirmPassword", {
+                            required: "Please confirm your password",
+                            validate: (value) =>
+                              value === password || "Passwords do not match",
+                          })}
                           className="relative w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Confirm your password`}
                         />
@@ -558,6 +631,11 @@ const RegisterForm = () => {
                           {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                       </div>
+                      {errors.confirmPassword && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.confirmPassword.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
