@@ -575,10 +575,10 @@ const RegisterForm = () => {
                   <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">Account Security</h2>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="relative space-y-2">
                       <Label htmlFor="password">Password</Label>
-                      <div className="relative">
+                      <div className="relative w-[290px] md:w-full">
                         <Input
                           type={showPassword ? "text" : "password"}
                           {...register("password", {
@@ -606,15 +606,15 @@ const RegisterForm = () => {
                           {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                       </div>
-                      {errors.password && (
+                      {/* {errors.password && (
                         <p className="text-red-500 text-sm mt-1">
                           {errors.password.message}
                         </p>
-                      )}
+                      )} */}
                     </div>
                     <div className="relative space-y-2">
                       <Label htmlFor="confirmPassword">Confirm Password</Label>
-                      <div className="relative">
+                      <div className="relative w-[290px] md:w-full">
                         <Input
                           type={showPassword ? "text" : "password"}
                           {...register("confirmPassword", {
@@ -634,11 +634,11 @@ const RegisterForm = () => {
                           {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                       </div>
-                      {errors.confirmPassword && (
+                      {/* {errors.confirmPassword && (
                         <p className="text-red-500 text-sm mt-1">
                           {errors.confirmPassword.message}
                         </p>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>
