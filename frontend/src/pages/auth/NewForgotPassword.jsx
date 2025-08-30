@@ -48,6 +48,256 @@ const LoginForm = ({ onSubmit, loading }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
+      <div className="relative z-20 w-full max-w-md bg-white/80 backdrop-blur-sm shadow-lg rounded-lg p-8">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+          {step === 1
+            ? "Forgot Password"
+            : step === 2
+            ? "Enter Verification Code"
+            : "Reset Password"}
+        </h2>
+
+        {step === 1 && (
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
+                type="email"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                placeholder="Enter your email"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300
+                        ${
+                          loading
+                            ? "bg-blue-400 cursor-not-allowed"
+                            : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                        }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Sending Code...
+                </div>
+              ) : (
+                "Send Verification Code"
+              )}
+            </button>
+          </form>
+        )}
+
+        {step === 2 && (
+          <form
+            onSubmit={handleSubmit(onSubmitVerification)}
+            className="space-y-6"
+          >
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Verification Code
+              </label>
+              <input
+                {...register("code", {
+                  required: "Verification code is required",
+                  pattern: {
+                    value: /^[0-9]{6}$/,
+                    message: "Please enter the 6-digit code",
+                  },
+                })}
+                type="text"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                placeholder="Enter 6-digit code"
+              />
+              {errors.code && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.code.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300
+                        ${
+                          loading
+                            ? "bg-blue-400 cursor-not-allowed"
+                            : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                        }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Verifying...
+                </div>
+              ) : (
+                "Verify Code"
+              )}
+            </button>
+          </form>
+        )}
+
+        {step === 3 && (
+          <form
+            onSubmit={handleSubmit(onSubmitNewPassword)}
+            className="space-y-6"
+          >
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                New Password
+              </label>
+              <input
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message:
+                      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+                  },
+                })}
+                type="password"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                placeholder="Enter new password"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Confirm New Password
+              </label>
+              <input
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
+                type="password"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                placeholder="Confirm new password"
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300
+                        ${
+                          loading
+                            ? "bg-blue-400 cursor-not-allowed"
+                            : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                        }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Resetting Password...
+                </div>
+              ) : (
+                "Reset Password"
+              )}
+            </button>
+          </form>
+        )}
+
+        <p className="text-center text-sm text-gray-600 mt-6">
+          Remember your password?{" "}
+          <Link
+            to="/login"
+            className="text-blue-600 hover:text-blue-800 font-medium"
+          >
+            Sign in here
+          </Link>
+        </p>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         {["username", "password", "role"].map((field, index) => (
           <div className="space-y-2" key={index}>
@@ -173,7 +423,7 @@ const LoginForm = ({ onSubmit, loading }) => {
   );
 };
 
-const NewLogin = () => {
+const NewForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -264,4 +514,4 @@ const NewLogin = () => {
   );
 };
 
-export default NewLogin;
+export default NewForgotPassword;
