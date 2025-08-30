@@ -388,7 +388,7 @@ const RegisterForm = () => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="username">Username</Label>
                       <Input
                         id="username"
@@ -405,7 +405,7 @@ const RegisterForm = () => {
                         </p>
                       )}
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
@@ -428,7 +428,7 @@ const RegisterForm = () => {
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="house_address">House Address</Label>
                       <Input
                         id="house_address"
@@ -445,7 +445,7 @@ const RegisterForm = () => {
                         </p>
                       )}
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input
                         id="phone"
@@ -465,7 +465,7 @@ const RegisterForm = () => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="emergency_contact_name">
                         Emergency Contact Name
                       </Label>
@@ -477,7 +477,7 @@ const RegisterForm = () => {
                         placeholder="Your emergency contact name"
                       />
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="emergency_contact_phone">
                         Emergency Contact Number
                       </Label>
@@ -507,7 +507,7 @@ const RegisterForm = () => {
                     </h2>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full">
                       <Label htmlFor="firstName">Occupation</Label>
                       <Input
                         id="firstName"
@@ -521,55 +521,56 @@ const RegisterForm = () => {
                       />
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="flex flex-col gap-3">
-                        <Label htmlFor="date" className="whitespace no-wrap">
-                          Baptism Date
-                        </Label>
+                    {/* <div className="grid md:grid-cols-2 gap-6"> */}
+                    <div className="space-y-2">
+                      <Label htmlFor="date" className="whitespace no-wrap">
+                        Baptism Date
+                      </Label>
 
-                        <Controller
-                          name="date_of_birth"
-                          control={control} // from useForm()
-                          rules={{ required: "Date of birth is required" }}
-                          render={({ field }) => (
-                            <Popover open={open} onOpenChange={setOpen}>
-                              <PopoverTrigger asChild>
-                                <Button
-                                  variant="outline"
-                                  id="date"
-                                  className="w-48 justify-between font-normal"
-                                >
-                                  {field.value
-                                    ? new Date(field.value).toLocaleDateString()
-                                    : "Select date"}
-                                  <ChevronDownIcon />
-                                </Button>
-                              </PopoverTrigger>
-                              <PopoverContent
-                                className="w-auto overflow-hidden p-0"
-                                align="start"
+                      <Controller
+                        name="date_of_birth"
+                        control={control} // from useForm()
+                        rules={{ required: "Date of birth is required" }}
+                        render={({ field }) => (
+                          <Popover open={open} onOpenChange={setOpen}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                id="date"
+                                className="w-48 justify-between font-normal"
                               >
-                                <Calendar
-                                  mode="single"
-                                  selected={
-                                    field.value
-                                      ? new Date(field.value)
-                                      : undefined
-                                  }
-                                  captionLayout="dropdown"
-                                  onSelect={(date) => {
-                                    field.onChange(date); // updates form state
-                                    setOpen(false);
-                                  }}
-                                />
-                              </PopoverContent>
-                            </Popover>
-                          )}
-                        />
-                      </div>
+                                {field.value
+                                  ? new Date(field.value).toLocaleDateString()
+                                  : "Select date"}
+                                <ChevronDownIcon />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-auto overflow-hidden p-0"
+                              align="start"
+                            >
+                              <Calendar
+                                mode="single"
+                                selected={
+                                  field.value
+                                    ? new Date(field.value)
+                                    : undefined
+                                }
+                                captionLayout="dropdown"
+                                onSelect={(date) => {
+                                  field.onChange(date); // updates form state
+                                  setOpen(false);
+                                }}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        )}
+                      />
                     </div>
+                    {/* </div> */}
                   </div>
                 </div>
+
                 <div className="items-center grid md:grid-cols-1 gap-4">
                   <div className="flex justify-center items-center py-2 rounded-lg w-full">
                     <h2 className="text-lg font-semibold">Account Security</h2>
