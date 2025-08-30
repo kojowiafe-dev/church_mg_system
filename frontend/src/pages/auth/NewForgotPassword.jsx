@@ -19,28 +19,200 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const formValidation = {
-  username: {
-    required: "Username is required",
-    minLength: { value: 3, message: "Username must be at least 3 characters" },
-  },
-  password: {
-    required: "Password is required",
-    minLength: { value: 8, message: "Password must be at least 8 characters" },
-  },
-  role: { required: "Role is required" },
-};
-
-const LoginForm = ({ onSubmit, loading }) => {
-  const [showPassword, setShowPassword] = useState(false);
+const ForgotPasswordForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1); // 1: Email, 2: Verification Code, 3: New Password
+  //   const [email, setEmail] = useState("");
+  const [countdown, setCountdown] = useState(3);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    control,
+    watch,
     formState: { errors },
   } = useForm();
+  const password = watch("password");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  useEffect(() => {
+    let timer;
+    if (showSuccess && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (showSuccess && countdown === 0) {
+      navigate("/login");
+    }
+    return () => clearTimeout(timer);
+  }, [showSuccess, countdown, navigate]);
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      console.log("Sending forgot password request with data:", {
+        email: data.email,
+      });
+
+      const response = await api.post("/auth/forgot-password", {
+        email: data.email,
+      });
+
+      console.log("Forgot password response:", response.data);
+
+      if (response.data.message) {
+        toast.success(response.data.message, {
+          style: { background: "#000", color: "#fff" },
+        });
+        setEmail(data.email);
+        setStep(2);
+      } else {
+        throw new Error("No success message received");
+      }
+    } catch (error) {
+      console.error("Forgot password error details:", {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        headers: error.response?.headers,
+      });
+
+      let errorMessage = "Something went wrong";
+
+      if (error.response) {
+        if (error.response.status === 404) {
+          errorMessage = "Email not found";
+        } else if (error.response.status === 400) {
+          errorMessage = error.response.data.detail || "Invalid request";
+        } else {
+          errorMessage =
+            error.response.data.detail || "Failed to process request";
+        }
+      } else if (error.message === "No success message received") {
+        errorMessage = "Invalid response from server";
+      } else if (error.message === "Network Error") {
+        errorMessage =
+          "Cannot connect to server. Please check your connection.";
+      }
+
+      toast.error(errorMessage, {
+        style: { background: "#000", color: "#fff" },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onSubmitVerification = async (data) => {
+    setLoading(true);
+    try {
+      await api.post("/auth/verify-code", {
+        email,
+        code: data.code,
+      });
+      setStep(3);
+      toast.success("Code verified successfully!", {
+        style: { background: "#000", color: "#fff" },
+      });
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.detail || "Invalid verification code";
+      toast.error(errorMessage, {
+        style: { background: "#000", color: "#fff" },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onSubmitNewPassword = async (data) => {
+    setLoading(true);
+    try {
+      await api.post("/auth/reset-password", {
+        email,
+        password: data.password,
+      });
+
+      setShowSuccess(true);
+      toast.success(
+        <div>
+          <h4 className="font-bold mb-2">Password Reset Successful!</h4>
+          <p>You can now login with your new password.</p>
+        </div>,
+        {
+          style: { background: "#000", color: "#fff" },
+          autoClose: false,
+          closeOnClick: false,
+        }
+      );
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.detail || "Failed to reset password";
+      toast.error(errorMessage, {
+        style: { background: "#000", color: "#fff" },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleManualLogin = () => {
+    navigate("/login");
+  };
+
+  if (showSuccess) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        {/* Background Image */}
+        <BackgroundImage
+          src={bgImage}
+          className="absolute inset-0"
+          fallbackColor="#222"
+          style={{ opacity: 0.5 }}
+        />
+        <div className="absolute inset-0 bg-black opacity-40" />
+
+        {/* Success Message */}
+        <div className="relative z-20 w-full max-w-md bg-white/80 backdrop-blur-sm shadow-lg rounded-lg p-8 text-center">
+          <div className="mb-6">
+            <svg
+              className="w-16 h-16 text-green-500 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+          </div>
+
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">
+            Password Reset Successful!
+          </h2>
+          <p className="text-gray-600 mb-6">
+            You can now login with your new password.
+          </p>
+
+          <div className="space-y-4">
+            <p className="text-sm text-gray-500">
+              Redirecting to login page in {countdown} seconds...
+            </p>
+
+            <button
+              onClick={handleManualLogin}
+              className="w-full py-3 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Go to Login Now
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -424,67 +596,6 @@ const LoginForm = ({ onSubmit, loading }) => {
 };
 
 const NewForgotPassword = () => {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { login } = useAuth();
-
-  useEffect(() => {
-    const popup = localStorage.getItem("registerToken");
-    if (popup) {
-      notifySuccess("You've registered!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      localStorage.removeItem("registerToken");
-    }
-  }, []);
-
-  const handleLogin = async (data) => {
-    setLoading(true);
-    try {
-      const payload = {
-        username: data.username,
-        password: data.password,
-        role: data.role,
-      };
-
-      const response = await api.post("/auth/login", payload, {
-        headers: {
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-          Accept: "application/json",
-        },
-      });
-
-      if (!response.data.access_token)
-        throw new Error("No access token received");
-
-      const { access_token, role } = response.data;
-      const storage = data.remember_me ? localStorage : sessionStorage;
-
-      storage.setItem("accessToken", access_token);
-      storage.setItem("role", role);
-      storage.setItem("username", data.username);
-
-      login(access_token, role, data.username);
-      localStorage.setItem("loginToken", "Welcome");
-      navigate("/profile");
-    } catch (error) {
-      const message =
-        error.response?.data?.detail ||
-        (error.response?.status === 401 && "Invalid username or password") ||
-        (error.message === "No access token received" &&
-          "Invalid response from server") ||
-        (error.message === "Network Error" &&
-          "Cannot connect to server. Please check your connection.") ||
-        "Something went wrong";
-
-      notifyError(message, {
-        style: { background: "#000", color: "#fff" },
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <div>
       <div className="h-screen md:grid grid-cols-2 px-16 py-6 pt-18 hidden">
@@ -504,11 +615,11 @@ const NewForgotPassword = () => {
           </div>
         </div>
         <div className="flex items-center justify-center bg-white dark:bg-slate-900 px-20 py-15 rounded-xl mt-6 shadow-md z-20">
-          <LoginForm onSubmit={handleLogin} loading={loading} />
+          <ForgotPasswordForm />
         </div>
       </div>
       <div className="h-screen md:hidden grid grid-cols-1 px-16 py-6 pt-18 items-center">
-        <LoginForm onSubmit={handleLogin} loading={loading} />
+        <ForgotPasswordForm />
       </div>
     </div>
   );
