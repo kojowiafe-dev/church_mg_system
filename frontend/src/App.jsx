@@ -7,6 +7,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import NewLogin from "./pages/auth/NewLogin";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import NewForgotPassword from "./pages/auth/NewForgotPassword";
 import Admin from "./pages/auth/Admin";
 import NewRegister from "./pages/auth/NewRegister";
 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/new-register" element={<NewRegister />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/new-forgot-password" element={<NewForgotPassword />} />
       </Route>
 
       <Route
