@@ -237,7 +237,7 @@ const NewLogin = () => {
   };
   return (
     <div>
-      <div className="h-screen grid grid-cols-2 px-16 py-6 pt-18">
+      <div className="h-screen md:grid grid-cols-2 px-16 py-6 pt-18 hidden">
         <div className="bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <video
@@ -254,9 +254,11 @@ const NewLogin = () => {
           </div>
         </div>
         <div className="flex items-center justify-center bg-white dark:bg-slate-900 px-20 py-15 rounded-xl mt-6 shadow-md z-20">
-          {/* <h2 className="text-lg font-semibold">Login</h2> */}
           <LoginForm onSubmit={handleLogin} loading={loading} />
         </div>
+      </div>
+      <div className="h-screen md:hidden grid grid-cols-1 px-16 py-6 pt-18 items-center">
+        <LoginForm onSubmit={handleLogin} loading={loading} />
       </div>
     </div>
   );
