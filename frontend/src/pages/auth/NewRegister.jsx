@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import video from "../../video/5949377-hd_1920_1080_24fps.mp4";
 import {
   Select,
@@ -76,6 +77,7 @@ const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const [showSavePrompt, setShowSavePrompt] = useState(false);
   const [submissionId, setSubmissionId] = useState(null);
+  const navigate = useNavigate();
   const {
     control,
     // formState: { errors },
@@ -139,7 +141,7 @@ const RegisterForm = () => {
               <div
                 className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold ${
                   step <= currentStep
-                    ? "bg-cyan-500 text-white"
+                    ? "bg-blue-600 text-white"
                     : "bg-gray-700 text-gray-400"
                 }`}
               >
@@ -152,7 +154,7 @@ const RegisterForm = () => {
               {step < 4 && (
                 <div
                   className={`w-16 h-1 mx-2 ${
-                    step < currentStep ? "bg-purple-600" : "bg-gray-700"
+                    step < currentStep ? "bg-blue-600" : "bg-gray-700"
                   }`}
                 ></div>
               )}
@@ -533,7 +535,7 @@ const RegisterForm = () => {
                   <CheckCircle className="text-green-400 w-16 h-16" />
                 </div> */}
                 <div className="w-full max-w-sm mx-auto text-center">
-                  <h2 className="text-2xl font-semibold text-white mb-2">
+                  <h2 className="text-lg font-semibold text-black mb-2">
                     Registration Successful!
                   </h2>
                   <p className="text-sm text-gray-300 mb-8">
@@ -545,9 +547,9 @@ const RegisterForm = () => {
                   </p>
                   <Button
                     type="button"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
                     onClick={() => {
-                      // Add navigation to login or dashboard
+                      navigate("/login");
                     }}
                   >
                     Continue to Login
@@ -618,7 +620,7 @@ const RegisterForm = () => {
                 <Button
                   type="button"
                   onClick={nextStep}
-                  className="bg-cyan-500 hover:bg-cyan-700 text-white cursor-pointer"
+                  className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                 >
                   Next Step
                   <ArrowRight className="w-4 h-4 ml-2" />
