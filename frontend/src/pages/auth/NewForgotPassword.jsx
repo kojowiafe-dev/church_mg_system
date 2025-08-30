@@ -22,7 +22,7 @@ import {
 const ForgotPasswordForm = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1); // 1: Email, 2: Verification Code, 3: New Password
-  //   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [countdown, setCountdown] = useState(3);
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +33,6 @@ const ForgotPasswordForm = () => {
     formState: { errors },
   } = useForm();
   const password = watch("password");
-  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     let timer;
