@@ -779,6 +779,8 @@ const NewRegister = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Screens */}
       <div className="md:hidden">
         <RegisterForm />
       </div>
