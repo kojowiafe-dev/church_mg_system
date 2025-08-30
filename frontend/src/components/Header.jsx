@@ -29,25 +29,19 @@ const Header = () => {
 
               {/* Desktop Nav */}
               <div className="hidden md:flex items-center space-x-6 font-medium text-sm">
-                <Link
-                  to="/features"
-                  className="hover:text-indigo-600 transition"
-                >
+                <Link to="/features" className="hover:text-blue-600 transition">
                   Features
                 </Link>
-                <Link to="/about" className="hover:text-indigo-600 transition">
+                <Link to="/about" className="hover:text-blue-600 transition">
                   About
                 </Link>
-                <Link
-                  to="/contact"
-                  className="hover:text-indigo-600 transition"
-                >
+                <Link to="/contact" className="hover:text-blue-600 transition">
                   Contact
                 </Link>
 
                 {/* Login Button for Desktop */}
                 <Link to="/login">
-                  <button className="ml-4 flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
+                  <button className="ml-4 flex items-center gap-2 bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
                     <FaSignInAlt /> Login
                   </button>
                 </Link>
@@ -97,7 +91,7 @@ const Header = () => {
                 </Link>
                 {/* Login Button for Mobile */}
                 <Link to="/login">
-                  <button className="w-full mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
+                  <button className="w-full mt-2 flex items-center justify-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:scale-105 hover:shadow-lg transition">
                     <FaSignInAlt /> Login
                   </button>
                 </Link>
