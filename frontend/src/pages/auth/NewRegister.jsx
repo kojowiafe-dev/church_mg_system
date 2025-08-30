@@ -123,17 +123,17 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="h-full flex flex-col p-6">
+    <div className="h-full flex flex-col md:p-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-6"
+        className="md:mb-6"
       >
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-center">
           {[1, 2, 3, 4].map((step) => (
-            <div key={step} className="flex items-center">
+            <div key={step} className="flex items-center justify-center">
               <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold ${
+                className={`w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-xs md:text-sm font-bold md:font-semibold ${
                   step <= currentStep
                     ? "bg-blue-600 text-white"
                     : "bg-gray-700 text-gray-400"
@@ -147,7 +147,7 @@ const RegisterForm = () => {
               </div>
               {step < 4 && (
                 <div
-                  className={`w-16 h-1 mx-2 ${
+                  className={`w-12 md:w-16 h-1 mx-2 ${
                     step < currentStep ? "bg-blue-600" : "bg-gray-700"
                   }`}
                 ></div>
@@ -164,11 +164,11 @@ const RegisterForm = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="w-[450px] h-[500px] flex items-center justify-center"
+        className="bg-red-400 w-[400px] md:w-[450px] h-[550px] md:h-[500px] flex items-center justify-center"
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="h-full flex flex-col"
+          className="h-full flex flex-col bg-blue-400"
         >
           <div className="flex-1">
             {/* Step 1: Personal Information */}
@@ -185,8 +185,8 @@ const RegisterForm = () => {
                     </h2>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                  <div className="grid md:grid-cols-2 gap-4 bg-red-400">
+                    <div className="space-y-2 w-[290px] md:w-full bg-amber-200">
                       <Label htmlFor="firstName">First Name</Label>
                       <Input
                         id="firstName"
@@ -201,7 +201,7 @@ const RegisterForm = () => {
                         </p>
                       )}
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-[290px] md:w-full bg-blue-200">
                       <Label htmlFor="lastName">Last Name</Label>
                       <Input
                         id="lastName"
@@ -219,8 +219,8 @@ const RegisterForm = () => {
                       )}
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-2 md:gap-4 bg-green-400">
+                    <div className="space-y-2 bg-red-400">
                       <Label htmlFor="role">Role</Label>
 
                       <Controller
@@ -250,7 +250,7 @@ const RegisterForm = () => {
                         )}
                       />
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 bg-yellow-400">
                       <Label htmlFor="gender">Gender</Label>
 
                       <Controller
@@ -280,58 +280,60 @@ const RegisterForm = () => {
                         )}
                       />
                     </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="flex flex-col gap-3">
-                        <Label htmlFor="date" className="px-1">
-                          Date of birth
-                        </Label>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 bg-amber-400">
+                    {/* <div className="grid md:grid-cols-2 gap-6 bg-red-400"> */}
+                    <div className="space-y-2 bg-blue-500">
+                      <Label htmlFor="date" className="px-1">
+                        Date of birth
+                      </Label>
 
-                        <Controller
-                          name="date_of_birth"
-                          control={control} // comes from useForm()
-                          rules={{ required: "Date of birth is required" }}
-                          render={({ field }) => (
-                            <Popover open={open} onOpenChange={setOpen}>
-                              <PopoverTrigger asChild>
-                                <Button
-                                  variant="outline"
-                                  id="date"
-                                  className="w-48 justify-between font-normal"
-                                >
-                                  {field.value
-                                    ? new Date(field.value).toLocaleDateString()
-                                    : "Select date"}
-                                  <ChevronDownIcon />
-                                </Button>
-                              </PopoverTrigger>
-                              <PopoverContent
-                                className="w-auto overflow-hidden p-0"
-                                align="start"
+                      <Controller
+                        name="date_of_birth"
+                        control={control} // comes from useForm()
+                        rules={{ required: "Date of birth is required" }}
+                        render={({ field }) => (
+                          <Popover open={open} onOpenChange={setOpen}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                id="date"
+                                className="w-48 justify-between font-normal"
                               >
-                                <Calendar
-                                  mode="single"
-                                  selected={
-                                    field.value
-                                      ? new Date(field.value)
-                                      : undefined
-                                  }
-                                  captionLayout="dropdown"
-                                  onSelect={(date) => {
-                                    field.onChange(date);
-                                    setOpen(false);
-                                  }}
-                                />
-                              </PopoverContent>
-                              {/* {fieldState.error && (
+                                {field.value
+                                  ? new Date(field.value).toLocaleDateString()
+                                  : "Select date"}
+                                <ChevronDownIcon />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-auto overflow-hidden p-0"
+                              align="start"
+                            >
+                              <Calendar
+                                mode="single"
+                                selected={
+                                  field.value
+                                    ? new Date(field.value)
+                                    : undefined
+                                }
+                                captionLayout="dropdown"
+                                onSelect={(date) => {
+                                  field.onChange(date);
+                                  setOpen(false);
+                                }}
+                              />
+                            </PopoverContent>
+                            {/* {fieldState.error && (
                                 <p className="text-red-500 text-sm mt-1">
                                   {fieldState.error.message}
                                 </p>
                               )} */}
-                            </Popover>
-                          )}
-                        />
-                      </div>
+                          </Popover>
+                        )}
+                      />
                     </div>
+                    {/* </div> */}
 
                     <div className="space-y-2">
                       <Label htmlFor="marital_status">Marital Status</Label>
@@ -781,7 +783,7 @@ const NewRegister = () => {
       </div>
 
       {/* Mobile Screens */}
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center justify-center h-full pt-24">
         <RegisterForm />
       </div>
       <ToastContainer
