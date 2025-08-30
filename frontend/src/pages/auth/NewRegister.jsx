@@ -29,46 +29,12 @@ import {
   Shield,
   Users,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
 import api from "../api";
-
-const FeatureCard = React.memo(function FeatureCard({
-  feature,
-  selected,
-  onToggle,
-}) {
-  const Icon = feature.icon;
-  return (
-    <div
-      key={feature.id}
-      onClick={() => onToggle(feature.id)}
-      className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-        selected
-          ? "border-purple-500 bg-purple-500/20"
-          : "border-white/20 bg-white/5 hover:border-white/40"
-      }`}
-    >
-      <div className="flex items-center space-x-3">
-        <Icon
-          className={`w-5 h-5 ${
-            selected ? "text-purple-400" : "text-gray-400"
-          }`}
-        />
-        <span className="font-medium">{feature.label}</span>
-      </div>
-    </div>
-  );
-});
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
@@ -79,25 +45,70 @@ const RegisterForm = () => {
   const [submissionId, setSubmissionId] = useState(null);
   const navigate = useNavigate();
   const {
+    register,
+    handleSubmit,
     control,
-    // formState: { errors },
+    watch,
+    formState: { errors },
   } = useForm();
-  const [formData, setFormData] = useState({
-    companyName: "",
-    fullName: "",
-    email: "",
-    phone: "",
-    industry: "",
-    companySize: "",
-    projectType: "",
-    budget: "",
-    timeline: "",
-    description: "",
-    features: [],
-    agreeToTerms: false,
-  });
 
+  const password = watch("password");
   const [showPassword, setShowPassword] = useState(false);
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      // Format dates properly
+      const formatDate = (dateString) => {
+        if (!dateString) return null;
+        const date = new Date(dateString);
+        return date.toISOString().split("T")[0];
+      };
+
+      // Create user and member profile in a single request
+      const registrationData = {
+        user: {
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          phone: data.phone,
+          house_address: data.house_address,
+          role: data.role,
+        },
+        member: {
+          first_name: data.first_name,
+          last_name: data.last_name,
+          date_of_birth: formatDate(data.date_of_birth),
+          gender: data.gender,
+          marital_status: data.marital_status,
+          occupation: data.occupation || null,
+          emergency_contact: data.emergency_contact || null,
+          emergency_contact_phone: data.emergency_contact_phone || null,
+          baptism_date: formatDate(data.baptism_date),
+          membership_date: new Date().toISOString().split("T")[0],
+          notes: data.notes || null,
+        },
+      };
+
+      console.log("Registration data:", registrationData); // Debug log
+
+      const response = await api.post("/auth/register", registrationData);
+
+      if (response.status === 200) {
+        localStorage.setItem("registerToken", "Welcome");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      const errorMessage =
+        error.response?.data?.detail || "Registration failed";
+      toast.error(errorMessage, {
+        style: { background: "#000", color: "#fff" },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -111,23 +122,6 @@ const RegisterForm = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await api.post("/get-started", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.data && response.data.submission_id) {
-        setSubmissionId(response.data.submission_id);
-        setShowSavePrompt(true);
-      }
-      setCurrentStep(4);
-    } catch (error) {
-      console.error("Submission error:", error);
-    }
-  };
   return (
     <div className="h-full flex flex-col p-6">
       <motion.div
@@ -172,9 +166,12 @@ const RegisterForm = () => {
         transition={{ delay: 0.2 }}
         className="w-[450px] h-[500px] flex items-center justify-center"
       >
-        <form onSubmit={handleSubmit} className="h-full flex flex-col">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="h-full flex flex-col"
+        >
           <div className="flex-1">
-            {/* Step 1: Company Information */}
+            {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -193,25 +190,33 @@ const RegisterForm = () => {
                       <Label htmlFor="firstName">First Name</Label>
                       <Input
                         id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          handleInputChange("firstName", e.target.value)
-                        }
+                        {...register("first_name", { required: true })}
+                        type="text"
                         className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
+                      {errors.first_name && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.first_name.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
                       <Input
                         id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          handleInputChange("lastName", e.target.value)
-                        }
+                        {...register("last_name", {
+                          required: "Last name is required",
+                        })}
+                        type="text"
                         className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                         placeholder="Your last name"
                       />
+                      {errors.last_name && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.last_name.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -223,69 +228,103 @@ const RegisterForm = () => {
                         // rules={formValidation.role}
                         render={({ field }) => (
                           <Select
+                            {...register("role", {
+                              required: "Role is required",
+                            })}
                             onValueChange={field.onChange}
-                            value={field.value}
+                            // value={field.value}
                           >
                             <SelectTrigger className="w-full bg-white/10 border-white/20 text-white">
                               <SelectValue placeholder="Select a role" />
                             </SelectTrigger>
                             <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                              <SelectItem value="admin">Admin</SelectItem>
+                              {/* <SelectItem value="admin">Admin</SelectItem> */}
                               <SelectItem value="pastor">Pastor</SelectItem>
                               <SelectItem value="member">Member</SelectItem>
                             </SelectContent>
                           </Select>
                         )}
                       />
+                      {errors.role && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.role.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="gender">Gender</Label>
                       <Select
-                        // value={formData.industry}
+                        {...register("gender", {
+                          required: "Gender is required",
+                        })}
                         onValueChange={(value) =>
-                          handleInputChange("industry", value)
+                          handleInputChange("gender", value)
                         }
                       >
                         <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue placeholder="Select your gender" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                          <SelectItem value="technology">Male</SelectItem>
-                          <SelectItem value="healthcare">Female</SelectItem>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
                         </SelectContent>
                       </Select>
+                      {errors.gender && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.gender.message}
+                        </p>
+                      )}
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-3">
                         <Label htmlFor="date" className="px-1">
                           Date of birth
                         </Label>
-                        <Popover open={open} onOpenChange={setOpen}>
-                          <PopoverTrigger asChild>
-                            <Button
-                              variant="outline"
-                              id="date"
-                              className="w-48 justify-between font-normal"
-                            >
-                              {date ? date.toLocaleDateString() : "Select date"}
-                              <ChevronDownIcon />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent
-                            className="w-auto overflow-hidden p-0"
-                            align="start"
-                          >
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              captionLayout="dropdown"
-                              onSelect={(date) => {
-                                setDate(date);
-                                setOpen(false);
-                              }}
-                            />
-                          </PopoverContent>
-                        </Popover>
+
+                        <Controller
+                          name="date_of_birth"
+                          control={control} // comes from useForm()
+                          rules={{ required: "Date of birth is required" }}
+                          render={({ field, fieldState }) => (
+                            <Popover open={open} onOpenChange={setOpen}>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  id="date"
+                                  className="w-48 justify-between font-normal"
+                                >
+                                  {field.value
+                                    ? new Date(field.value).toLocaleDateString()
+                                    : "Select date"}
+                                  <ChevronDownIcon />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                className="w-auto overflow-hidden p-0"
+                                align="start"
+                              >
+                                <Calendar
+                                  mode="single"
+                                  selected={
+                                    field.value
+                                      ? new Date(field.value)
+                                      : undefined
+                                  }
+                                  captionLayout="dropdown"
+                                  onSelect={(date) => {
+                                    field.onChange(date);
+                                    setOpen(false);
+                                  }}
+                                />
+                              </PopoverContent>
+                              {fieldState.error && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {fieldState.error.message}
+                                </p>
+                              )}
+                            </Popover>
+                          )}
+                        />
                       </div>
                     </div>
 
@@ -535,12 +574,12 @@ const RegisterForm = () => {
                   <CheckCircle className="text-green-400 w-16 h-16" />
                 </div> */}
                 <div className="w-full max-w-sm mx-auto text-center">
-                  <h2 className="text-lg font-semibold text-black mb-2">
+                  <h2 className="text-lg font-semibold text-black/60 mb-2">
                     Registration Successful!
                   </h2>
-                  <p className="text-sm text-gray-300 mb-8">
+                  <p className="text-sm text-gray-600 mb-8">
                     Welcome to{" "}
-                    <span className="text-gradient bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
+                    <span className="text-gradient text-blue-600 font-semibold">
                       Church Management System
                     </span>
                     . Your account has been created successfully! 🚀
@@ -662,6 +701,13 @@ const NewRegister = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="dark"
+        toastClassName="bg-slate-800 text-white px-6 py-4 rounded-xl shadow-lg"
+        bodyClassName="text-sm font-medium"
+      />
     </div>
   );
 };
