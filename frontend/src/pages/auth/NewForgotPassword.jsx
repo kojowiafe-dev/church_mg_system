@@ -30,6 +30,7 @@ const ForgotPasswordForm = () => {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm();
   const password = watch("password");
@@ -478,24 +479,24 @@ const ForgotPasswordForm = () => {
             {field === "password" ? (
               <div className="relative">
                 <Input
-                  {...register(field, formValidation[field])}
-                  type={showPassword ? "text" : "password"}
+                  // {...register(field, formValidation[field])}
+                  // type={showPassword ? "text" : "password"}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                   placeholder={`Enter your ${field}`}
                 />
                 <button
                   type="button"
-                  onClick={togglePasswordVisibility}
+                  // onClick={togglePasswordVisibility}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
                 </button>
               </div>
             ) : field === "role" ? (
               <Controller
                 name="role"
                 control={control}
-                rules={formValidation.role}
+                // rules={formValidation.role}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
@@ -511,7 +512,7 @@ const ForgotPasswordForm = () => {
               />
             ) : (
               <Input
-                {...register(field, formValidation[field])}
+                // {...register(field, formValidation[field])}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                 placeholder={`Enter your ${field}`}
               />
