@@ -233,7 +233,7 @@ const RegisterForm = () => {
                               value={field.value || ""} // bind form value
                               onValueChange={field.onChange} // update form state
                             >
-                              <SelectTrigger className="bg-white/10 border-white/20 text-foreground">
+                              <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select role" />
                               </SelectTrigger>
                               <SelectContent className="bg-gray-800 border-gray-700 text-white">
