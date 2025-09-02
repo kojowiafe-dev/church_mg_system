@@ -235,7 +235,7 @@ const ForgotPasswordForm = () => {
             <label className="block text-sm font-medium text-gray-700">
               Email
             </label>
-            <input
+            <Input
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -304,7 +304,7 @@ const ForgotPasswordForm = () => {
             <label className="block text-sm font-medium text-gray-700">
               Verification Code
             </label>
-            <input
+            <Input
               {...register("code", {
                 required: "Verification code is required",
                 pattern: {
@@ -313,7 +313,7 @@ const ForgotPasswordForm = () => {
                 },
               })}
               type="text"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
               placeholder="Enter 6-digit code"
             />
             {errors.code && (
