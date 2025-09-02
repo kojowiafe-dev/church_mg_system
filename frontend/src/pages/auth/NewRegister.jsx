@@ -192,7 +192,7 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("first_name", { required: true })}
                         type="text"
-                        className="bg-white/10 border px-4 py-3 border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border px-4 py-3 border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                       {errors.first_name && (
@@ -209,7 +209,7 @@ const RegisterForm = () => {
                           required: "Last name is required",
                         })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Your last name"
                       />
                       {errors.last_name && (
@@ -396,7 +396,7 @@ const RegisterForm = () => {
                           required: "Username is required",
                         })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your username"
                       />
                       {errors.username && (
@@ -417,7 +417,7 @@ const RegisterForm = () => {
                           },
                         })}
                         type="email"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Your email"
                       />
                       {errors.email && (
@@ -436,7 +436,7 @@ const RegisterForm = () => {
                           required: "House address is required",
                         })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Your house address"
                       />
                       {errors.house_address && (
@@ -453,7 +453,7 @@ const RegisterForm = () => {
                           required: "Phone number is required",
                         })}
                         type="tel"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="+1 (555) 123-4567"
                       />
                       {errors.phone && (
@@ -473,7 +473,7 @@ const RegisterForm = () => {
                         id="emergency_contact_name"
                         {...register("emergency_contact_name")}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Your emergency contact name"
                       />
                     </div>
@@ -485,7 +485,7 @@ const RegisterForm = () => {
                         id="emergency_contact_phone"
                         {...register("emergency_contact_phone")}
                         type="tel"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Your emergency contact phone"
                       />
                     </div>
@@ -513,7 +513,7 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("occupation")}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                     </div>
@@ -591,7 +591,7 @@ const RegisterForm = () => {
                                 "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                             },
                           })}
-                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
+                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Enter your password`}
                         />
 
@@ -619,7 +619,7 @@ const RegisterForm = () => {
                             validate: (value) =>
                               value === password || "Passwords do not match",
                           })}
-                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
+                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Confirm your password`}
                         />
 
