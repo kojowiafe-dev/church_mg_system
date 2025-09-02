@@ -192,7 +192,7 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("first_name", { required: true })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border px-4 py-3 border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                       {errors.first_name && (
