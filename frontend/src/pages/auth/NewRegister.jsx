@@ -396,7 +396,7 @@ const RegisterForm = () => {
                           required: "Username is required",
                         })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 px-4 py-3 text-foreground placeholder:text-gray-400"
+                        className="border border-gray-300 px-4 py-3"
                         placeholder="Enter your username"
                       />
                       {errors.username && (
@@ -417,7 +417,7 @@ const RegisterForm = () => {
                           },
                         })}
                         type="email"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
+                        className="border border-gray-300 px-4 py-3"
                         placeholder="Your email"
                       />
                       {errors.email && (
@@ -436,7 +436,7 @@ const RegisterForm = () => {
                           required: "House address is required",
                         })}
                         type="text"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
+                        className="border border-gray-300 px-4 py-3"
                         placeholder="Your house address"
                       />
                       {errors.house_address && (
@@ -453,8 +453,8 @@ const RegisterForm = () => {
                           required: "Phone number is required",
                         })}
                         type="tel"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
-                        placeholder="+1 (555) 123-4567"
+                        className="border border-gray-300 px-4 py-3"
+                        placeholder="+233 (555) 123-4567"
                       />
                       {errors.phone && (
                         <p className="text-red-500 text-sm mt-1">
@@ -473,7 +473,7 @@ const RegisterForm = () => {
                         id="emergency_contact_name"
                         {...register("emergency_contact_name")}
                         type="text"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
+                        className="border border-gray-300 px-4 py-3"
                         placeholder="Your emergency contact name"
                       />
                     </div>
@@ -485,8 +485,8 @@ const RegisterForm = () => {
                         id="emergency_contact_phone"
                         {...register("emergency_contact_phone")}
                         type="tel"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
-                        placeholder="Your emergency contact phone"
+                        className="border border-gray-300 px-4 py-3"
+                        placeholder="+233 (555) 123-4567"
                       />
                     </div>
                   </div>
@@ -513,8 +513,8 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("occupation")}
                         type="text"
-                        className="bg-white/10 border border-gray-300 px-4 py-3 text-foreground placeholder:text-gray-400"
-                        placeholder="Enter your first name"
+                        className="border border-gray-300 px-4 py-3"
+                        placeholder="Enter your occupation"
                       />
                     </div>
 
@@ -619,7 +619,7 @@ const RegisterForm = () => {
                             validate: (value) =>
                               value === password || "Passwords do not match",
                           })}
-                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
+                          className="relative w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Confirm your password`}
                         />
 
