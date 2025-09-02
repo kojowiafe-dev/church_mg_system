@@ -417,7 +417,7 @@ const RegisterForm = () => {
                           },
                         })}
                         type="email"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Your email"
                       />
                       {errors.email && (
@@ -436,7 +436,7 @@ const RegisterForm = () => {
                           required: "House address is required",
                         })}
                         type="text"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Your house address"
                       />
                       {errors.house_address && (
@@ -453,7 +453,7 @@ const RegisterForm = () => {
                           required: "Phone number is required",
                         })}
                         type="tel"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="+1 (555) 123-4567"
                       />
                       {errors.phone && (
@@ -473,7 +473,7 @@ const RegisterForm = () => {
                         id="emergency_contact_name"
                         {...register("emergency_contact_name")}
                         type="text"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Your emergency contact name"
                       />
                     </div>
@@ -485,7 +485,7 @@ const RegisterForm = () => {
                         id="emergency_contact_phone"
                         {...register("emergency_contact_phone")}
                         type="tel"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Your emergency contact phone"
                       />
                     </div>
@@ -513,10 +513,7 @@ const RegisterForm = () => {
                         id="firstName"
                         {...register("occupation")}
                         type="text"
-                        // onChange={(e) =>
-                        //   handleInputChange("firstName", e.target.value)
-                        // }
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your first name"
                       />
                     </div>
