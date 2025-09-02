@@ -80,7 +80,7 @@ const LoginForm = ({ onSubmit, loading }) => {
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-gray-800 border-gray-700 text-white">
                       <SelectItem value="admin">Admin</SelectItem>
                       <SelectItem value="pastor">Pastor</SelectItem>
                       <SelectItem value="member">Member</SelectItem>
