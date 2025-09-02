@@ -396,7 +396,7 @@ const RegisterForm = () => {
                           required: "Username is required",
                         })}
                         type="text"
-                        className="bg-white/10 border-white/20 text-foreground placeholder:text-gray-400"
+                        className="bg-white/10 border border-gray-300 text-foreground placeholder:text-gray-400"
                         placeholder="Enter your username"
                       />
                       {errors.username && (
