@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import video from "../../video/5949377-hd_1920_1080_24fps.mp4";
 import { notifySuccess, notifyError } from "../../utils/toastHelpers";
 import api from "../api";
 import { motion } from "framer-motion";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Controller } from "react-hook-form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 const ForgotPasswordForm = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1); // 1: Email, 2: Verification Code, 3: New Password
@@ -30,7 +18,6 @@ const ForgotPasswordForm = () => {
     register,
     handleSubmit,
     watch,
-    control,
     formState: { errors },
   } = useForm();
   const password = watch("password");
@@ -163,15 +150,6 @@ const ForgotPasswordForm = () => {
   if (showSuccess) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        {/* Background Image */}
-        {/* <BackgroundImage
-          src={bgImage}
-          className="absolute inset-0"
-          fallbackColor="#222"
-          style={{ opacity: 0.5 }}
-        />
-        <div className="absolute inset-0 bg-black opacity-40" />
-
         {/* Success Message */}
         <div className="relative z-20 w-full max-w-md bg-white/80 backdrop-blur-sm shadow-lg rounded-lg p-8 text-center">
           <div className="mb-6">
@@ -220,7 +198,6 @@ const ForgotPasswordForm = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
-      {/* <div className="relative z-20 w-full max-w-md bg-white/80 backdrop-blur-sm shadow-lg rounded-lg p-8"> */}
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
         {step === 1
           ? "Forgot Password"
