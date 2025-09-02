@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import video from "../../video/5949377-hd_1920_1080_24fps.mp4";
 import {
@@ -38,11 +38,8 @@ import api from "../api";
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [showSavePrompt, setShowSavePrompt] = useState(false);
-  const [submissionId, setSubmissionId] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -587,7 +584,7 @@ const RegisterForm = () => {
                                 "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                             },
                           })}
-                          className="relative w-full px-4 py-3 rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
+                          className="relative w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
                           placeholder={`Enter your password`}
                         />
 
