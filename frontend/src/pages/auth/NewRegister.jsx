@@ -761,7 +761,7 @@ const NewRegister = () => {
   return (
     <div className="h-screen overflow-hidden">
       <div className="h-full md:grid grid-cols-2 px-16 py-6 pt-24 hidden">
-        <div className="flex items-center justify-center dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
+        <div className="flex items-center justify-center bg-white dark:bg-slate-900 rounded-xl shadow-md z-20 overflow-hidden">
           {/* <div className="w-full h-full overflow-y-auto"> */}
           <RegisterForm />
           {/* </div> */}
