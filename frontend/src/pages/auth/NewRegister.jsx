@@ -454,7 +454,7 @@ const RegisterForm = () => {
                         })}
                         type="tel"
                         className="border border-gray-300 px-4 py-3"
-                        placeholder="+233 (555) 123-4567"
+                        placeholder="+233 (0) 123-456-789"
                       />
                       {errors.phone && (
                         <p className="text-red-500 text-sm mt-1">
@@ -474,7 +474,7 @@ const RegisterForm = () => {
                         {...register("emergency_contact_name")}
                         type="text"
                         className="border border-gray-300 px-4 py-3"
-                        placeholder="Your emergency contact name"
+                        placeholder="Emergency contact name"
                       />
                     </div>
                     <div className="space-y-2 w-[290px] md:w-full">
@@ -486,7 +486,7 @@ const RegisterForm = () => {
                         {...register("emergency_contact_phone")}
                         type="tel"
                         className="border border-gray-300 px-4 py-3"
-                        placeholder="+233 (555) 123-4567"
+                        placeholder="+233 (0) 123-456-789"
                       />
                     </div>
                   </div>
@@ -620,7 +620,7 @@ const RegisterForm = () => {
                               value === password || "Passwords do not match",
                           })}
                           className="relative w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-0"
-                          placeholder={`Confirm your password`}
+                          placeholder={`Confirm password`}
                         />
 
                         <button
