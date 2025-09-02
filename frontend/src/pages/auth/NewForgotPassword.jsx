@@ -476,6 +476,9 @@ const NewForgotPassword = () => {
   return (
     <div>
       <div className="h-screen md:grid grid-cols-2 px-16 py-6 pt-18 hidden">
+        <div className="flex items-center justify-center bg-white dark:bg-slate-900 px-20 py-15 rounded-xl mt-6 shadow-md z-20">
+          <ForgotPasswordForm />
+        </div>
         <div className="bg-white dark:bg-slate-900 rounded-xl mt-6 shadow-md z-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <video
@@ -490,9 +493,6 @@ const NewForgotPassword = () => {
             </video>
             {/* <div className="absolute inset-0 bg-black/60" /> */}
           </div>
-        </div>
-        <div className="flex items-center justify-center bg-white dark:bg-slate-900 px-20 py-15 rounded-xl mt-6 shadow-md z-20">
-          <ForgotPasswordForm />
         </div>
       </div>
       <div className="h-screen md:hidden grid grid-cols-1 px-16 py-6 pt-8 items-center">
