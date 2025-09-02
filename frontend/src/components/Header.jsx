@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import { FaChurch, FaSignInAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Church from "../assets/Adobe Express - file.png";
 
 const Header = () => {
@@ -21,10 +21,6 @@ const Header = () => {
                 <Link to="/">
                   <img src={Church} alt="Church Logo" className="w-10 h-10" />
                 </Link>
-                {/* <FaChurch className="text-indigo-600 w-7 h-7" />
-                <span className="text-lg font-bold text-indigo-700">
-                  <Link to="/">KGCCI</Link>
-                </span> */}
               </div>
 
               {/* Desktop Nav */}
@@ -48,7 +44,7 @@ const Header = () => {
               </div>
 
               {/* Mobile Menu Button */}
-              <Disclosure.Button className="md:hidden text-indigo-600 hover:text-indigo-800">
+              <Disclosure.Button className="md:hidden text-blue-600 hover:text-blue-800">
                 {open ? (
                   <FaTimes className="w-6 h-6" />
                 ) : (
