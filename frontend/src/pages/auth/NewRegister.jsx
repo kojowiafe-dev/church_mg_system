@@ -110,10 +110,6 @@ const RegisterForm = () => {
     }
   };
 
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
   const nextStep = () => {
     if (currentStep < 4) setCurrentStep(currentStep + 1);
   };
