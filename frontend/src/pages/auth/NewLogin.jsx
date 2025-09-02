@@ -113,7 +113,7 @@ const LoginForm = ({ onSubmit, loading }) => {
             Remember me
           </label>
           <Link
-            to="/forgot-password"
+            to="/new-forgot-password"
             className="text-sm text-blue-600 hover:text-blue-800"
           >
             Forgot password?
