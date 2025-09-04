@@ -21,6 +21,7 @@ class GenderEnum(str, Enum):
     other = "other"
 
 class User(SQLModel, table=True):
+    # __tablename__ = "users"
     id: int = Field(default=None, primary_key=True, index=True)
     member_id: int = Field(foreign_key="member.id", nullable=False)
     username: str = Field(unique=True, index=True)
