@@ -232,7 +232,7 @@ const RegisterForm = () => {
                               <SelectContent className="bg-gray-800 border-gray-700 text-white">
                                 <SelectItem value="member">Member</SelectItem>
                                 <SelectItem value="pastor">Pastor</SelectItem>
-                                <SelectItem value="admin">Admin</SelectItem>
+                                {/* <SelectItem value="admin">Admin</SelectItem> */}
                               </SelectContent>
                             </Select>
                             {fieldState.error && (
