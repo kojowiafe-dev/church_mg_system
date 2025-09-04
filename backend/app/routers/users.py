@@ -41,10 +41,10 @@ def update_user(
     session.refresh(db_user)
     return db_user
 
-@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(id: int, session:SessionDep):
-    user = session.get(User, id)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    session.delete(user)
-    session.commit()
+# @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
+# def delete_user(id: int, session:SessionDep):
+#     user = session.get(User, id)
+#     if not user:
+#         raise HTTPException(status_code=404, detail="User not found")
+#     session.delete(user)
+#     session.commit()
