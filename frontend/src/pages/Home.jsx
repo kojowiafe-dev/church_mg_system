@@ -13,6 +13,12 @@ import {
 import video from "../video/5949377-hd_1920_1080_24fps.mp4";
 import Daddy from "../assets/Daddy.jpg";
 import Church from "../assets/Adobe Express - file.png";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "../components/ui/card";
 
 // import Header from "../components/Header";
 
@@ -308,24 +314,41 @@ export default function HomePage() {
             },
           ].map((item, idx) => (
             // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 py-12">
-            <div
-              key={idx}
-              data-aos="fade-up"
-              data-aos-delay={idx * 100}
-              className="group relative overflow-hidden p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:border-blue-600 "
-            >
-              <div className="absolute inset-0 bg-indigo-50 dark:bg-gray-800 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
-              <div className="relative">
-                <div className="bg-indigo-100 dark:bg-indigo-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-700 animate-icon">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors duration-300">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+            // <div
+            //   key={idx}
+            //   data-aos="fade-up"
+            //   data-aos-delay={idx * 100}
+            //   className="group relative overflow-hidden p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:border-blue-600 "
+            // >
+            //   <div className="absolute inset-0 bg-indigo-50 dark:bg-gray-800 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+            //   <div className="relative">
+            //     <div className="bg-indigo-100 dark:bg-indigo-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-700 animate-icon">
+            //       {item.icon}
+            //     </div>
+            //     <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors duration-300">
+            //       {item.title}
+            //     </h3>
+            //     <p className="text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+            //       {item.desc}
+            //     </p>
+            //   </div>
+            // </div>
+            <div key={idx} className="">
+              <Card className="bg-white relative text-black p-6 transform hover:scale-105 group overflow-hidden dark:bg-gray-900 rounded-2xl shadow-md text-center cursor-pointer border border-indigo-100 dark:border-gray-700 transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-[1.03] hover:border-blue-600">
+                <div className="absolute inset-0 bg-indigo-50 dark:bg-gray-800 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+                <CardHeader className="z-20">
+                  <div className="w-10 h-10 text-indigo-500 flex-shrink-0 animate-pulse rounded-full flex items-center justify-center mx-auto">
+                    {item.icon}
+                  </div>
+
+                  <CardTitle className="text-xl font-semibold text-black">
+                    {item.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-800 leading-relaxed z-20">
                   {item.desc}
-                </p>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           ))}
         </div>

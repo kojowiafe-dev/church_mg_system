@@ -120,7 +120,7 @@ const RegisterForm = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-4 md:mb-6"
+        className="mb-2 md:mb-6"
       >
         <div className="w-full flex items-center justify-center">
           {[1, 2, 3, 4].map((step) => (
@@ -231,7 +231,7 @@ const RegisterForm = () => {
                               </SelectTrigger>
                               <SelectContent className="bg-gray-800 border-gray-700 text-white">
                                 <SelectItem value="member">Member</SelectItem>
-                                <SelectItem value="guest">Pastor</SelectItem>
+                                <SelectItem value="pastor">Pastor</SelectItem>
                               </SelectContent>
                             </Select>
                             {fieldState.error && (
@@ -688,7 +688,7 @@ const RegisterForm = () => {
               {currentStep === 3 ? (
                 <Button
                   type="submit"
-                  onClick={nextStep}
+                  // onClick={nextStep}
                   disabled={loading}
                   className={` py-3 rounded-lg text-white font-semibold transition-all duration-300 cursor-pointer
                           ${
