@@ -79,14 +79,14 @@ def delete_member(
     # current_user: dict = Depends(get_current_user)
 ):
     member = session.get(Member, member_id)
-    user = session.get(User, member_id)
+    # user = session.get(User, member_id)
     if not member:
         raise HTTPException(status_code=404, detail="Member not found")
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+    # if not user:
+    #     raise HTTPException(status_code=404, detail="User not found")
     
     session.delete(member)
-    session.delete(user)
+    # session.delete(user)
     session.commit()
     return {"message": "Member deleted successfully"}
 
