@@ -79,7 +79,7 @@ const RegisterForm = () => {
           gender: data.gender,
           marital_status: data.marital_status,
           occupation: data.occupation || null,
-          emergency_contact: data.emergency_contact || null,
+          emergency_contact_name: data.emergency_contact_name || null,
           emergency_contact_phone: data.emergency_contact_phone || null,
           baptism_date: formatDate(data.baptism_date),
           membership_date: new Date().toISOString().split("T")[0],
@@ -232,6 +232,7 @@ const RegisterForm = () => {
                               <SelectContent className="bg-gray-800 border-gray-700 text-white">
                                 <SelectItem value="member">Member</SelectItem>
                                 <SelectItem value="pastor">Pastor</SelectItem>
+                                <SelectItem value="admin">Admin</SelectItem>
                               </SelectContent>
                             </Select>
                             {fieldState.error && (
@@ -518,9 +519,9 @@ const RegisterForm = () => {
                       </Label>
 
                       <Controller
-                        name="date_of_birth"
+                        name="baptism_date"
                         control={control} // from useForm()
-                        rules={{ required: "Date of birth is required" }}
+                        rules={{ required: "Baptism Date is required" }}
                         render={({ field }) => (
                           <Popover open={open} onOpenChange={setOpen}>
                             <PopoverTrigger asChild>
