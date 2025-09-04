@@ -4,7 +4,7 @@ from typing import List
 from datetime import datetime, date
 
 from database import get_session, SessionDep
-from models.model import Member, Family, FamilyMember, Attendance
+from models.model import Member, Family, FamilyMember, Attendance, User
 from schemas import (
     MemberCreate, Member as MemberSchema,
     FamilyCreate, Family as FamilySchema,
@@ -79,10 +79,14 @@ def delete_member(
     # current_user: dict = Depends(get_current_user)
 ):
     member = session.get(Member, member_id)
+    user = session.get(User, member_id)
     if not member:
         raise HTTPException(status_code=404, detail="Member not found")
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
     
     session.delete(member)
+    session.delete(user)
     session.commit()
     return {"message": "Member deleted successfully"}
 

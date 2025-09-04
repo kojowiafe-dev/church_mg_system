@@ -98,37 +98,17 @@ async def register(
                     detail="Email already registered"
                 )
 
-        # Create member
-        db_member = model.Member(
-            first_name=registration_data.member.first_name,
-            last_name=registration_data.member.last_name,
-            date_of_birth=registration_data.member.date_of_birth if registration_data.member.date_of_birth is not None else datetime.utcnow().date(),
-            gender=registration_data.member.gender,
-            marital_status=registration_data.member.marital_status,
-            occupation=registration_data.member.occupation,
-            emergency_contact=registration_data.member.emergency_contact,
-            emergency_contact_phone=registration_data.member.emergency_contact_phone,
-            baptism_date=registration_data.member.baptism_date,
-            membership_date=registration_data.member.membership_date or datetime.utcnow(),
-            notes=registration_data.member.notes,
-            is_active=True,
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow()
-        )
-
-        session.add(db_member)
-        session.commit()
-        session.refresh(db_member)
+        
 
         # Create user
         hashed_password = hashing.get_password_hash(registration_data.user.password)
-        if db_member.id is None:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Failed to create member: member ID is None"
-            )
+        # if db_member.id is None:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        #         detail="Failed to create member: member ID is None"
+        #     )
         db_user = model.User(
-            member_id=db_member.id,
+            # member_id=db_member.id,
             username=registration_data.user.username,
             email=registration_data.user.email,
             password=hashed_password,
@@ -141,6 +121,29 @@ async def register(
         session.add(db_user)
         session.commit()
         session.refresh(db_user)
+        
+        # Create member
+        db_member = model.Member(
+            user=db_user,
+            first_name=registration_data.member.first_name,
+            last_name=registration_data.member.last_name,
+            date_of_birth=registration_data.member.date_of_birth if registration_data.member.date_of_birth is not None else datetime.utcnow().date(),
+            gender=registration_data.member.gender,
+            marital_status=registration_data.member.marital_status,
+            occupation=registration_data.member.occupation,
+            emergency_contact_name=registration_data.member.emergency_contact_name,
+            emergency_contact_phone=registration_data.member.emergency_contact_phone,
+            baptism_date=registration_data.member.baptism_date,
+            membership_date=registration_data.member.membership_date or datetime.utcnow(),
+            notes=registration_data.member.notes,
+            is_active=True,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
+
+        session.add(db_member)
+        session.commit()
+        session.refresh(db_member)
 
         return db_user  # FastAPI will use response_model to serialize this
 

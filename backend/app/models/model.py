@@ -23,7 +23,7 @@ class GenderEnum(str, Enum):
 class User(SQLModel, table=True):
     # __tablename__ = "users"
     id: int = Field(default=None, primary_key=True, index=True)
-    member_id: int = Field(foreign_key="member.id", nullable=False)
+    member: Optional["Member"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "all, delete"})
     username: str = Field(unique=True, index=True)
     email: Optional[str] = Field(default=None, unique=True, index=True)
     password: str
@@ -40,17 +40,19 @@ class User(SQLModel, table=True):
     # family: List['Family'] = Relationship(back_populates="head")
     # attendance_records: List['Attendance'] = Relationship(back_populates="member") 
 
+from sqlalchemy import ForeignKey, Column, Integer
 class Member(SQLModel, table=True):
     # __tablename__ = "members"
     id: Optional[int] = Field(default=None, primary_key=True)
-    # user_id: int = Field(foreign_key="users.id", nullable=False)
+    user_id: int = Field(sa_column=Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), unique=True))
+    user: Optional[User] = Relationship(back_populates="member")
     first_name: str
     last_name: str
     date_of_birth: date
     gender: GenderEnum
     marital_status: MaritalStatusEnum
     occupation: Optional[str] = None
-    emergency_contact: Optional[str] = None
+    emergency_contact_name: Optional[str] = None
     emergency_contact_phone: Optional[str] = None
     baptism_date: Optional[date] = None
     membership_date: Optional[date] = None

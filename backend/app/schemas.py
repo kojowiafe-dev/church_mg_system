@@ -24,7 +24,7 @@ class UserLogin(SQLModel):
 
 class UserPublic(UserBase):
     id: int
-    member_id: int
+    # member_id: int
     profile_image: Optional[str] = None
     join_date: datetime
     is_active: bool = True
@@ -46,7 +46,7 @@ class MemberBase(SQLModel):
     gender: GenderEnum
     marital_status: MaritalStatusEnum
     occupation: Optional[str] = None
-    emergency_contact: Optional[str] = None
+    emergency_contact_name: Optional[str] = None
     emergency_contact_phone: Optional[str] = None
     baptism_date: Optional[date] = None
     membership_date: Optional[date] = None
