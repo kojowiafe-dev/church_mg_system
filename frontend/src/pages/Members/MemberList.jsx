@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
   getFilteredRowModel,
   flexRender,
-} from '@tanstack/react-table';
-import { Dialog, Transition } from '@headlessui/react';
+} from "@tanstack/react-table";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -15,13 +15,13 @@ import {
   TrashIcon,
   ChevronUpIcon,
   ChevronDownIcon,
-} from '@heroicons/react/24/outline';
-import api from '../../pages/api';
+} from "@heroicons/react/24/outline";
+import api from "../../pages/api";
 
 const MemberList = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const MemberList = () => {
   const fetchMembers = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/members');
+      const response = await api.get("/members");
       setMembers(response.data);
     } catch (error) {
       console.error(error);
@@ -59,19 +59,19 @@ const MemberList = () => {
     () => [
       {
         accessorFn: (row) => `${row.first_name} ${row.last_name}`,
-        id: 'name',
-        header: 'Name',
+        id: "name",
+        header: "Name",
         cell: (info) => info.getValue(),
       },
       {
-        accessorKey: 'gender',
-        header: 'Gender',
+        accessorKey: "gender",
+        header: "Gender",
         cell: (info) => (
           <span
             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-              info.getValue() === 'male'
-                ? 'bg-blue-100 text-blue-800'
-                : 'bg-pink-100 text-pink-800'
+              info.getValue() === "male"
+                ? "bg-blue-100 text-blue-800"
+                : "bg-pink-100 text-pink-800"
             }`}
           >
             {info.getValue().charAt(0).toUpperCase() + info.getValue().slice(1)}
@@ -79,19 +79,19 @@ const MemberList = () => {
         ),
       },
       {
-        accessorKey: 'marital_status',
-        header: 'Marital Status',
+        accessorKey: "marital_status",
+        header: "Marital Status",
         cell: (info) => {
           const status = info.getValue();
           const colors = {
-            married: 'bg-green-100 text-green-800',
-            single: 'bg-blue-100 text-blue-800',
-            divorced: 'bg-orange-100 text-orange-800',
+            married: "bg-green-100 text-green-800",
+            single: "bg-blue-100 text-blue-800",
+            divorced: "bg-orange-100 text-orange-800",
           };
           return (
             <span
               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                colors[status] || 'bg-gray-100 text-gray-800'
+                colors[status] || "bg-gray-100 text-gray-800"
               }`}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -100,31 +100,31 @@ const MemberList = () => {
         },
       },
       {
-        accessorKey: 'membership_date',
-        header: 'Membership Date',
+        accessorKey: "membership_date",
+        header: "Membership Date",
         cell: (info) =>
           info.getValue()
             ? new Date(info.getValue()).toLocaleDateString()
-            : 'N/A',
+            : "N/A",
       },
       {
-        accessorKey: 'is_active',
-        header: 'Status',
+        accessorKey: "is_active",
+        header: "Status",
         cell: (info) => (
           <span
             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
               info.getValue()
-                ? 'bg-green-100 text-green-800'
-                : 'bg-red-100 text-red-800'
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
             }`}
           >
-            {info.getValue() ? 'Active' : 'Inactive'}
+            {info.getValue() ? "Active" : "Inactive"}
           </span>
         ),
       },
       {
-        id: 'actions',
-        header: 'Actions',
+        id: "actions",
+        header: "Actions",
         cell: (info) => (
           <div className="flex space-x-2">
             <button
@@ -167,14 +167,17 @@ const MemberList = () => {
     <div className="px-4 sm:px-6 lg:px-8 py-8 pt-18">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-2xl font-poppins font-bold text-gray-900">Members</h1>
+          <h1 className="text-2xl font-poppins font-bold text-gray-900">
+            Members
+          </h1>
           <p className="mt-2 text-sm text-gray-700">
-            A list of all members in your church including their name, gender, marital status, and membership date.
+            A list of all members in your church including their name, gender,
+            marital status, and membership date.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
-            onClick={() => navigate('/members/new')}
+            onClick={() => navigate("/members/new")}
             className="inline-flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
           >
             <PlusIcon className="h-5 w-5 mr-2" />
@@ -213,9 +216,10 @@ const MemberList = () => {
                             <div
                               {...{
                                 className: header.column.getCanSort()
-                                  ? 'cursor-pointer select-none'
-                                  : '',
-                                onClick: header.column.getToggleSortingHandler(),
+                                  ? "cursor-pointer select-none"
+                                  : "",
+                                onClick:
+                                  header.column.getToggleSortingHandler(),
                               }}
                             >
                               {flexRender(
@@ -223,8 +227,12 @@ const MemberList = () => {
                                 header.getContext()
                               )}
                               {{
-                                asc: <ChevronUpIcon className="h-4 w-4 inline" />,
-                                desc: <ChevronDownIcon className="h-4 w-4 inline" />,
+                                asc: (
+                                  <ChevronUpIcon className="h-4 w-4 inline" />
+                                ),
+                                desc: (
+                                  <ChevronDownIcon className="h-4 w-4 inline" />
+                                ),
                               }[header.column.getIsSorted()] ?? null}
                             </div>
                           )}
@@ -303,10 +311,10 @@ const MemberList = () => {
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to delete{' '}
+                          Are you sure you want to delete{" "}
                           {memberToDelete
                             ? `${memberToDelete.first_name} ${memberToDelete.last_name}`
-                            : 'this member'}
+                            : "this member"}
                           ? This action cannot be undone.
                         </p>
                       </div>
@@ -338,4 +346,4 @@ const MemberList = () => {
   );
 };
 
-export default MemberList; 
+export default MemberList;
