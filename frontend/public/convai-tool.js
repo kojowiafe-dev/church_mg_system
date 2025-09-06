@@ -6,7 +6,7 @@
 // ============================================================================
 
 // REQUIRED: Replace with your ElevenLabs agent ID
-const AGENT_ID = "agent_1801k3mwqn8df65thdxha074mb7z";
+const AGENT_ID = "agent_6201k4ffbf1zeqqaqj4r7ke9558a";
 
 // OPTIONAL: Change navigation behavior
 const OPEN_IN_NEW_TAB = true; // true = new tab, false = same tab
