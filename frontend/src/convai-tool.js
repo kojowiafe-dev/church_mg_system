@@ -15,7 +15,7 @@ const OPEN_IN_NEW_TAB = true; // true = new tab, false = same tab
 const WIDGET_POSITION = "bottom-right"; // 'bottom-right', 'bottom-left', 'top-right', 'top-left'
 
 // OPTIONAL: Base URL for navigation (leave empty for auto-detection)
-const BASE_URL = "https://kgcci.vercel.app"; // e.g., 'https://mysite.framer.app' or 'https://mysite.wixsite.com/mysite'
+const BASE_URL = ""; // e.g., 'https://mysite.framer.app' or 'https://mysite.wixsite.com/mysite'
 
 // ============================================================================
 // DON'T CHANGE ANYTHING BELOW THIS LINE
