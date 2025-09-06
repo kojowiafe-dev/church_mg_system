@@ -20,7 +20,7 @@ def get_users(session: SessionDep):
 def get_user_by_id(id: int, session: SessionDep):
     user = session.get(User, id)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user
 
 @router.put("/{id}", response_model=UserUpdate)
@@ -45,6 +45,6 @@ def update_user(
 def delete_user(id: int, session:SessionDep):
     user = session.get(User, id)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     session.delete(user)
     session.commit()
