@@ -67,7 +67,7 @@ export default function HomePage() {
           </video>
           <div className="absolute inset-0 bg-black/60" />
         </div>
-
+        g
         <div className="relative z-10 mt-10 md:mt-10">
           <h1
             className="text-4xl md:text-5xl font-extrabold text-indigo-50/90 drop-shadow-xl leading-tight mb-4"
